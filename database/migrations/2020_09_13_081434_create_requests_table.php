@@ -13,17 +13,18 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('user_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
+            $table->string('model_id');
             $table->integer('quantity')->default(1);
             $table->text('description')->nullable();
             $table->boolean('approved')->default(false);
             $table->enum('type', array('sell', 'loan'));
             $table->float('price')->default(0);
             $table->float('price_per_hour')->default(0);
-            $table->date('date');
+            $table->string('image')->default('/');
+            $table->string('datasheet')->default('/');
             $table->timestamps();
         });
     }

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
+    public function store()
+    {
+        // Add product to the cart here.
+    }
+
     public function update(Request $request, $rowId)
     {
         $data = $request->json()->all();

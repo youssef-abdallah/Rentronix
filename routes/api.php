@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /* Requests Routes */
 
-Route::get('requests', 'UserRequestController@index')->name('requests.index');
-Route::get('requests/{id}', 'UserRequestController@show')->name('requests.show');
-Route::put('requests/{id}', 'UserRequestController@update')->name('requests.update');
-Route::post('requests', 'UserRequestController@store')->name('requests.store');
-Route::delete('requests', 'UserRequestController@destroy')->name('requests.destroy');
-
+Route::apiResource('requests', 'UserRequestController');
 
 /* Cart Routes */
 
@@ -36,7 +32,27 @@ Route::get('emptycart', function() {
     Cart::destroy();
 });
 
+/* Checkout routes */
+
+Route::get('checkout', 'CheckoutController.index')->name('checkout.index');
+Route::post('checkout', 'CheckoutController@store')->name('checkout.store');
+
 /* Complaints routes */
 
-Route::get('complaints', 'ComplaintController@index')->name('complaints.index');
-Route::post('complaints', 'ComplaintController@store')->name('complaints.store');
+Route::apiResource('complaints', 'ComplaintController');
+
+/* Orders Routes */
+
+Route::apiResource('orders', 'OrderController');
+
+/* Advertisements Routes */
+
+Route::apiResource('advertisements', 'AdvertisementController');
+
+/* Order Feedback Routes */
+
+Route::apiResource('feedback', 'OrderFeedbackController');
+
+/* Home Route */
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -44,11 +44,11 @@ class User extends Authenticatable
     ];
     public function addNew($input)
     {
-        $check = static::where('facebook_id',$input['facebook_id'])->first();
+        $check = static::query()->where('facebook_id',$input['facebook_id'])->first();
 
 
         if(is_null($check)){
-            return static::create($input);
+            return static::query()->create($input);
         }
 
 

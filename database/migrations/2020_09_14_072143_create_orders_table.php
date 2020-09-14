@@ -18,8 +18,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('seller_id');
             $table->enum('shipping_status', array('pending','shipped','delivered'));
+            $table->float('total_cost');
             $table->unsignedBigInteger('payement_id');
-            $table->timestamps('created_at');
+            $table->timestamps();
             $table->date('delivery_date');
         });
     }

@@ -18,11 +18,6 @@ class ComplaintController extends Controller
         return response($complaint, 200);
     }
 
-    public function create()
-    {
-        
-    }
-
     public function store(Request $request)
     {
         $data = $request->all();
@@ -30,11 +25,6 @@ class ComplaintController extends Controller
         return response()->json([
             'message' => 'complaint record created'
         ], 201);
-    }
-
-    public function edit(Complaint $complaint)
-    {
-
     }
 
     public function update(Complaint $complaint, Request $request)

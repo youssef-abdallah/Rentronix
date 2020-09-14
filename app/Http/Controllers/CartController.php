@@ -9,9 +9,21 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
-        // Add product to the cart here.
+        // The Product class hasn't been added yet.
+        $product = Product::find($request->id);
+        $duplicate = Cart::search(function ($cartItem, $rowId) use ($product) {
+            return $cartItem->id === $product->id;
+        });
+        if ($duplicate->isNotEmpty())
+        {
+            return redirect()->route('products.index')->with('success', 'the product has already been added');
+        }
+        // Adding to cart
+        Cart::add($product->id, $product->title, 1, $product->price, $request->type)
+            ->associate('App\Models\Product');
+        return redirect()->route('products.index')->with('success', 'the product has been added');
     }
 
     public function update(Request $request, $rowId)

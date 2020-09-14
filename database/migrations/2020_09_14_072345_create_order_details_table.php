@@ -18,7 +18,8 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->string('model_id');
             $table->integer('quantity');
-            $table->date('due_date');
+            $table->enum('type', array('buy', 'rent', 'repair'));
+            $table->date('due_date')->nullable();
         });
     }
 

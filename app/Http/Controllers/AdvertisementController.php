@@ -18,11 +18,6 @@ class AdvertisementController extends Controller
         return response($advertisement, 200);
     }
 
-    public function create()
-    {
-        
-    }
-
     public function store(Request $request)
     {
         $data = $request->all();
@@ -30,11 +25,6 @@ class AdvertisementController extends Controller
         return response()->json([
             'message' => 'advertisement record created'
         ], 201);
-    }
-
-    public function edit(Advertisement $advertisement)
-    {
-
     }
 
     public function update(Advertisement $advertisement, Request $request)

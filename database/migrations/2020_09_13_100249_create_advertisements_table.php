@@ -15,7 +15,7 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('model_id');
+            $table->unsignedBigInteger('product_id');
             $table->string('image')->default('/');
             $table->timestamps();
         });

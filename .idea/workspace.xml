@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="22c47349-1172-48b3-91c5-3d1e01b5940b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/FacebookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +169,7 @@
       <updated>1599987114451</updated>
       <workItem from="1599987128933" duration="16997000" />
       <workItem from="1600085433054" duration="20624000" />
-      <workItem from="1600154333112" duration="5582000" />
+      <workItem from="1600154333112" duration="7674000" />
     </task>
     <servers />
   </component>
@@ -177,6 +177,22 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1323" height="234" key="GridCell.Tab.0.bottom" timestamp="1600164355386">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="234" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600164355386" />
+    <state width="1323" height="234" key="GridCell.Tab.0.center" timestamp="1600164355386">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="234" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1600164355386" />
+    <state width="1323" height="234" key="GridCell.Tab.0.left" timestamp="1600164355385">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="234" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1600164355385" />
+    <state width="1323" height="234" key="GridCell.Tab.0.right" timestamp="1600164355386">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="234" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1600164355386" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1600105186185">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

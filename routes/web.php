@@ -24,8 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('user',Controllers\UserController::class);
 
 // facebook login
-Route::get('facebook', function () {
-    return view('facebook');
+Route::get('facebook', function () {return view('facebook');
 });
 Route::get('auth/facebook', 'App\Http\Controllers\Auth\FacebookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'App\Http\Controllers\Auth\FacebookController@handleFacebookCallback');

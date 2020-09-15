@@ -8,28 +8,26 @@ class UserController extends Controller
 
     public function index()
     {
-        return Models\User::all();
+        return response()->json(Models\User::get(),200);
     }
 
 
     public function create()
     {
-        $users=Models\User::all();
-        return $users;
+        ///
     }
 
 
     public function store(Request $request)
     {
-        $data=request();
-        $user=Models\User::query()->create(['name'=>$data->name,'email'=>$data->email]);
-        return redirect(route('home'));
+        $data=Models\User::query()->$request->all();
+        return response()->json($data,201);
     }
 
 
     public function show($id)
     {
-        return Models\User::query()->findOrfail($id);
+        return response()->json(Models\User::query()->find($id),200);
     }
 
 
@@ -41,22 +39,14 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user=Models\User::query()->findOrfail($id);
-        $data=request();
-        $user->update(['name'=>$data->name,'email'=>$data->email]);
-        return redirect(route('home'));
+        $id->update($request->all());
+        return response()->json($id,200);
     }
 
 
     public function destroy($id)
     {
-        $user=Models\User::query()->findOrfail($id);
-
-        try {
-            $user->delete($user);
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
-        return redirect(route('home'));
+        $id->delete();
+        return response()->json(null,204);
     }
 }

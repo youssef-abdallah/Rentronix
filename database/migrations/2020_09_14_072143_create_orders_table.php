@@ -18,9 +18,15 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('seller_id');
             $table->enum('shipping_status', array('pending','shipped','delivered'));
-            $table->unsignedBigInteger('payement_id');
-            $table->timestamps('created_at');
+            $table->float('total_cost');
+            $table->unsignedBigInteger('payment_id');
+            $table->timestamps();
             $table->date('delivery_date');
+
+            
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');  
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
         });
     }
 

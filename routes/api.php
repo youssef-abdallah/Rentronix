@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,7 +36,7 @@ Route::get('emptycart', function() {
 
 /* Checkout routes */
 
-Route::get('checkout', 'CheckoutController.index')->name('checkout.index');
+Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
 Route::post('checkout', 'CheckoutController@store')->name('checkout.store');
 
 /* Complaints routes */
@@ -51,8 +53,12 @@ Route::apiResource('advertisements', 'AdvertisementController');
 
 /* Order Feedback Routes */
 
-Route::apiResource('feedback', 'OrderFeedbackController');
+Route::apiResource('feedbacks', 'OrderFeedbackController');
 
 /* Home Route */
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* User routes */
+
+Route::apiResource('users', UserController::class);

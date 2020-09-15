@@ -20,7 +20,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Model::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function orderFeedback()

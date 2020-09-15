@@ -20,6 +20,9 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
             $table->enum('type', array('buy', 'rent', 'repair'));
             $table->date('due_date')->nullable();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');  
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

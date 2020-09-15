@@ -18,6 +18,8 @@ class CreateOrderFeedbackTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->text('content');
             $table->integer('manufacturer_rating');
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

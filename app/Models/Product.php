@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class products extends Model
+class Product extends Model
 {
     protected $table = 'products';  // to connect the model with its corresponding table
 

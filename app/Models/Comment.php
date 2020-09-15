@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class products_comments extends Model
+class Comment extends Model
 {
     protected $table = 'products_comments';  // to connect the model with its corresponding table
 

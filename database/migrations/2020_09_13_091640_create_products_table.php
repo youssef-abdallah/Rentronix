@@ -14,9 +14,6 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-
-            $table->engine = ' MyISAM' ; // to remove error SQLSTATE[HY000]: General error: 1215
-
             $table->bigIncrements('id');
             $table->string('name');
             $table->string(' product_overview');
@@ -25,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger(' available_stock');
             $table->unsignedInteger(' rental_price');
             $table->unsignedInteger(' selling_price');
-            $table-> bigInteger('subcategory_id');
+            $table->unsignedBigInteger('subcategory_id');
             $table->timestamps();
             // a forign key should be done here on the user "manufacture type"
 

@@ -14,19 +14,23 @@ class CreateProductsCommentsTable extends Migration
     public function up()
     {
         Schema::create('products_comments', function (Blueprint $table) {
-            $table->engine = ' MyISAM' ; // to remove error SQLSTATE[HY000]: General error: 1215
             $table->bigIncrements('id');
             $table->unsignedInteger('rating');
             $table->string(' content');
             $table->dateTime('date_of_publishing');
-            $table->bigInteger('product_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
-            // a forign key should be done here on the user
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onDelete('cascade');
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
 
         });
     }

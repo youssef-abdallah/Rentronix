@@ -21,10 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('user',Controllers\UserController::class);
+Route::resource('user', 'UserController');
 
 // facebook login
 Route::get('facebook', function () {return view('facebook');
 });
-Route::get('auth/facebook', 'App\Http\Controllers\Auth\FacebookController@redirectToFacebook');
-Route::get('auth/facebook/callback', 'App\Http\Controllers\Auth\FacebookController@handleFacebookCallback');
+Route::get('auth/facebook', 'Auth\FacebookController@redirectToFacebook');
+Route::get('auth/facebook/callback', 'Auth\FacebookController@handleFacebookCallback');

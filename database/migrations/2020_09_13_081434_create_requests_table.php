@@ -16,7 +16,7 @@ class CreateRequestsTable extends Migration
         Schema::create('user_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('product_id');
+            $table->unsignedBigInteger('product_id')->default(1);
             $table->integer('quantity')->default(1);
             $table->text('description')->nullable();
             $table->boolean('approved')->default(false);

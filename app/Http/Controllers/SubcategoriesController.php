@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\subcategories;
+use Illuminate\Http\Request;
+
+class SubcategoriesController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\subcategories  $subcategories
+     * @return \Illuminate\Http\Response
+     */
+    public function show(subcategories $subcategories)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\subcategories  $subcategories
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(subcategories $subcategories)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\subcategories  $subcategories
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, subcategories $subcategories)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\subcategories  $subcategories
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(subcategories $subcategories)
+    {
+        //
+    }
+}

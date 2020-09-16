@@ -14,7 +14,6 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
         $orders = Order::all()->toJson(JSON_PRETTY_PRINT);
         return response($orders, 200);
     }

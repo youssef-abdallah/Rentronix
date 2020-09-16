@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\favourite_list;
+use App\Models\FavouriteList;
 use Illuminate\Http\Request;
 
 class FavouriteListController extends Controller
@@ -41,10 +41,10 @@ class FavouriteListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\favourite_list  $favourite_list
+     * @param  \App\FavouriteList  $FavouriteList
      * @return \Illuminate\Http\Response
      */
-    public function show(favourite_list $favourite_list)
+    public function show(FavouriteList $favouriteList)
     {
         //
     }
@@ -52,10 +52,10 @@ class FavouriteListController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\favourite_list  $favourite_list
+     * @param  \App\FavouriteList  $FavouriteList
      * @return \Illuminate\Http\Response
      */
-    public function edit(favourite_list $favourite_list)
+    public function edit(FavouriteList $favouriteList)
     {
         //
     }
@@ -64,10 +64,10 @@ class FavouriteListController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\favourite_list  $favourite_list
+     * @param  \App\FavouriteList  $FavouriteList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, favourite_list $favourite_list)
+    public function update(Request $request, FavouriteList $favouriteList)
     {
         //
     }
@@ -75,10 +75,10 @@ class FavouriteListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\favourite_list  $favourite_list
+     * @param  \App\FavouriteList  $FavouriteList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(favourite_list $favourite_list)
+    public function destroy(FavouriteList $favouriteList)
     {
         //
     }

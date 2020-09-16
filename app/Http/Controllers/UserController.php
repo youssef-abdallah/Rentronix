@@ -9,7 +9,7 @@ class UserController extends Controller
     public function index()
     {
 
-        return response()->json(Models\User::get(),200);
+        return response()->json(User::get(),200);
 
 
 
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $data=Models\User::query()->$request->all();
+        $data=User::query()->$request->all();
         return response()->json($data,201);
 
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
     public function show($id)
     {
 
-        return response()->json(Models\User::query()->find($id),200);
+        return response()->json(User::query()->find($id),200);
 
     }
 

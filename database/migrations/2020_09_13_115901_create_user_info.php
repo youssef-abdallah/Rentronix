@@ -45,7 +45,7 @@ class CreateUserInfo extends Migration
 
             $table->foreign('manufacturer_id')
                 ->references('id')
-                ->on('manufacturer_info')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }

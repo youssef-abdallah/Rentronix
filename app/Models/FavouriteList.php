@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class favourite_list extends Model
+class FavouriteList extends Model
 {
     protected $table = 'favourite_lists' ;  // to connect the model with its corresponding table
 

@@ -14,13 +14,9 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-
-           // $table->engine = 'InnoDB'; // to remove error SQLSTATE[HY000]: General error: 1215
-
             $table->bigIncrements('id');
             $table->string('title');
             $table->timestamps();
-
         });
     }
 

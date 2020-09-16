@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +12,6 @@ class CartController extends Controller
 {
     public function store(Request $request)
     {
-        // The Product class hasn't been added yet.
         $product = Product::find($request->id);
         $duplicate = Cart::search(function ($cartItem, $rowId) use ($product) {
             return $cartItem->id === $product->id;

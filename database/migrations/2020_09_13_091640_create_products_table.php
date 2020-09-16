@@ -16,15 +16,20 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string(' product_overview');
-            $table->string(' datasheet_url');
-            $table->string(' image_url');
-            $table->unsignedInteger(' available_stock');
-            $table->unsignedInteger(' rental_price');
-            $table->unsignedInteger(' selling_price');
+            $table->string('product_overview');
+            $table->string('datasheet_url');
+            $table->string('image_url');
+            $table->unsignedInteger('available_stock');
+            $table->unsignedInteger('rental_price');
+            $table->unsignedInteger('selling_price');
             $table->unsignedBigInteger('subcategory_id');
+            $table->unsignedBigInteger('manufacturer_id');
             $table->timestamps();
-            // a forign key should be done here on the user "manufacture type"
+
+            $table->foreign('manufacturer_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             $table->foreign('subcategory_id')
                 ->references('id')

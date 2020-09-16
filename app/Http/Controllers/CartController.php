@@ -30,7 +30,7 @@ class CartController extends Controller
     {
         $data = $request->json()->all();
         $validator = Validator::make($request->all(), [
-            'qty' => 'required|numeric|between:1,5'
+            'quantity' => 'required|numeric|between:1,5'
         ]);
 
         if ($validator->fails())
@@ -38,7 +38,7 @@ class CartController extends Controller
             Session::flash('danger', 'The quantity of the product should not exceed 5.');
             return response()->json(['error' => 'Cart quantity has not been updated']);
         }
-        Cart::update($rowId, $data['qty']);
+        Cart::update($rowId, $data['quantity']);
         Session::flash('success', 'The quantity has been changed.');
         return response()->json(['success' => 'Cart quantity has been updated']);
     }

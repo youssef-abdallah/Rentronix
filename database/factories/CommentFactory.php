@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\products_comments;
+use App\Models\Comment;
 use Faker\Generator as Faker;
 
-$factory->define(products_comments::class, function (Faker $faker) {
+$factory->define(Comment::class, function (Faker $faker) {
     return [
         'rating'=>$faker->numberBetween(5) ,
         ' content'=>$faker->paragraph ,

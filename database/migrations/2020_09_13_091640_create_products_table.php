@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('product_overview');
             $table->string('datasheet_url');
             $table->string('image_url');
+            $table->enum('available_for', array('rent', 'buy'));
             $table->unsignedInteger('available_stock');
             $table->unsignedInteger('rental_price');
             $table->unsignedInteger('selling_price');

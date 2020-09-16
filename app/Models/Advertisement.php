@@ -9,10 +9,10 @@ class Advertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['model_id', 'image'];
+    protected $fillable = ['product_id', 'image'];
 
-    public function model()
+    public function product()
     {
-        return $this->belongsTo('App\Models\Model');
+        return $this->belongsTo('App\Models\Product');
     }
 }

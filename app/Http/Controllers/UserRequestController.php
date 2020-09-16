@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class UserRequestController extends Controller
@@ -72,4 +73,37 @@ class UserRequestController extends Controller
             'message' => 'request record deleted'
         ], 200);
     }
+
+    /**
+     * Admin approves user requests
+     *
+     * @param  \App\Models\UserRequest  $userRequest
+     * @return \Illuminate\Http\Response
+     */
+
+     public function approve(UserRequest $userRequest)
+     {
+        // ToDo:   Admin authorization
+        if ($userRequest->approved) {
+            return response()->json([
+                'message' => 'request was already approved.'
+            ], 200);
+        }
+        $product = new Product();
+        $product->name = $userRequest->product_name;
+        $product->quantity = $userRequest->quantity;
+        $product->product_overview = $userRequest->description;
+        $product->available_for = $userRequest->type == 'loan' ? 'rent' : 'buy';
+        $product->rental_price = $userRequest->price_per_hour;
+        $product->selling_price = $userRequest->price;
+        $product->image_url = $userRequest->image;
+        $product->datasheet_url = $userRequest->datasheet;
+        $product->manufacturer_id = $userRequest->user_id;
+        $userRequest->save();
+        $product->save();
+        $userRequest->approved = true;
+        return response()->json([
+            'message' => 'request approved and product added.'
+        ], 200);
+     }
 }

@@ -55,4 +55,15 @@ class User extends Authenticatable
 
         return $check;
     }
+
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Request');
+    }
+
+    public function complaints()
+    {
+        return $this->hasMany('App\Models\Complaint');
+    }
+
 }

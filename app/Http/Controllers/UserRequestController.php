@@ -53,8 +53,9 @@ class UserRequestController extends Controller
      * @param  \App\Models\UserRequest  $userRequest
      * @return \Illuminate\Http\Response
      */
-    public function show(UserRequest $userRequest)
+    public function show($userRequestId)
     {
+        $userRequest = UserRequest::findOrFail($userRequestId);
         return response($userRequest, 200);
     }
 
@@ -65,8 +66,9 @@ class UserRequestController extends Controller
      * @param  \App\Models\UserRequest  $userRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserRequest $userRequest)
+    public function update(Request $request, $userRequestId)
     {
+        $userRequest = UserRequest::findOrFail($userRequestId);
         $userRequest->update($request->all());
         return response()->json([
             'message' => 'request record updated'
@@ -79,7 +81,7 @@ class UserRequestController extends Controller
      * @param  \App\Models\UserRequest  $userRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserRequest $userRequest)
+    public function destroy($userRequest)
     {
         UserRequest::destroy($userRequest);
         return response()->json([

@@ -13,8 +13,9 @@ class AdvertisementController extends Controller
         return response($advertisements, 200);
     }
 
-    public function show(Advertisement $advertisement)
+    public function show($advertisementId)
     {
+        $advertisement = Advertisement::findOrFail($advertisementId);
         return response($advertisement, 200);
     }
 
@@ -36,8 +37,9 @@ class AdvertisementController extends Controller
         ], 201);
     }
 
-    public function update(Advertisement $advertisement, Request $request)
+    public function update($advertisementId, Request $request)
     {
+        $advertisement = Advertisement::findOrFail($advertisementId);
         $advertisement->update($request->all());
         return response()->json([
             'message' => 'advertisement record updated'

@@ -20,10 +20,19 @@ class AdvertisementController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        Advertisement::create($data);
+        $this->validate($request, [
+            'image' => 'required|image|max:1024'
+        ]);
+        $advertisement = new Advertisement();
+        $advertisement->product_id = $request->product_id;
+        $fileName = 'ad_'.strval($advertisement->id).'.png';
+        $file = $request->file('image')->move(public_path('images'), $fileName);
+        $fileUrl = url('public/images/'.$fileName);
+        $advertisement->image = $fileUrl;
+        $advertisement->save();
         return response()->json([
-            'message' => 'advertisement record created'
+            'message' => 'advertisement record created',
+            'image_url' => $fileUrl,
         ], 201);
     }
 

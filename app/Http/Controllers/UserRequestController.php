@@ -28,7 +28,20 @@ class UserRequestController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        UserRequest::create($data);
+        $this->validate($request, [
+            'image' => 'image|max:1024',
+            'datasheet' => 'mimes:pdf|max:10000'
+        ]);
+        $userRequest = UserRequest::create($data);
+        $imageFileName = 'product_'.strval($userRequest->id).'.png';
+        $file = $request->file('image')->move(public_path('images'), $imageFileName);
+        $imageFileUrl = url('public/images/'.$imageFileName);
+        $userRequest->image = $imageFileUrl;
+        $datasheetFileName = 'datasheet_'.strval($userRequest->id).'.pdf';
+        $file = $request->file('datasheet')->move(public_path('datasheets'), $datasheetFileName);
+        $datasheetFileUrl = url('public/images/'.$datasheetFileName);
+        $userRequest->datasheet = $datasheetFileUrl;
+        $userRequest->save();
         return response()->json([
             'message' => 'request record created'
         ], 201);

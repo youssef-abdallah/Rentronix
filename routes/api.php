@@ -33,7 +33,9 @@ Route::post('cart', 'CartController@store')->name('cart.store');
 Route::put('cart/{rowid}', 'CartController@update')->name('cart.update');
 Route::delete('cart/{rowid}', 'CartController@destroy')->name('cart.destroy');
 Route::get('emptycart', function() {
+    Cart::restore('username');
     Cart::destroy();
+    Cart::store('username');
 });
 
 /* Checkout routes */

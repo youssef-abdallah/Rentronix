@@ -49,8 +49,8 @@ class FacebookController extends Controller
 
         } catch (Exception $e) {
 
-
-            return redirect('auth/facebook');
+            dd($e);
+            //return redirect('auth/facebook');
 
 
         }

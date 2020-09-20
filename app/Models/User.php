@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','facebook_id'
+        'name', 'email', 'password','facebook_id','google_id'
     ];
     //protected $guarded = ['id'];
 
@@ -46,6 +46,18 @@ class User extends Authenticatable
     public function addNew($input)
     {
         $check = static::query()->where('facebook_id',$input['facebook_id'])->first();
+
+
+        if(is_null($check)){
+            return static::query()->create($input);
+        }
+
+
+        return $check;
+    }
+    public function addNewGoogle($input)
+    {
+        $check = static::query()->where('google_id',$input['google_id'])->first();
 
 
         if(is_null($check)){

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ability;
 use App\Models\CustomerInfo;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ManufacturerInfoSeeder::class);
         $this->call(CustomerInfoSeeder::class);
         $this->call(ManufacturerLocationsSeeder::class);
-        //$this->call(RoleSeeder::class);
+        $this->call(AbilitySeeder::class);
         // User::factory(10)->create();
     }
 }

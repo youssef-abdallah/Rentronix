@@ -28,7 +28,7 @@ class UserController extends Controller
     public function destroy(User $id)
     {
         try {
-            $id->delete();
+            $id->destroy();
         } catch (\Exception $e) {
             return response()->json($e->getMessage(),$e->getCode());
         }

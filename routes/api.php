@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\FacebookController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -64,4 +67,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 /* User routes */
 
 Route::apiResource('users', UserController::class);
-

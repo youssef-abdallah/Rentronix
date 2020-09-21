@@ -28,7 +28,10 @@ class Order extends Model
         return $this->hasOne(OrderFeedback::class);
     }
 
-
-
+    public function updateStatus($state)
+    {
+        $this->shipping_status = $state;
+        $this->save();
+    }
 
 }

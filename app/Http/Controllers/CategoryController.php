@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class categoryController extends Controller
@@ -12,9 +14,10 @@ class categoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category,Subcategory $subcategory)
     {
-        //
+        $categories = Category::all()->toJson(JSON_PRETTY_PRINT);
+        return response($categories, 200);
     }
 
     /**
@@ -35,7 +38,11 @@ class categoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        Category::create($data);
+        return response()->json([
+            'message' => 'category record created'
+        ], 201);
     }
 
     /**
@@ -44,9 +51,15 @@ class categoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($category_id)
     {
-        //
+        $category= Category::find($category_id);
+
+        if(is_null($category))
+        {
+            return response()->json('record not found',404);
+        }
+        return new CategoryResource($category);
     }
 
     /**
@@ -67,9 +80,16 @@ class categoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,  $category_id)
     {
-        //
+        $category= Category::find($category_id);
+        if(is_null($category))
+        {
+            return response()->json('record not found',404);
+        }
+        $category->update($request->all());
+
+        return response()->json( $category, 200);
     }
 
     /**
@@ -78,8 +98,14 @@ class categoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy( $category_id)
     {
-        //
+        $category= Category::find($category_id);
+        if(is_null($category))
+        {
+            return response()->json('record not found',404);
+        }
+        $category->delete();
+        return response()->json(null,204);
     }
 }

@@ -3,16 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Subcategory extends Model
 {
     protected $table = 'subcategories';  // to connect the model with its corresponding table
 
     protected $guarded = [];      // to allow mass assigning
-
+    use HasFactory;
     function category() // identify the one to many relationship between category & subcategory
     {
-        return $this->belongsTo(categories::class, category_id);
+        return $this->belongsTo(Categories::class, category_id);
+    }
+
+    function products()
+    {
+
+        return $this->hasMany(Product::class);
     }
 
 

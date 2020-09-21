@@ -32,9 +32,10 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": ["laravel/dusk"]
         }
     },
+
     "autoload": {
         "psr-4": {
             "App\\": "app/",

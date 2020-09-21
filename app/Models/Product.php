@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     protected $table = 'products';  // to connect the model with its corresponding table
-
+    use HasFactory;
     protected $guarded = [];      // to allow mass assigning
 
     function subcategory()  // identify the one to many relationship between subcategory & product
@@ -15,6 +15,21 @@ class Product extends Model
         return $this->belongsTo(subcategories::class,'subcategory_id');
     }
 
-    ///function should be done for the user 'manufacture'
+    function owner()  // identify the one to many relationship between subcategory & product
+    {
+        return $this->belongsTo(User::class,'owner_id');
+    }
+
+    function favouriteList()
+    {
+        return $this->hasMany(FavouriteList::class);
+    }
+
+    function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
 
 }

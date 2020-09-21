@@ -16,7 +16,7 @@ class CreateProductsCommentsTable extends Migration
         Schema::create('products_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('rating');
-            $table->string(' content');
+            $table->string('content');
             $table->dateTime('date_of_publishing');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();

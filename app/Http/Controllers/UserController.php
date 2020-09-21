@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -8,61 +9,29 @@ class UserController extends Controller
 
     public function index()
     {
-
-        return response()->json(Models\User::get(),200);
-
-
-
+        return response()->json(User::get(),200);
     }
-
-
-    public function create()
-    {
-
-        ///
-
-    }
-
-
     public function store(Request $request)
     {
-
-        $data=Models\User::query()->$request->all();
+        $data=User::query()->create($request->all());
         return response()->json($data,201);
-
     }
-
-
     public function show($id)
     {
-
-        return response()->json(Models\User::query()->find($id),200);
-
+        return response()->json(User::query()->find($id),200);
     }
-
-
-    public function edit($id)
+    public function update(Request $request,User $id)
     {
-       ///
-    }
-
-
-    public function update(Request $request, $id)
-    {
-
         $id->update($request->all());
         return response()->json($id,200);
-
     }
-
-
-    public function destroy($id)
+    public function destroy(User $id)
     {
-
-        $id->delete();
+        try {
+            $id->delete();
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(),$e->getCode());
+        }
         return response()->json(null,204);
-
-
-
     }
 }

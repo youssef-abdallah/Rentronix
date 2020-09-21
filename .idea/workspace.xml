@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="22c47349-1172-48b3-91c5-3d1e01b5940b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/FacebookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -150,6 +156,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Rentronix\app\Http\Controllers" />
       <recent name="C:\xampp\htdocs\Rentronix\app\Http\Controllers\Auth" />
     </key>
   </component>
@@ -170,6 +177,9 @@
       <workItem from="1599987128933" duration="16997000" />
       <workItem from="1600085433054" duration="20624000" />
       <workItem from="1600154333112" duration="7674000" />
+      <workItem from="1600254773762" duration="16604000" />
+      <workItem from="1600344776271" duration="16754000" />
+      <workItem from="1600608117817" duration="6229000" />
     </task>
     <servers />
   </component>
@@ -177,6 +187,14 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="452" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600266341703">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="452" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1600266341703" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600611063242">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1600611063242" />
     <state width="1323" height="234" key="GridCell.Tab.0.bottom" timestamp="1600164355386">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -193,9 +211,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="234" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1600164355386" />
+    <state x="498" y="87" key="NewPhpClassDialog" timestamp="1600612944755">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="498" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1600612944755" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1600105186185">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1600105186185" />
+    <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1600357053135">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="390" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1600357053135" />
   </component>
 </project>

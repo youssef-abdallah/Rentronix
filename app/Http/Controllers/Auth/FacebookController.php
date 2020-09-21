@@ -7,10 +7,11 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-//use Socialite;
+
 use App\Http\Controllers\UserController;
 use Exception;
-use App\Services\SocialFacebookAccountService;
+//use App\Services\SocialFacebookAccountService;
+use Illuminate\Http\Request;
 
 
 class FacebookController extends Controller
@@ -23,7 +24,7 @@ class FacebookController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function callback(SocialFacebookAccountService $service)
+    public function callback(\App\Services\SocialFacebookAccountService $service)
     {
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
         auth()->login($user);

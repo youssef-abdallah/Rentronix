@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ability;
+use App\Models\CustomerInfo;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,11 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SubcategorySeeder::class,
             ProductSeeder::class,
+            RoleSeeder::class,
+            ManufacturerInfoSeeder::class,
+            CustomerInfoSeeder::class,
+            ManufacturerLocationsSeeder::class,
+            AbilitySeeder::class,
         ]);
     }
 }

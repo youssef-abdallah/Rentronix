@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+use App\Http\Controllers\UserController;
+//use App\Http\Controllers\Auth\GoogleController;
+
+
+//App\Http\Controllers
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +35,9 @@ Route::get('facebook', function () {return view('facebook');
 });
 Route::get('auth/facebook', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'Auth\FacebookController@handleFacebookCallback');
+// google login
+Route::get('google', function () {
+    return view('google');
+});
+Route::get('auth/google', [GoogleController::class,'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class,'handleGoogleCallback']);

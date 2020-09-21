@@ -31,7 +31,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::resource('user', 'UserController');
 
 // facebook login
-Route::get('facebook', function () {return view('facebook');
+Route::get('facebook', function () {
+    return view('facebook');
 });
 Route::get('auth/facebook', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'Auth\FacebookController@handleFacebookCallback');

@@ -74,4 +74,46 @@ Route::apiResource('users', UserController::class);
 /* Subscriptions routes */
 
 Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
+/* favourite list routes
+
+Route::group(['prefix'=>'users'], function (){
+    Route::apiResource('{users}/favouriteList', FavouriteList::class);
+});
+ */
+
+/* categories routes*/
+
+Route::apiResource('/category', CategoryController::class);
+
+/* subcategories routes*/
+
+Route::group(['prefix'=>'category'], function () {
+    Route::apiResource('/{category}/subcategory', SubcategoryController::class);
+});
+
+
+/* Products routes*/
+
+Route::group(['prefix'=>'category/{category}/subcategory'], function () {
+    Route::apiResource('{subcategory}/products', ProductController::class);
+});
+
+
+
+/* comments routes */
+
+Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'], function (){
+    Route::apiResource('{products}/comments', CommentController::class);
+});
+
+
+
+
+
+
+
+
+
+
+
 

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
+use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -11,10 +15,22 @@ class CommentController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
-    public function index()
+    public function _construct()
+{
+    $this->middleware('auth:api')->except('index','show');
+}
+    public function index(Category $category,Subcategory $subcategory, $product_id)
     {
-        //
+
+
+        $product = Product::find($product_id);
+        if (count($product->comments)<1)
+        {
+            return response()->json('no comments for this product ',404);
+        }
+        return response( $product->comments, 200);
     }
 
     /**
@@ -24,7 +40,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +51,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "rating"=>'required|unique:products_comments',
+            "content"=>'required',
+            "date_of_publishing"=>'required',
+            "product_id"=>'required',
+            "user_id" =>'required|max:1000',
+
+        ]);
+
+
+        Comment::create($validatedData);
+        return response()->json([
+            'message' => 'comment record created'
+        ], 201);
     }
 
     /**
@@ -44,9 +73,14 @@ class CommentController extends Controller
      * @param  \App\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($category_id,$subcategory_id, $product_id, $comment_id)
     {
-        //
+        $comment = Comment::find($comment_id);
+        if(is_null($comment))
+        {
+            return response()->json('record not found',404);
+        }
+        return new CommentResource($comment);
     }
 
     /**
@@ -67,9 +101,16 @@ class CommentController extends Controller
      * @param  \App\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $subcategory_id, $sub_id, $product_id,$comment_id)
     {
-        //
+        $comment=Comment::find($comment_id);
+        if(is_null($comment))
+        {
+            return response()->json('record not found',404);
+        }
+        $comment->update($request->all());
+        $comment->save();
+        return response()->json($comment, 200);
     }
 
     /**
@@ -78,8 +119,15 @@ class CommentController extends Controller
      * @param  \App\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($category_id, $sub_id, $product_id,$comment_id)
     {
-        //
+        $comment= Comment::find($comment_id);
+
+        if(is_null($comment))
+        {
+            return response()->json('record not found',404);
+        }
+        $comment->delete();
+        return response()->json(null,204);
     }
 }

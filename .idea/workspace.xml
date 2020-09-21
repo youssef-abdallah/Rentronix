@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="22c47349-1172-48b3-91c5-3d1e01b5940b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Rentronix.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Rentronix.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubcategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubcategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/FavouriteList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FavouriteList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Subcategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Subcategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/CategoriesFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/FavouriteListFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/FavouriteListFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/ProductsCommentsFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/ProductsFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/SubcategoriesFactory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_13_082222_create_subcategories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_13_082222_create_subcategories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_13_091640_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_13_091640_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_15_093543_create_products_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_15_093543_create_products_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/CategoriesSeeder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +172,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
       <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/vendor/hardevine/shoppingcart" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hRwCfSQurkZs2BYO2XGylpgQNH" />
@@ -145,6 +187,13 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Rentronix/.env" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -171,17 +220,33 @@
       <workItem from="1599987128933" duration="16997000" />
       <workItem from="1600085433054" duration="20624000" />
       <workItem from="1600154333112" duration="7674000" />
+<<<<<<< HEAD
       <workItem from="1600254773762" duration="16604000" />
       <workItem from="1600344776271" duration="16754000" />
       <workItem from="1600608117817" duration="9077000" />
       <workItem from="1600697888826" duration="7571000" />
+=======
+      <workItem from="1600310051632" duration="55263000" />
+>>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="452" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600266341703">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -190,6 +255,16 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1600611063242" />
+=======
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600710692185">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600710692185" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1600316074260">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1600316074260" />
+>>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
     <state width="1323" height="234" key="GridCell.Tab.0.bottom" timestamp="1600164355386">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -214,6 +289,7 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1600105186185" />
+<<<<<<< HEAD
     <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1600357053135">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -222,5 +298,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1600704750291" />
+=======
+    <state x="55" y="0" width="1196" height="689" key="dock-window-1" timestamp="1600601731659">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="55" y="0" width="1196" height="689" key="dock-window-1/0.0.1536.824@0.0.1536.824" timestamp="1600601731659" />
+    <state x="0" y="0" width="1196" height="689" key="dock-window-2" timestamp="1600601731660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="0" width="1196" height="689" key="dock-window-2/0.0.1536.824@0.0.1536.824" timestamp="1600601731660" />
+    <state x="0" y="0" width="1196" height="689" key="dock-window-3" timestamp="1600601731660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="0" width="1196" height="689" key="dock-window-3/0.0.1536.824@0.0.1536.824" timestamp="1600601731660" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/database/factories/ProductFactory.php</url>
+          <line>31</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+>>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
   </component>
 </project>

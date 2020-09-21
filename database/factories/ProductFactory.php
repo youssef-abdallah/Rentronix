@@ -3,8 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+<<<<<<< HEAD
 use App\Models\User;
 use App\Models\Subcategory;
+=======
+use App\Models\Subcategory;
+use App\Models\User;
+>>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -35,7 +40,13 @@ class ProductFactory extends Factory
             'rental_price' => $this->faker->numberBetween(10000) ,
             'selling_price' => $this->faker->numberBetween(10000) ,
             'subcategory_id' => $this->faker->randomElement($sucategories),
-            'manufacturer_id' => $this->faker->randomElement($users),
+            'owner_id' => $this->faker->randomElement($users),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (Product $product) {})->afterCreating(function (Product $product)
+        {});
     }
 }

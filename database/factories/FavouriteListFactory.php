@@ -1,13 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\favourite_list;
-use Faker\Generator as Faker;
+use App\Models\FavouriteList;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(favourite_list::class, function (Faker $faker) {
-    return [
-        'product_id'=>factory(app\products::class)
-        // user id should be here
-    ];
-});
+class FavouriteListFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = FavouriteList::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $user= User::pluck('id')->toArray();
+        $product= Product::pluck('id')->toArray();
+        return [
+            'product_id'=>$this->faker->randomElement($product),
+            'user_id'=>$this->faker->randomElement($user)
+        ];
+    }
+}

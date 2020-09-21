@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewAd;
 use App\Models\Advertisement;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class AdvertisementController extends Controller
 {
@@ -31,6 +35,11 @@ class AdvertisementController extends Controller
         $fileUrl = url('public/images/'.$fileName);
         $advertisement->image = $fileUrl;
         $advertisement->save();
+        $subscriptions = Subscription::all();
+        foreach ($subscriptions as $subscriber)
+        {
+            Mail::to($subscriber->email)->send(new NewAd());
+        }
         return response()->json([
             'message' => 'advertisement record created',
             'image_url' => $fileUrl,

@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ManufacturerinfoFactory extends Factory
+class ManufacturerInfoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

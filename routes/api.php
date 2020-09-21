@@ -68,3 +68,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::apiResource('users', UserController::class);
 
+/* Subscriptions routes */
+
+Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
+

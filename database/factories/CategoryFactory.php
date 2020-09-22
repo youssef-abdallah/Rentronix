@@ -4,11 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-<<<<<<< HEAD
 use Illuminate\Support\Str;
-=======
-
->>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
 
 class CategoryFactory extends Factory
 {

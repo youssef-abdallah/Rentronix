@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -95,6 +97,27 @@ class OrderController extends Controller
         Order::destroy($order);
         return response()->json([
             'message' => 'order record deleted'
+        ], 200);
+    }
+
+    /**
+     * Updates the current order stage.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOrderStatus(Order $order, Request $request)
+    {
+        // ToDo put request in api.php
+        $status =  $request->status;
+        $order->updateStatus($status);
+        $customer_email = User::find($order->customer_id)->email;
+        if ($status == 'delivered')
+        {
+            Mail::to($customer_email)->send(new NewAd());
+        }
+        return response()->json([
+            'message' => 'order status has been updated.'
         ], 200);
     }
 }

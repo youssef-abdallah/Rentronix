@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/Rentronix.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Rentronix.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
@@ -47,6 +48,9 @@
       <change beforePath="$PROJECT_DIR$/database/seeders/CategoriesSeeder.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NumbersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NumbersController.php" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,10 +228,15 @@
       <workItem from="1600254773762" duration="16604000" />
       <workItem from="1600344776271" duration="16754000" />
       <workItem from="1600608117817" duration="9077000" />
+<<<<<<< Updated upstream
       <workItem from="1600697888826" duration="7571000" />
 =======
       <workItem from="1600310051632" duration="55263000" />
 >>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
+=======
+      <workItem from="1600697888826" duration="9635000" />
+      <workItem from="1600873244097" duration="237000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

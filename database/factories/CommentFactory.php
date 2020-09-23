@@ -28,7 +28,7 @@ class CommentFactory extends Factory
         $product= Product::pluck('id')->toArray();
         return [
             'rating'=>$this->faker->numberBetween(5) ,
-            'content'=>$this->faker->paragraph ,
+            'content'=>$this->faker->text ,
             'date_of_publishing'=>$this->faker->dateTime ,
             'product_id'=>$this->faker->randomElement($product),
             'user_id'=>$this->faker->randomElement($user)

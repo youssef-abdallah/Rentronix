@@ -12,7 +12,8 @@ class UserRequest extends Model
 
     protected $fillable = ['user_id', 'product_name',
         'description', 'quantity', 'type',
-        'price', 'price_per_hour', 'subcategory_title'];
+        'price', 'price_per_hour', 'subcategory_title',
+        'category_title', 'subcategory_description'];
 
     public function user()
     {

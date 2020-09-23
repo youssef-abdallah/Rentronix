@@ -29,7 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /* Requests Routes */
 
 Route::apiResource('requests', 'UserRequestController');
-Route::put('requests/approve/{request}', 'UserRequestController@approve')->name('requests.approve');
+Route::put('requests/{request}/approve', 'UserRequestController@approve')->name('requests.approve');
 
 /* Cart Routes */
 

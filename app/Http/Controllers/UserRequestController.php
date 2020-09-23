@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\UserRequest;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class UserRequestController extends Controller
@@ -96,9 +98,10 @@ class UserRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function approve(UserRequest $userRequest)
+     public function approve($userRequestId)
      {
         // ToDo:   Admin authorization
+        $userRequest = UserRequest::findOrFail($userRequestId);
         if ($userRequest->approved) {
             return response()->json([
                 'message' => 'request was already approved.'
@@ -106,14 +109,31 @@ class UserRequestController extends Controller
         }
         $product = new Product();
         $product->name = $userRequest->product_name;
-        $product->quantity = $userRequest->quantity;
+        $product->available_stock = $userRequest->quantity;
         $product->product_overview = $userRequest->description;
         $product->available_for = $userRequest->type == 'loan' ? 'rent' : 'buy';
         $product->rental_price = $userRequest->price_per_hour;
         $product->selling_price = $userRequest->price;
         $product->image_url = $userRequest->image;
         $product->datasheet_url = $userRequest->datasheet;
-        $product->manufacturer_id = $userRequest->user_id;
+        $product->owner_id = $userRequest->user_id;
+        $subcategory = Subcategory::where('title', $userRequest->subcategory_title)->first();
+        if (is_null($subcategory))
+        {
+            $category = Category::where('title', $userRequest->category_title)->first();
+            if (is_null($category))
+            {
+                $category = new Category();
+                $category->title = $userRequest->category_title;
+                $category->save();
+            }
+            $subcategory = new Subcategory();
+            $subcategory->title = $userRequest->subcategory_title;
+            $subcategory->category_id = $category->id;
+            $subcategory->description = $userRequest->subcategory_description;
+            $subcategory->save();
+        }
+        $product->subcategory_id = $subcategory->id;
         $userRequest->approved = true;
         $userRequest->save();
         $product->save();

@@ -25,6 +25,9 @@ class CreateRequestsTable extends Migration
             $table->float('price_per_hour')->default(0);
             $table->string('image')->default('/');
             $table->string('datasheet')->default('/');
+            $table->string('subcategory_title');
+            $table->string('subcategory_description')->default('default description');
+            $table->string('category_title')->default('default title');
             $table->timestamps();
         });
     }

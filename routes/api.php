@@ -29,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /* Requests Routes */
 
 Route::apiResource('requests', 'UserRequestController');
+Route::put('requests/approve/{request}', 'UserRequestController@approve')->name('requests.approve');
 
 /* Cart Routes */
 
@@ -69,7 +70,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* User routes */
 
-Route::apiResource('users', UserController::class);
+Route::apiResource('users', 'UserController');
 
 /* Subscriptions routes */
 

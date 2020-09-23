@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
     protected $table = 'products';  // to connect the model with its corresponding table
     use HasFactory;
     protected $guarded = [];      // to allow mass assigning

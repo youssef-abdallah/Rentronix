@@ -16,7 +16,7 @@ class Subcategory extends Model
     use HasFactory;
     function category() // identify the one to many relationship between category & subcategory
     {
-        return $this->belongsTo(Categories::class, category_id);
+        return $this->belongsTo(Categories::class, 'category_id');
     }
 
     function products()

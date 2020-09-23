@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Ability;
+use App\Models\Comment;
 use App\Models\CustomerInfo;
 use Illuminate\Database\Seeder;
 
@@ -16,15 +17,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
-            CategorySeeder::class,
-            SubcategorySeeder::class,
-            ProductSeeder::class,
+           UserSeeder::class,
             RoleSeeder::class,
             ManufacturerInfoSeeder::class,
             CustomerInfoSeeder::class,
             ManufacturerLocationsSeeder::class,
             AbilitySeeder::class,
+            CategorySeeder::class,
+            SubcategorySeeder::class,
+            ProductSeeder::class,
+            CommentSeeder::class,
+
+
         ]);
     }
 }

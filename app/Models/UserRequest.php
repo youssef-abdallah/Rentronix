@@ -10,9 +10,9 @@ class UserRequest extends Model
     use HasFactory;
     protected $table = 'user_requests';
 
-    protected $fillable = ['user_id', 'model_id', 'product_name',
+    protected $fillable = ['user_id', 'product_name',
         'description', 'quantity', 'type',
-        'price', 'price_per_hour'];
+        'price', 'price_per_hour', 'subcategory_title'];
 
     public function user()
     {

@@ -114,9 +114,9 @@ class UserRequestController extends Controller
         $product->image_url = $userRequest->image;
         $product->datasheet_url = $userRequest->datasheet;
         $product->manufacturer_id = $userRequest->user_id;
+        $userRequest->approved = true;
         $userRequest->save();
         $product->save();
-        $userRequest->approved = true;
         return response()->json([
             'message' => 'request approved and product added.'
         ], 200);

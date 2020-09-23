@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('product_overview');
+            $table->text('product_overview');
             $table->string('datasheet_url');
             $table->string('image_url');
             $table->enum('available_for', array('rent', 'buy'));
@@ -24,9 +24,8 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('rental_price');
             $table->unsignedInteger('selling_price');
             $table->unsignedBigInteger('subcategory_id');
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->timestamps();
             $table->unsignedBigInteger('owner_id');
+            $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subcategory_id')

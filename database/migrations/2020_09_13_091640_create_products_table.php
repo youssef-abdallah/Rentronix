@@ -24,7 +24,6 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('rental_price');
             $table->unsignedInteger('selling_price');
             $table->unsignedBigInteger('subcategory_id');
-            $table->unsignedBigInteger('manufacturer_id');
             $table->timestamps();
             $table->unsignedBigInteger('owner_id');
 

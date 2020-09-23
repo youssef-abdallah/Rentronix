@@ -3,13 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Product;
-<<<<<<< HEAD
-use App\Models\User;
-use App\Models\Subcategory;
-=======
 use App\Models\Subcategory;
 use App\Models\User;
->>>>>>> 657cabfa3b05b32899ef15ce84e766e80654f7c7
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

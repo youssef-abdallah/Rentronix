@@ -94,10 +94,9 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
-        $customer = CustomerInfo::where('user_id', $order->customer_id)->first();
-        $customer->wallet += $order->total_cost;
-        $customer->save();
+        $customer = User::findOrFail($order->customer_id);
+        $customer->customerInfo->wallet += $order->total_cost;
+        $customer->customerInfo->save();
         Order::destroy($order);
         return response()->json([
             'message' => 'order record deleted'

@@ -14,12 +14,11 @@ class CreateUserInfo extends Migration
     public function up()
     {
         Schema::create('customer_info', function (Blueprint $table) {
-            //$table->primary('user_id');
-            $table->bigIncrements('user_id');
+            $table->bigIncrements('id');
             $table->string('address');
             $table->float('wallet');
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->foreign('id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

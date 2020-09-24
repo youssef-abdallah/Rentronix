@@ -26,9 +26,9 @@ class CustomerInfoFactory extends Factory
     {
         $ids= User::all()->pluck('id')->toArray();
         return [
-            'user_id'=>$this->faker->unique()->randomElement($ids),
-            'address'=>$this->faker->address,
-            'wallet'=>0.0
+            'id' => $this->faker->unique()->randomElement($ids),
+            'address' => $this->faker->address,
+            'wallet' => 0.0
         ];
     }
 }

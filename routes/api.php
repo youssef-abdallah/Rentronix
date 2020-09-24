@@ -75,12 +75,12 @@ Route::apiResource('users', 'UserController');
 /* Subscriptions routes */
 
 Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
-/* favourite list routes
+/* favourite list routes */
 
 Route::group(['prefix'=>'users'], function (){
     Route::apiResource('{users}/favouriteList', FavouriteList::class);
 });
- */
+
 
 /* categories routes*/
 
@@ -107,7 +107,16 @@ Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'
     Route::apiResource('{products}/comments', CommentController::class);
 });
 
+/* Numbers routes */
+Route::get('profile/number/profit/{id}',[\App\Http\Controllers\NumbersController::class,'monthProfit']);
+Route::get('profile/number/orders/{id}',[\App\Http\Controllers\NumbersController::class,'numberOfOrders']);
+Route::get('profile/number/bestseller/{id}',[\App\Http\Controllers\NumbersController::class,'mostOrderedItem']);
+Route::get('profile/number/favourite/{id}',[\App\Http\Controllers\NumbersController::class,'mostFavouriteListedItem']);
 
+Route::get('profile/number/product/favourite/{id}',[\App\Http\Controllers\NumbersController::class,'productFavouriteList']);
+Route::get('profile/number/product/sold/{id}',[\App\Http\Controllers\NumbersController::class,'productSold']);
+Route::get('profile/number/product/rent/{id}',[\App\Http\Controllers\NumbersController::class,'productRented']);
+Route::get('profile/number/product/profit/{id}',[\App\Http\Controllers\NumbersController::class,'productProfit']);
 
 
 

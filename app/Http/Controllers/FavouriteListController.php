@@ -3,83 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\FavouriteList;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavouriteListController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function _construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function index()
     {
-        //
+        $id=Auth::id();
+        $fav=FavouriteList::query()->where('user_id','=',$id)->get();
+        return response()->json($fav,200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        FavouriteList::create($data);
+        return response()->json([
+            'message' => 'favouriteList record created'
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\FavouriteList  $FavouriteList
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FavouriteList $favouriteList)
+
+    public function show($favouriteList)
     {
-        //
+        return response()->json(FavouriteList::query()->find($favouriteList),200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\FavouriteList  $FavouriteList
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FavouriteList $favouriteList)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FavouriteList  $FavouriteList
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, FavouriteList $favouriteList)
     {
-        //
+        $favouriteList->update($request->all());
+        return response()->json([
+            'message' => 'favouriteList record updated'
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\FavouriteList  $FavouriteList
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(FavouriteList $favouriteList)
     {
-        //
+        FavouriteList::destroy($favouriteList);
+        return response()->json([
+            'message' => 'favouriteList record deleted'
+        ], 200);
     }
 }

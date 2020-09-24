@@ -18,9 +18,9 @@ class CommentController extends Controller
      *
      */
     public function _construct()
-{
-    $this->middleware('auth:api')->except('index','show');
-}
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
     public function index(Category $category,Subcategory $subcategory, $product_id)
     {
 

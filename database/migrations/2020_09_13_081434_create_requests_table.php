@@ -20,7 +20,7 @@ class CreateRequestsTable extends Migration
             $table->integer('quantity')->default(1);
             $table->text('description')->nullable();
             $table->boolean('approved')->default(false);
-            $table->enum('type', array('sell', 'loan'));
+            $table->enum('type', array('sell', 'loan', 'repair'));
             $table->float('price')->default(0);
             $table->float('price_per_hour')->default(0);
             $table->string('image')->default('/');

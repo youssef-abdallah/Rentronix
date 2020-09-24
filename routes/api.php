@@ -83,8 +83,9 @@ Route::group(['prefix'=>'users'], function (){
  */
 
 /* categories routes*/
-
-Route::apiResource('/category', CategoryController::class);
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResource('/category', CategoryController::class);
+});
 
 /* subcategories routes*/
 
@@ -107,6 +108,8 @@ Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'
     Route::apiResource('{products}/comments', CommentController::class);
 });
 
+/* facebook route */
+Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
 
 
 

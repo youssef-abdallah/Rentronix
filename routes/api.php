@@ -55,6 +55,7 @@ Route::apiResource('complaints', 'ComplaintController');
 /* Orders Routes */
 
 Route::apiResource('orders', 'OrderController');
+Route::put('orders/updatestatus/{order}', 'OrderController@updateOrderStatus')->name('orders.updateOrderStatus');
 
 /* Advertisements Routes */
 

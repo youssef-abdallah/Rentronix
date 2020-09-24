@@ -11,9 +11,21 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function Role(){
+    public function role(){
         return $this->belongsToMany(Role::class);
     }
+
+    public function customerInfo()
+    {
+        return $this->hasOne(CustomerInfo::class);
+    }
+
+    public function manufacturerInfo()
+    {
+        return $this->hasOne(ManufacturerInfo::class);
+    }
+
+
 
 
     /**

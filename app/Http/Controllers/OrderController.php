@@ -97,7 +97,7 @@ class OrderController extends Controller
         $customer = User::findOrFail($order->customer_id);
         $customer->customerInfo->wallet += $order->total_cost;
         $customer->customerInfo->save();
-        Order::destroy($order);
+        Order::destroy($order->id);
         return response()->json([
             'message' => 'order record deleted'
         ], 200);
@@ -112,7 +112,7 @@ class OrderController extends Controller
     public function updateOrderStatus(Order $order, Request $request)
     {
         // ToDo put request in api.php
-        $status =  $request->status;
+        $status =  $request->shipping_status;
         $order->updateStatus($status);
         $customer_email = User::find($order->customer_id)->email;
         if ($status == 'delivered')

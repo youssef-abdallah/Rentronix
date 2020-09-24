@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\CustomerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -94,6 +95,9 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+        $customer = CustomerInfo::where('user_id', $order->customer_id)->first();
+        $customer->wallet += $order->total_cost;
+        $customer->save();
         Order::destroy($order);
         return response()->json([
             'message' => 'order record deleted'

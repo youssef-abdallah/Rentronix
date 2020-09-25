@@ -55,6 +55,7 @@ class FacebookController extends Controller
             //return redirect('auth/facebook');
         }
     }
+    
     public function loginFromToken(Request $request) {    
         $user = Socialite::driver('facebook')->userFromToken( $request->input('access_token'));
         abort_if($user == null || $user->id != $request->input('user_id'), 400, 'Invalid credentials');

@@ -113,7 +113,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /* facebook route */
 Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
 
-
+/* google route */
+Route::post('auth/google', 'Auth\GoogleController@loginFromToken');
 
 
 

@@ -12,8 +12,48 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
-    public function role(){
-        return $this->belongsToMany(Role::class);
+    /**
+     * User roles.
+     *
+     * @return BelongsToMany
+     */
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * Assign role to user.
+     *
+     * @param string $role
+     *
+     * @return Role
+     */
+
+    public function assignRole($role)
+    {
+        $this->roles()->save($role);
+    }
+
+    /**
+     * Return true if user has given role.
+     *
+     * @param string|Collection $role
+     *
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+        return !! $role->intersect($this->roles)->count();
+    }
+
+    public function abilities()
+    {
+        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
     }
 
     public function customerInfo()

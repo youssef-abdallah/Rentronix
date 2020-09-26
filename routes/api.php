@@ -25,7 +25,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     /* Requests Routes */
 
     Route::apiResource('requests', 'UserRequestController');
-    Route::put('requests/{request}/approve', 'UserRequestController@approve')->name('requests.approve');
+    Route::put('requests/{request}/approve', 'UserRequestController@approve')
+            ->name('requests.approve')->middleware('can:approve,request');
 
     /* Cart Routes */
 

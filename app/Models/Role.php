@@ -8,10 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-    public function Ability(){
-        return $this->belongsToMany(Ability::class);
+
+    protected $guarded = [];
+
+    public function abilities()
+    {
+        return $this->belongsToMany(Ability::class)->withTimestamps();
     }
-    public function User(){
+
+    public function allowTo($ability)
+    {
+        $this->abilities()->save($ability);
+    }
+
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 

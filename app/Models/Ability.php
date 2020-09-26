@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Ability extends Model
 {
     use HasFactory;
-    public function Role(){
-        return $this->belongsToMany(Role::class);
+
+    protected $guarded = [];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
     }
 }

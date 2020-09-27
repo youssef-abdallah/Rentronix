@@ -7,6 +7,7 @@ use App\Models\CustomerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\NewAd;
 
 class OrderController extends Controller
 {

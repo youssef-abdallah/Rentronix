@@ -6,6 +6,7 @@ use App\Models\Order;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -17,15 +18,16 @@ class CheckoutController extends Controller
     {
         $data = $request->json()->all();
         $order = new Order();
+        $order->totalCost = 0;
         foreach (Cart::content() as $product)
         {
-            // ToDo: attach to the order detail
-            $order->roles()->attach($product, ['quantity' => 1,
-             'due_date' => '2021-01-01', 'type' => 'rent']);
-            // Filling all the order details
+            $order->products()->attach($product->model, ['quantity' => $product->qty,
+             'due_date' => '2021-01-01', 'type' => 'rent', '' => $product->model]);
+            $order->totalCost += $product->model->price * $product->qty;
         }
-        // ToDo: Filling the order fields.
-
+        $order->paymentId = 1;
+        $order->customer_id = Auth::id();
+        $order->shipping_status = 'pending';
         $order->save();
         Session::flash('success', 'Your payment succeeded!');
         Cart::destroy();

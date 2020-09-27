@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
         $roles = Role::all();
 
         User::all()->each(function ($user) use ($roles) {
-            $user->Role()->attach(
+            $user->roles()->attach(
                 $roles->random(rand(1, 3))->pluck('id')->toArray()
             );
         });

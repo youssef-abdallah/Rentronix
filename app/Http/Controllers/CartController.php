@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,7 @@ class CartController extends Controller
     public function index()
     {
         // Restoring the cart
-        Cart::restore('username');
+        Cart::restore(Auth::id());
         $data = Cart::content()->toJson(JSON_PRETTY_PRINT);
         return response($data, 200);
     }
@@ -23,7 +24,7 @@ class CartController extends Controller
         $product = Product::find($request->id);
 
         // Restoring the cart
-        Cart::restore('username');
+        Cart::restore(Auth::id());
 
         $duplicate = Cart::search(function ($cartItem, $rowId) use ($product) {
             return $cartItem->id === $product->id;
@@ -39,7 +40,7 @@ class CartController extends Controller
             ->associate('App\Models\Product');
 
         // Storing the cart
-        Cart::store('username');
+        Cart::store(Auth::id());
 
         return response()->json([
             'message' => 'The product has been added to the cart'
@@ -49,7 +50,7 @@ class CartController extends Controller
     public function update(Request $request, $rowId)
     {
         // Restoring the cart
-        Cart::restore('username');
+        Cart::restore(Auth::id());
         $data = $request->json()->all();
         $validator = Validator::make($request->all(), [
             'quantity' => 'required|numeric|between:1,5'
@@ -62,7 +63,7 @@ class CartController extends Controller
         }
         Cart::update($rowId, $data['quantity']);
         // Storing the cart
-        Cart::store('username');
+        Cart::store(Auth::id());
         Session::flash('success', 'The quantity has been changed.');
         return response()->json(['success' => 'Cart quantity has been updated']);
     }
@@ -70,10 +71,10 @@ class CartController extends Controller
     public function destroy($rowid)
     {
         // Restoring the cart
-        Cart::restore('username');
+        Cart::restore(Auth::id());
         Cart::remove($rowid);
         // Storing the cart
-        Cart::store('username');
+        Cart::store(Auth::id());
         return response()->json(['success' => 'The product has been removed from cart']);
     }
 }

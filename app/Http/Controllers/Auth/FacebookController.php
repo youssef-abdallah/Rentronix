@@ -59,17 +59,22 @@ class FacebookController extends Controller
     public function loginFromToken(Request $request) {    
         $user = Socialite::driver('facebook')->userFromToken( $request->input('access_token'));
         abort_if($user == null || $user->id != $request->input('user_id'), 400, 'Invalid credentials');
-        $existing_user = User::where('facebook_id', $user->id)->first();
-        if (is_null($existing_user))
+        $existingUser = User::where('facebook_id', $user->id)->first();
+        if (is_null($existingUser))
         {
             $create['name'] = $user->getName();
             $create['email'] = $user->getEmail();
             $create['facebook_id'] = $user->getId();
             $create['facebook_token'] = $user->token;
             $userModel = new User;
-            $existing_user = $userModel->addNew($create);
+            $existingUser = $userModel->addNew($create);
         }
-        return $this->issueToken($existing_user, $request->client_id, $request->client_secret);
+        $response = $this->issueToken($existingUser, $request->client_id, $request->client_secret);
+        if (array_key_exists('error', $response))
+        {
+            $existingUser->delete();
+        }
+        return $response;
     }        
 
     private function issueToken(User $user, $client_id, $client_secret) {

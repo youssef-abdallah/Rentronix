@@ -29,6 +29,11 @@ class CreateRequestsTable extends Migration
             $table->string('subcategory_description')->default('default description');
             $table->string('category_title')->default('default title');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

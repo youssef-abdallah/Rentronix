@@ -20,7 +20,7 @@ class AbilitySeeder extends Seeder
         $abilities = Ability::all();
 
         Role::all()->each(function ($role) use ($abilities) {
-            $role->Ability()->attach(
+            $role->abilities()->attach(
                 $abilities->random(rand(1, 3))->pluck('id')->toArray()
             );
         });

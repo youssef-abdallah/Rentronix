@@ -25,8 +25,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     /* Requests Routes */
 
     Route::apiResource('requests', 'UserRequestController');
-    Route::put('requests/{request}/approve', 'UserRequestController@approve')
-            ->name('requests.approve')->middleware('can:approve,request');
 
     /* Cart Routes */
 
@@ -56,15 +54,14 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /* Advertisements Routes */
 
-    Route::apiResource('advertisements', 'AdvertisementController');
+    Route::post('advertisements', 'AdvertisementController@store')->name('advertisements.store');
+    Route::put('advertisements/{advertisement}', 'AdvertisementController@update')->name('advertisements.update');
+    Route::delete('advertisements/{advertisement}', 'AdvertisementController@destroy')->name('advertisements.destroy');
 
     /* Order Feedback Routes */
 
     Route::apiResource('feedbacks', 'OrderFeedbackController');
 
-    /* Home Route */
-
-    Route::get('/home', 'HomeController@index')->name('home');
 
     /* User routes */
 
@@ -111,12 +108,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-/* facebook route */
+/* Facebook Route */
 Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
 
-/* google route */
+/* Google Route */
 Route::post('auth/google', 'Auth\GoogleController@loginFromToken');
 
+/* Ads routes */
+Route::get('advertisements', 'AdvertisementController@index')->name('advertisements.index');
+Route::get('advertisements/{advertisement}', 'AdvertisementController@show')->name('advertisements.show');
+
+/* Home Route */
+Route::get('/home', 'HomeController@index')->name('home');
+
+/* Admin Routes */
+Route::get('/admin/requests', 'AdminController@displayRequests')
+            ->name('requests.admin')
+            ->middleware('can:display-requests');
+Route::put('/admin/requests/{request}/approve', 'AdminController@approve')
+            ->name('requests.approve')
+            ->middleware('can:approve,request');
 
 
 

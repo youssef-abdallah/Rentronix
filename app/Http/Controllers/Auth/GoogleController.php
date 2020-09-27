@@ -57,7 +57,12 @@ class GoogleController extends Controller
             $userModel = new User;
             $existing_user = $userModel->addNew($create);
         }
-        return $this->issueToken($existing_user, $request->client_id, $request->client_secret);
+        $response = $this->issueToken($existingUser, $request->client_id, $request->client_secret);
+        if (array_key_exists('error', $response))
+        {
+            $existingUser->delete();
+        }
+        return $response
     }        
 
     private function issueToken(User $user, $client_id, $client_secret) {

@@ -7,6 +7,7 @@ use App\Models\UserRequest;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserRequestController extends Controller
 {
@@ -77,7 +78,7 @@ class UserRequestController extends Controller
             ->where('id', $userRequestId)
             ->firstOrFail();
         $data = $request->all();
-        $data->user_id = Auth::id();
+        $data['user_id'] = Auth::id();
         $userRequest->update($data);
         return response()->json([
             'message' => 'request record updated'
@@ -90,7 +91,7 @@ class UserRequestController extends Controller
      * @param  \App\Models\UserRequest  $userRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userRequest)
+    public function destroy($userRequestId)
     {
         $userRequest = UserRequest::where('user_id', Auth::id())
             ->where('id', $userRequestId)

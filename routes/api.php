@@ -72,6 +72,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 /* User routes */
 
 Route::apiResource('users', 'UserController');
+Route::get('users/wallet/{user}', 'UserController@showWallet')->name('users.showWallet');
+
 
 /* Subscriptions routes */
 

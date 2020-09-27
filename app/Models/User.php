@@ -23,7 +23,7 @@ class User extends Authenticatable
 
     public function manufacturerInfo()
     {
-        return $this->hasOne(ManufacturerInfo::class);
+        return $this->hasOne(ManufacturerInfo::class, 'id');
     }
 
 

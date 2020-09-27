@@ -34,4 +34,12 @@ class UserController extends Controller
         }
         return response()->json(null,204);
     }
+
+    public function showWallet(User $user)
+    {
+        $customerWallet = $user->customerInfo->wallet ?? "";
+        $manufacturerWallet = $user->manufacturerInfo->wallet ?? "";
+        $wallet = json_encode(array("customerWallet"=>$customerWallet , "manufacturerWallet"=>$manufacturerWallet));
+        return response($wallet, 200);
+    }
 }

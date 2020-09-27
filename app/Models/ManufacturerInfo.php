@@ -11,7 +11,7 @@ class ManufacturerInfo extends Model
     use HasFactory;
 
     public function User(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
     public function ManufacturerLocation(){
         return $this->hasMany(ManufacturerLocation::class);

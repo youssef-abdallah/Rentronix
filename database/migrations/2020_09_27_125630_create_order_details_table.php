@@ -18,7 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
-            $table->enum('type', array('buy', 'rent', 'repair'));
+            $table->enum('type', array('buy', 'rent'));
             $table->date('due_date')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');  

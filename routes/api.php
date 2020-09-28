@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\ManufacturerSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,7 @@ Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'
     Route::apiResource('{products}/comments', CommentController::class);
 });
 
+Route::apiResource('manufacturersearch', ManufacturerSearchController::class);
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -15,12 +16,6 @@ class GoogleController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function callback(SocialGoogleAccountService $service)
-    {
-        $user = $service->createOrGetUser(Socialite::driver('google')->user());
-        auth()->login($user);
-        return redirect()->to('/home');
-    }
 
     public function handleGoogleCallback()
     {
@@ -57,12 +52,12 @@ class GoogleController extends Controller
             $userModel = new User;
             $existing_user = $userModel->addNew($create);
         }
-        $response = $this->issueToken($existingUser, $request->client_id, $request->client_secret);
+        $response = $this->issueToken($existing_user, $request->client_id, $request->client_secret);
         if (array_key_exists('error', $response))
         {
-            $existingUser->delete();
+            $existing_user->delete();
         }
-        return $response
+        return $response;
     }        
 
     private function issueToken(User $user, $client_id, $client_secret) {

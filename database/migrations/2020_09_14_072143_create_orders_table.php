@@ -16,9 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('seller_id');
             $table->enum('shipping_status', array('pending','shipped','delivered'));
-            $table->float('total_cost');
+            $table->double('total_cost');
             $table->unsignedBigInteger('payment_id');
             $table->timestamps();
             $table->date('delivery_date');

@@ -16,21 +16,26 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        Cart::restore(Auth::id());
         $order = new Order();
-        $order->totalCost = 0;
+        $order->total_cost = 0;
+        $order->payment_id = 1;
+        $order->customer_id = Auth::id();
+        $order->shipping_status = 'pending';
+        $order->delivery_date = '2021-01-01';
+        $order->save();
         foreach (Cart::content() as $product)
         {
             $order->products()->attach($product->model, ['quantity' => $product->qty,
-             'due_date' => '2021-01-01', 'type' => 'rent', '' => $product->model]);
-            $order->totalCost += $product->model->price * $product->qty;
+                'due_date' => '2021-01-01', 'type' => 'rent',
+                'seller_id' => $product->model->owner_id]);
+            // dd($product->model);
+            $order->total_cost += $product->model->selling_price * $product->qty;
         }
-        $order->paymentId = 1;
-        $order->customer_id = Auth::id();
-        $order->shipping_status = 'pending';
         $order->save();
         Session::flash('success', 'Your payment succeeded!');
         Cart::destroy();
+        Cart::store(Auth::id());
         return response()->json(['success' => 'Payment Intent succeeded']);
     }
 }

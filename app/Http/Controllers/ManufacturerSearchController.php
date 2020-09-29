@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class ManufacturerSearchController extends Controller
 {
     function index(Request $request){
@@ -19,7 +20,7 @@ class ManufacturerSearchController extends Controller
                     ->select('name')
                     ->get();
             }
-            return datatables()->of($data)->make(true);
+            return $data;
 
         }
 

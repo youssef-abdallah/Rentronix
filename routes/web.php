@@ -42,4 +42,4 @@ Route::get('google', function () {
 });
 Route::get('auth/google', [GoogleController::class,'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class,'handleGoogleCallback']);
-Route::resource('manufacturersearch','ManufacturerSearchController');
+Route::resource('/manufacturersearch','ManufacturerSearchController');

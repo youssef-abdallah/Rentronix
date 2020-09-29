@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\ManufacturerSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,9 @@ Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
 
 /* Google Route */
 Route::post('auth/google', 'Auth\GoogleController@loginFromToken');
+
+/* Manufacturer search */
+Route::apiResource('manufacturersearch', ManufacturerSearchController::class);
 
 /* Ads routes */
 Route::get('advertisements', 'AdvertisementController@index')->name('advertisements.index');

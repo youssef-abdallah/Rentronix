@@ -79,7 +79,7 @@ class FacebookController extends Controller
         ]);
         $response = app()->handle($request);
         $response = json_decode($response->getContent(), true);
-        if (array_key_exists('error', $response)) return $response;
+        if (isset($response['error'])) return $response;
         $userToken = $user->token() ?? $user->createToken('socialLogin');
         return [
             "token_type" => "Bearer",

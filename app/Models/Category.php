@@ -20,7 +20,10 @@ class Category extends Model
         return $this->hasMany(Subcategory::class);
     }
 
-
+    function products() // identify the one to many relationship between category & products
+    {
+        return $this->hasMany(Product::class);
+    }
 
 
 }

@@ -16,4 +16,7 @@ class ManufacturerInfo extends Model
     public function ManufacturerLocation(){
         return $this->hasMany(ManufacturerLocation::class);
     }
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

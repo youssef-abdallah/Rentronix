@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,7 +109,8 @@ Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'
 });
 
 
-
+Route::get('categories', 'Api\CategoryController@indexforsearch');
+Route::get('manufacturers', 'Api\ManufacturerController@index');
 
 
 

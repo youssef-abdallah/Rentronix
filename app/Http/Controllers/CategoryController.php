@@ -19,6 +19,15 @@ class CategoryController extends Controller
         $categories = Category::all()->toJson(JSON_PRETTY_PRINT);
         return response($categories, 200);
     }
+    public function indexforsearch()
+    {
+        $categories = Category::withCount(['products' => function ($query) {
+            $query->withFilters();
+        }])
+            ->get();
+
+        return CategoryResource::collection($categories);
+    }
 
     /**
      * Show the form for creating a new resource.

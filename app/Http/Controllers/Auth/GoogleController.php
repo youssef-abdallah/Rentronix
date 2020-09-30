@@ -13,7 +13,10 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        $url = Socialite::driver('google')->redirect()->getTargetUrl();
+        return response()->json([
+            'url' => $url
+        ]);
     }
 
 

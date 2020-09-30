@@ -19,11 +19,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 Route::resource('user', 'UserController');
 
 // facebook login
-Route::get('facebook', function () {
+Route::get('/facebook', function () {
     return view('facebook');
 });
 Route::get('auth/facebook', 'Auth\FacebookController@redirectToFacebook');
@@ -42,3 +42,8 @@ Route::get('google', function () {
 });
 Route::get('auth/google', [GoogleController::class,'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class,'handleGoogleCallback']);
+
+/* Routes for Single Page Application(SPA) */
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
+Auth::routes();

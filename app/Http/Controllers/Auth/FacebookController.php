@@ -21,7 +21,10 @@ class FacebookController extends Controller
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        $url = Socialite::driver('facebook')->redirect()->getTargetUrl();
+        return response()->json([
+            'url' => $url
+        ]);
     }
 
     public function handleFacebookCallback()
@@ -38,8 +41,13 @@ class FacebookController extends Controller
             $createdUser = $userModel->addNew($create);
             Auth::loginUsingId($createdUser->id);
 
-
-            return redirect()->route('home');
+            $response = [
+                'user' => $user,
+                'token' => $user->token
+            ];
+            
+            return response($response, 201);
+            // return redirect()->route('home');
 
 
         } catch (Exception $e) {

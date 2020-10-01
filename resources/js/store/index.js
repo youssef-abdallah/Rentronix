@@ -8,18 +8,20 @@ axios.defaults.baseURL = 'http://localhost:8000'
 
 export default new Vuex.Store({
   state: {
-    user: null
+    isLogged: false
   },
 
   mutations: {
-    setUserData (state, userData) {
-      state.user = userData
-      localStorage.setItem('user', JSON.stringify(userData))
-      axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`
+    setUserData (state, token) {
+      state.isLogged = true;
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      localStorage.setItem('token', JSON.stringify(token))
     },
 
-    clearUserData () {
-      localStorage.removeItem('user')
+    clearUserData (state) {
+      state.isLogged = false;
+      axios.defaults.headers.common.Authorization = '';
+      localStorage.removeItem('token')
       location.reload()
     }
   },
@@ -32,8 +34,12 @@ export default new Vuex.Store({
           if (res.data.url) {
             window.location.href = res.data.url;
           }
-          commit('setUserData', data)
+          //commit('setUserData', data)
         })
+    },
+
+    loginCallback ({ commit }, token) {
+      commit('setUserData', token)
     },
 
     logout ({ commit }) {
@@ -42,6 +48,6 @@ export default new Vuex.Store({
   },
 
   getters : {
-    isLogged: state => !!state.user
+    isLogged: state => !!state.isLogged
   }
 })

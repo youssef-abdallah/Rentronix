@@ -23,7 +23,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('user')
+  const loggedIn = localStorage.getItem('token')
+
+  if (to.matched.some(record => record.meta.unauth) && loggedIn) {
+    next('/home')
+    return
+  }
 
   if (to.matched.some(record => record.meta.auth) && !loggedIn) {
     next('/login')
@@ -42,5 +47,20 @@ const app = new Vue({
     el: '#app',
     router: router,
     store: store,
-    components: { Master, ExampleComponent }
+    components: { Master, ExampleComponent },
+    created () {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.$store.commit('setUserData', token)
+    }
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401) {
+          this.$store.dispatch('logout')
+        }
+        return Promise.reject(error)
+      }
+    )
+  }
 });

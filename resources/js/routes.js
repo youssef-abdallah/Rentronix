@@ -1,6 +1,7 @@
 import Home from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
+import LoginLoading from './components/LoginLoading'
 
 const routes = [
     {
@@ -16,7 +17,15 @@ const routes = [
     {
         path: '/login',
         name: 'login',
+        meta: {
+            unauth: true
+        },
         component: Login
+    },
+    {
+        path: '/authorize/:provider/callback',
+        name: 'login-loading',
+        component: LoginLoading
     }
 ]
 

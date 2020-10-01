@@ -26,7 +26,7 @@ Route::get('/welcome', function () {
 //Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', 'SpaController@index')->name('home');
 });
 Route::resource('user', 'UserController');
 
@@ -36,6 +36,7 @@ Route::get('/facebook', function () {
 });
 Route::get('auth/facebook', 'Auth\FacebookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'Auth\FacebookController@handleFacebookCallback');
+Route::get('authorize/facebook/callback', 'SpaController@index')->name('callback');
 // google login
 Route::get('google', function () {
     return view('google');

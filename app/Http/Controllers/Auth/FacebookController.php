@@ -31,6 +31,7 @@ class FacebookController extends Controller
     {
         try {
             $user = Socialite::driver('facebook')->user();
+
             $create['name'] = $user->getName();
             $create['email'] = $user->getEmail();
             $create['facebook_id'] = $user->getId();
@@ -46,8 +47,14 @@ class FacebookController extends Controller
                 'token' => $user->token
             ];
             
-            return response($response, 201);
-            // return redirect()->route('home');
+            $response = $this->issueToken($userModel,
+                env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
+                env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'));
+            
+            return redirect()->route('home')
+                ->withCookie(cookie('token', $response['access_token'],
+                    1, null, null, false, false));
+
 
 
         } catch (Exception $e) {
@@ -71,12 +78,12 @@ class FacebookController extends Controller
             $existingUser = $userModel->addNew($create);
         }
         $response = $this->issueToken($existingUser, $request->client_id, $request->client_secret);
-        if (array_key_exists('error', $response))
+        if (isset($response['error']))
         {
             $existingUser->delete();
         }
         return $response;
-    }        
+    }
 
     private function issueToken(User $user, $client_id, $client_secret) {
         $request = Request::create('http://localhost:8000/oauth/token', 'POST', [
@@ -87,7 +94,7 @@ class FacebookController extends Controller
         ]);
         $response = app()->handle($request);
         $response = json_decode($response->getContent(), true);
-        if (array_key_exists('error', $response)) return $response;
+        if (isset($response['error'])) return $response;
         $userToken = $user->token() ?? $user->createToken('socialLogin');
         return [
             "token_type" => "Bearer",

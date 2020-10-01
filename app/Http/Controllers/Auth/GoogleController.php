@@ -56,7 +56,7 @@ class GoogleController extends Controller
             $existing_user = $userModel->addNew($create);
         }
         $response = $this->issueToken($existing_user, $request->client_id, $request->client_secret);
-        if (array_key_exists('error', $response))
+        if (isset($response['error']))
         {
             $existing_user->delete();
         }
@@ -72,7 +72,7 @@ class GoogleController extends Controller
         ]);
         $response = app()->handle($request);
         $response = json_decode($response->getContent(), true);
-        if (array_key_exists('error', $response)) return $response;
+        if (isset($response['error'])) return $response;
         $userToken = $user->token() ?? $user->createToken('socialLogin');
         return [
             "token_type" => "Bearer",

@@ -1,17 +1,40 @@
 <template>
     <div>
-        <h1>Vue Router Demo</h1>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
 
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'about' }">About</router-link> |
-            <router-link :to="{ name: 'login' }" v-if="!isLogged">Login</router-link>
-            <button type="button" @click="doLogout" v-if="isLogged">
-            Logout
-            </button>
-        </p>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                        <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link> 
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'about' }" class="nav-link">About</router-link> 
+                        </li>
+                    </ul>
 
-        <div class="container">
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                            <li class="nav-item">
+                                <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login</router-link>
+                            </li>
+                            <button type="button" @click="doLogout" v-if="isLogged">
+                            Logout
+                            </button>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            <!-- <div class="container">
+                <router-link :to="{ name: 'home' }" >Home</router-link> 
+                <router-link :to="{ name: 'about' }">About</router-link> 
+                <router-link :to="{ name: 'login' }" v-if="!isLogged">Login</router-link>
+                <button type="button" @click="doLogout" v-if="isLogged">
+                Logout        </nav>
+                </button>
+            </div> -->
+
+        <div class="container mt-4">
             <router-view></router-view>
         </div>
     </div>

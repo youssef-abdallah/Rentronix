@@ -2067,6 +2067,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37883,37 +37906,93 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Vue Router Demo")]),
-    _vm._v(" "),
     _c(
-      "p",
+      "nav",
+      {
+        staticClass: "navbar navbar-expand-md navbar-light bg-white shadow-sm"
+      },
       [
-        _c("router-link", { attrs: { to: { name: "home" } } }, [
-          _vm._v("Home")
-        ]),
-        _vm._v(" |\n        "),
-        _c("router-link", { attrs: { to: { name: "about" } } }, [
-          _vm._v("About")
-        ]),
-        _vm._v(" |\n        "),
-        !_vm.isLogged
-          ? _c("router-link", { attrs: { to: { name: "login" } } }, [
-              _vm._v("Login")
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.isLogged
-          ? _c(
-              "button",
-              { attrs: { type: "button" }, on: { click: _vm.doLogout } },
-              [_vm._v("\n        Logout\n        ")]
-            )
-          : _vm._e()
-      ],
-      1
+        _c("div", { staticClass: "container" }, [
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarSupportedContent" }
+            },
+            [
+              _c(
+                "ul",
+                { staticClass: "navbar-nav mr-auto" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: { name: "home" } }
+                    },
+                    [_vm._v("Home")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: { name: "about" } }
+                        },
+                        [_vm._v("About")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    !_vm.isLogged
+                      ? _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "login" } }
+                          },
+                          [_vm._v("Login")]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.isLogged
+                  ? _c(
+                      "button",
+                      {
+                        attrs: { type: "button" },
+                        on: { click: _vm.doLogout }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Logout\n                        "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ])
+            ]
+          )
+        ])
+      ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+    _c("div", { staticClass: "container mt-4" }, [_c("router-view")], 1)
   ])
 }
 var staticRenderFns = []

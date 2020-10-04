@@ -124,10 +124,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 /* Admin Routes */
 Route::get('/admin/requests', 'AdminController@displayRequests')
             ->name('requests.admin')
-            ->middleware('can:display-requests');
+            ->middleware('auth:api');
+            //->middleware('role:Admin');
 Route::put('/admin/requests/{request}/approve', 'AdminController@approve')
             ->name('requests.approve')
-            ->middleware('can:approve,request');
+            ->middleware('auth:api')
+            ->middleware('role:Admin');
 
 
 

@@ -23,22 +23,37 @@ class GoogleController extends Controller
     public function handleGoogleCallback()
     {
         try {
-            $user = Socialite::driver('Google')->user();
+            $user = Socialite::driver('google')->user();
+
+
             $create['name'] = $user->getName();
             $create['email'] = $user->getEmail();
             $create['google_id'] = $user->getId();
-
-
+            $create['google_token'] = $user->token;
             $userModel = new User;
-            $createdUser = $userModel->addNewGoogle($create);
-            Auth::loginUsingId($createdUser->id);
+            $existingUser = $userModel->addNew($create);
+            Auth::loginUsingId($existingUser->id);
 
-            dd($user);
-            return redirect()->route('home');
+            $response = [
+                'user' => $user,
+                'token' => $user->token
+            ];
+            
+            $response = $this->issueToken($existingUser,
+                env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
+                env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'));
+            
+            
+            return redirect()->route('home')
+                ->withCookie(cookie('token', $response['access_token'],
+                    1, null, null, false, false));
+
 
 
         } catch (Exception $e) {
-            return redirect('auth/google');
+
+            dd($e);
+            //return redirect('auth/facebook');
         }
     }
 

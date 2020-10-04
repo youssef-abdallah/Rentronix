@@ -15,7 +15,7 @@ export default new Vuex.Store({
     setUserData (state, token) {
       state.isLogged = true;
       axios.defaults.headers.common.Authorization = `Bearer ${token}`
-      localStorage.setItem('token', JSON.stringify(token))
+      localStorage.setItem('token', token);
     },
 
     clearUserData (state) {

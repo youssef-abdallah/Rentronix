@@ -32,24 +32,24 @@ class FacebookController extends Controller
         try {
             $user = Socialite::driver('facebook')->user();
 
+
             $create['name'] = $user->getName();
             $create['email'] = $user->getEmail();
             $create['facebook_id'] = $user->getId();
             $create['facebook_token'] = $user->token;
-
-
             $userModel = new User;
-            $createdUser = $userModel->addNew($create);
-            Auth::loginUsingId($createdUser->id);
+            $existingUser = $userModel->addNew($create);
+            Auth::loginUsingId($existingUser->id);
 
             $response = [
                 'user' => $user,
                 'token' => $user->token
             ];
             
-            $response = $this->issueToken($userModel,
+            $response = $this->issueToken($existingUser,
                 env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
                 env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'));
+            
             
             return redirect()->route('home')
                 ->withCookie(cookie('token', $response['access_token'],

@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserRequest;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RequestPolicy
+class UserRequestPolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,8 @@ class RequestPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -30,7 +31,7 @@ class RequestPolicy
      */
     public function view(User $user, UserRequest $userRequest)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -41,7 +42,7 @@ class RequestPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -53,7 +54,7 @@ class RequestPolicy
      */
     public function update(User $user, UserRequest $userRequest)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -65,7 +66,7 @@ class RequestPolicy
      */
     public function delete(User $user, UserRequest $userRequest)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -77,7 +78,7 @@ class RequestPolicy
      */
     public function restore(User $user, UserRequest $userRequest)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     /**
@@ -89,7 +90,7 @@ class RequestPolicy
      */
     public function forceDelete(User $user, UserRequest $userRequest)
     {
-        //
+        return $user->hasRole('Admin');
     }
 
     public function approve(User $user, UserRequest $userRequest)

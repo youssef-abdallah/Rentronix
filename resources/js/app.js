@@ -7,6 +7,12 @@
 require('./bootstrap');
 import VueRouter from 'vue-router';
 import store from './store/index'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 // Importing components
 

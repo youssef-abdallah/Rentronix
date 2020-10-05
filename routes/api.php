@@ -126,6 +126,10 @@ Route::put('/admin/requests/{request}/approve', 'AdminController@approve')
     ->name('requests.approve')
     ->middleware('auth:api')
     ->middleware('role:Admin');
+Route::delete('/admin/requests/{request}', 'AdminController@destroyRequest')
+    ->name('requests.delete')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
 Route::get('/admin/products', 'AdminController@showProducts')
     ->name('products.admin')
     ->middleware('auth:api')

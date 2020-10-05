@@ -70,14 +70,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /* Subscriptions routes */
 
-<<<<<<< HEAD
     Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
     /* favourite list routes
-=======
-Route::apiResource('users', 'UserController');
-Route::get('users/wallet/{user}', 'UserController@showWallet')->name('users.showWallet');
-
->>>>>>> origin/orders
 
     Route::group(['prefix'=>'users'], function (){
         Route::apiResource('{users}/favouriteList', FavouriteList::class);

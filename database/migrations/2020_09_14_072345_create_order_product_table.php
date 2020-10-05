@@ -16,13 +16,9 @@ class CreateOrderProductTable extends Migration
         Schema::create('order_product', function (Blueprint $table) {
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
-<<<<<<< HEAD:database/migrations/2020_09_14_072345_create_order_product_table.php
             $table->primary(['order_id','product_id']);
             $table->unsignedBigInteger('seller_id');
             $table->integer('quantity')->default(1);
-=======
-            $table->integer('quantity');
->>>>>>> origin/orders:database/migrations/2020_09_27_125630_create_order_details_table.php
             $table->enum('type', array('buy', 'rent'));
             $table->date('due_date')->nullable();
 

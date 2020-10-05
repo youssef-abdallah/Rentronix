@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OrderFeedback extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     protected $table = 'order_feedback';
+=======
+    protected $table = 'order_feedback';  
+>>>>>>> origin/orders
 
     protected $guarded = [];
     public function order()

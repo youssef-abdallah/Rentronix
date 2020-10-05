@@ -34,6 +34,10 @@ class UserController extends Controller
         }
         return response()->json(null,204);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/orders
     public function showWallet(User $user)
     {
         $customerWallet = $user->customerInfo->wallet ?? "";

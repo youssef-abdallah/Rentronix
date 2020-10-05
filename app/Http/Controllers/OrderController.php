@@ -40,13 +40,22 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
         Order::create($data);
+<<<<<<< HEAD
 
         /*$customer = User::findOrFail($request->customer_id);
         $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
         $customer->customerInfo->save();*/
+=======
+        $customer = User::findOrFail($request->customer_id);
+        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
+        $customer->customerInfo->save();
+        
+        $manufacturer = User::findOrFail($request->seller_id);
+        $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet + $request->total_cost - (($manufacturer->manufacturerInfo->percentage/100) * $request->total_cost);
+        $manufacturer->manufacturerInfo->save();
+>>>>>>> origin/orders
         
         return response()->json([
             'message' => 'order record created'
@@ -100,10 +109,20 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
+<<<<<<< HEAD
         
         /*$customer = User::findOrFail($order->customer_id);
         $customer->customerInfo->wallet += $order->total_cost;
         $customer->customerInfo->save();*/
+=======
+        $manufacturer = User::findOrFail($order->seller_id);
+        $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet - $order->total_cost + (($manufacturer->manufacturerInfo->percentage/100) * $order->total_cost);
+        $manufacturer->manufacturerInfo->save();
+        
+        $customer = User::findOrFail($order->customer_id);
+        $customer->customerInfo->wallet += $order->total_cost;
+        $customer->customerInfo->save();
+>>>>>>> origin/orders
 
         Order::destroy($order->id);
         return response()->json([
@@ -120,10 +139,10 @@ class OrderController extends Controller
     public function updateOrderStatus(Order $order, Request $request)
     {
         // ToDo put request in api.php
-        $status =  $request->shipping_status;
-        $order->updateStatus($status);
+        $shipping_status =  $request->shipping_status;
+        $order->updateStatus($shipping_status);
         $customer_email = User::find($order->customer_id)->email;
-        if ($status == 'delivered')
+        if ($shipping_status == 'delivered')
         {
             Mail::to($customer_email)->send(new NewAd());
         }

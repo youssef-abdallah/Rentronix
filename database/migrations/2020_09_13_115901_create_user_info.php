@@ -29,10 +29,6 @@ class CreateUserInfo extends Migration
             $table->float('wallet');
             $table->float('percentage');
             $table->timestamps();
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/orders
             $table->foreign('id')
                 ->references('id')
                 ->on('users')

@@ -42,20 +42,10 @@ class OrderController extends Controller
     {
         $data = $request->all();
         Order::create($data);
-<<<<<<< HEAD
 
         /*$customer = User::findOrFail($request->customer_id);
         $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
         $customer->customerInfo->save();*/
-=======
-        $customer = User::findOrFail($request->customer_id);
-        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
-        $customer->customerInfo->save();
-        
-        $manufacturer = User::findOrFail($request->seller_id);
-        $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet + $request->total_cost - (($manufacturer->manufacturerInfo->percentage/100) * $request->total_cost);
-        $manufacturer->manufacturerInfo->save();
->>>>>>> origin/orders
         
         return response()->json([
             'message' => 'order record created'
@@ -109,20 +99,10 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-<<<<<<< HEAD
         
         /*$customer = User::findOrFail($order->customer_id);
         $customer->customerInfo->wallet += $order->total_cost;
         $customer->customerInfo->save();*/
-=======
-        $manufacturer = User::findOrFail($order->seller_id);
-        $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet - $order->total_cost + (($manufacturer->manufacturerInfo->percentage/100) * $order->total_cost);
-        $manufacturer->manufacturerInfo->save();
-        
-        $customer = User::findOrFail($order->customer_id);
-        $customer->customerInfo->wallet += $order->total_cost;
-        $customer->customerInfo->save();
->>>>>>> origin/orders
 
         Order::destroy($order->id);
         return response()->json([

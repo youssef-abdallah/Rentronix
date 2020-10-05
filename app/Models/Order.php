@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    protected $table = 'orders';
+
+    protected $guarded = [];
     public function customer()
     {
         return $this->belongsTo(User::class , 'id' , 'customer_id');

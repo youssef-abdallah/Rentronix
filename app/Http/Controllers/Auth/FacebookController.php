@@ -56,7 +56,7 @@ class FacebookController extends Controller
         if (is_null($existingUser))
         {
             $create['name'] = $user->getName();
-            $create['email'] = $user->getEmail();
+            $create['email'] = "nesreen191@gmail.com"//$user->getEmail();
             $create['facebook_id'] = $user->getId();
             $create['facebook_token'] = $user->token;
             $userModel = new User;
@@ -79,7 +79,7 @@ class FacebookController extends Controller
         ]);
         $response = app()->handle($request);
         $response = json_decode($response->getContent(), true);
-        if (array_key_exists('error', $response)) return $response;
+        if (isset($response['error'])) return $response;
         $userToken = $user->token() ?? $user->createToken('socialLogin');
         return [
             "token_type" => "Bearer",

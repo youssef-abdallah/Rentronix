@@ -43,6 +43,11 @@ class OrderController extends Controller
         //
         $data = $request->all();
         Order::create($data);
+
+        /*$customer = User::findOrFail($request->customer_id);
+        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
+        $customer->customerInfo->save();*/
+        
         return response()->json([
             'message' => 'order record created'
         ], 201);
@@ -95,9 +100,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $customer = User::findOrFail($order->customer_id);
+        
+        /*$customer = User::findOrFail($order->customer_id);
         $customer->customerInfo->wallet += $order->total_cost;
-        $customer->customerInfo->save();
+        $customer->customerInfo->save();*/
+
         Order::destroy($order->id);
         return response()->json([
             'message' => 'order record deleted'

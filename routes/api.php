@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     /* User routes */
 
     Route::apiResource('users', 'UserController');
+    Route::get('users/wallet/{user}', 'UserController@showWallet')->name('users.showWallet');
 
     /* Subscriptions routes */
 

@@ -31,14 +31,17 @@ class FacebookController extends Controller
     {
         try {
             $user = Socialite::driver('facebook')->user();
+            $existingUser = User::where('facebook_id', $user->id)->first();
 
-
-            $create['name'] = $user->getName();
-            $create['email'] = $user->getEmail();
-            $create['facebook_id'] = $user->getId();
-            $create['facebook_token'] = $user->token;
-            $userModel = new User;
-            $existingUser = $userModel->addNew($create);
+            if (is_null($existingUser))
+            {
+                $create['name'] = $user->getName();
+                $create['email'] = $user->getEmail();
+                $create['facebook_id'] = $user->getId();
+                $create['facebook_token'] = $user->token;
+                $userModel = new User;
+                $existingUser = $userModel->addNew($create);
+            }
             Auth::loginUsingId($existingUser->id);
 
             $response = [

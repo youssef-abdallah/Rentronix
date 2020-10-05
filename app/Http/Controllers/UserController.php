@@ -25,10 +25,10 @@ class UserController extends Controller
         $id->update($request->all());
         return response()->json($id,200);
     }
-    public function destroy(User $id)
+    public function destroy(User $user)
     {
         try {
-            $id->destroy();
+            $user->delete();
         } catch (\Exception $e) {
             return response()->json($e->getMessage(),$e->getCode());
         }

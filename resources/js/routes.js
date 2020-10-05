@@ -33,6 +33,7 @@ const routes = [
         name: 'admin-pages',
         component: Admin,
         meta: {
+            auth: true,
             admin: true
         }
     },
@@ -41,6 +42,7 @@ const routes = [
         name: 'admin',
         component: Admin,
         meta: {
+            auth: true,
             admin: true
         }
     },

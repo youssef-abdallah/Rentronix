@@ -63,10 +63,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::apiResource('feedbacks', 'OrderFeedbackController');
 
 
-    /* User routes */
-
-    Route::apiResource('users', 'UserController');
-
     /* Subscriptions routes */
 
     Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
@@ -122,14 +118,27 @@ Route::get('advertisements/{advertisement}', 'AdvertisementController@show')->na
 Route::get('/home', 'HomeController@index')->name('home');
 
 /* Admin Routes */
-Route::get('/admin/requests', 'AdminController@displayRequests')
-            ->name('requests.admin')
-            ->middleware('auth:api');
-            //->middleware('role:Admin');
+Route::get('/admin/requests', 'AdminController@showRequests')
+    ->name('requests.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
 Route::put('/admin/requests/{request}/approve', 'AdminController@approve')
-            ->name('requests.approve')
-            ->middleware('auth:api')
-            ->middleware('role:Admin');
+    ->name('requests.approve')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::get('/admin/products', 'AdminController@showProducts')
+    ->name('products.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::get('/admin/orders', 'AdminController@showOrders')
+    ->name('orders.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::get('/admin/users', 'AdminController@showUsers')
+    ->name('users.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+
 
 
 

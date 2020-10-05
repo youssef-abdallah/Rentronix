@@ -5,17 +5,18 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div>
                         <ul style="list-style-type:none">
-                            <li class="active"><button class="btn" @click="setComponent('main')">Dashboard</button></li>
-                            <!-- <li><button class="btn" @click="setComponent('orders')">Orders</button></li>
-                            <li><button class="btn" @click="setComponent('products')">Products</button></li>
-                            <li><button class="btn" @click="setComponent('users')">Users</button></li> -->
+                            <li style="float:left;" class="active"><button class="btn" @click="setComponent('main')">Dashboard</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('requests')">Requests</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('users')">Users</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('products')">Products</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('orders')">Orders</button></li>
                         </ul>
                     </div>
-                    <div class="col-md-9">
-                        <component :is="activeComponent"></component>
-                    </div>
+                </div>
+                <div class="row">
+                    <component :is="activeComponent"></component>
                 </div>
             </div>
         </div>
@@ -23,9 +24,10 @@
 
     <script>
     import Main from './Main'
-    // import Users from '../components/admin/Users'
-    // import Products from '../components/admin/Products'
-    // import Orders from '../components/admin/Orders'
+    import Requests from './Requests'
+    import Users from './Users'
+    import Products from './Products'
+    import Orders from './Orders'
 
     export default {
         data() {
@@ -34,6 +36,7 @@
             }
         },
         components: {
+            Main, Requests, Users, Products, Orders
         },
         beforeMount() {
             this.setComponent(this.$route.params.page)
@@ -42,6 +45,18 @@
         methods: {
              setComponent(value) {
                 switch(value) {
+                    case "requests":
+                        this.activeComponent = Requests
+                        break;
+                    case "users":
+                        this.activeComponent = Users
+                        break;
+                    case "products":
+                        this.activeComponent = Products
+                        break;
+                    case "orders":
+                        this.activeComponent = Orders
+                        break;
                     default:
                         this.activeComponent = Main
                         break;

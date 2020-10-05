@@ -24,14 +24,17 @@ class GoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->user();
+            $existingUser = User::where('facebook_id', $user->id)->first();
 
-
-            $create['name'] = $user->getName();
-            $create['email'] = $user->getEmail();
-            $create['google_id'] = $user->getId();
-            $create['google_token'] = $user->token;
-            $userModel = new User;
-            $existingUser = $userModel->addNew($create);
+            if (is_null($existingUser))
+            {
+                $create['name'] = $user->getName();
+                $create['email'] = $user->getEmail();
+                $create['google_id'] = $user->getId();
+                $create['google_token'] = $user->token;
+                $userModel = new User;
+                $existingUser = $userModel->addNew($create);
+            }
             Auth::loginUsingId($existingUser->id);
 
             $response = [

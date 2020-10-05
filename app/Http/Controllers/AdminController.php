@@ -6,6 +6,8 @@ use App\Models\UserRequest;
 use App\Models\Product;
 use App\Models\Subcategory;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,7 +17,7 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function displayRequests()
+    public function showRequests()
     {
         $requests = UserRequest::all()->toJson(JSON_PRETTY_PRINT);
         return response($requests, 200);
@@ -69,5 +71,23 @@ class AdminController extends Controller
        return response()->json([
            'message' => 'request approved and product added.'
        ], 200);
+    }
+
+    public function showProducts()
+    {
+        $products = Product::all()->toJson(JSON_PRETTY_PRINT);
+        return response($products, 200);
+    }
+
+    public function showOrders()
+    {
+        $orders = Order::all()->toJson(JSON_PRETTY_PRINT);
+        return response($orders, 200);
+    }
+
+    public function showUsers()
+    {
+        $users = User::all()->toJson(JSON_PRETTY_PRINT);
+        return response($users, 200);
     }
 }

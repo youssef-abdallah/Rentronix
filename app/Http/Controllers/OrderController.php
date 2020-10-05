@@ -42,20 +42,10 @@ class OrderController extends Controller
     {
         $data = $request->all();
         Order::create($data);
-<<<<<<< HEAD
 
         /*$customer = User::findOrFail($request->customer_id);
         $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
         $customer->customerInfo->save();*/
-=======
-        $customer = User::findOrFail($request->customer_id);
-        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
-        $customer->customerInfo->save();
-        
-        $manufacturer = User::findOrFail($request->seller_id);
-        $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet + $request->total_cost - (($manufacturer->manufacturerInfo->percentage/100) * $request->total_cost);
-        $manufacturer->manufacturerInfo->save();
->>>>>>> origin/orders
         
         return response()->json([
             'message' => 'order record created'

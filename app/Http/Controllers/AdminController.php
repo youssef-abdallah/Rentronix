@@ -97,7 +97,8 @@ class AdminController extends Controller
 
     public function showOrders()
     {
-        $orders = Order::all()->toJson(JSON_PRETTY_PRINT);
+        $orders = Order::with('products');
+        $orders = json_encode($orders);
         return response($orders, 200);
     }
 

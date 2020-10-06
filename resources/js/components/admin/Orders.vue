@@ -3,10 +3,11 @@
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
-                    <td>Product</td>
-                    <td>Quantity</td>
+                    <td>Order id</td>
+                    <td>Customer id</td>
                     <td>Cost</td>
-                    <td>Action</td>
+                    <td>Status</td>
+                    <td>Details</td>
                 </tr>
             </thead>
             <tbody>

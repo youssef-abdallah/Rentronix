@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewAd;
 
 class AdminController extends Controller
 {
@@ -97,9 +99,42 @@ class AdminController extends Controller
 
     public function showOrders()
     {
-        $orders = Order::with('products');
-        $orders = json_encode($orders);
+        $orders = Order::with('products')->get()->toJson(JSON_PRETTY_PRINT);
         return response($orders, 200);
+    }
+
+    public function destroyOrder(Order $order)
+    {
+        $order->delete();
+        return response()->json([
+            'message' => 'order has been successfully deleted.'
+        ], 200);
+    }
+
+    /**
+     * Updates the current order stage.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOrderStatus(Order $order)
+    {
+        // ToDo put request in api.php
+        $shipping_status =  $order->shipping_status;
+        if ($shipping_status == 'delivered') {
+            return response()->json([
+                'message' => 'order has been already delivered.'
+            ], 200);
+        }
+        $order->updateStatus($shipping_status);
+        $customer_email = User::find($order->customer_id)->email;
+        if ($shipping_status == 'delivered')
+        {
+            Mail::to($customer_email)->send(new NewAd());
+        }
+        return response()->json([
+            'message' => 'order status has been updated.'
+        ], 200);
     }
 
     public function showUsers()

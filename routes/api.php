@@ -63,6 +63,11 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::apiResource('feedbacks', 'OrderFeedbackController');
 
 
+    /* User routes */
+
+    Route::apiResource('users', 'UserController');
+    Route::get('users/wallet/{user}', 'UserController@showWallet')->name('users.showWallet');
+
     /* Subscriptions routes */
 
     Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
@@ -140,6 +145,14 @@ Route::delete('/admin/products/{product}', 'AdminController@destroyProduct')
     ->middleware('role:Admin');
 Route::get('/admin/orders', 'AdminController@showOrders')
     ->name('orders.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::delete('/admin/orders/{order}', 'AdminController@destroyOrder')
+    ->name('orders.delete')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::put('/admin/orders/{order}/status', 'AdminController@updateOrderStatus')
+    ->name('orders.update')
     ->middleware('auth:api')
     ->middleware('role:Admin');
 Route::get('/admin/users', 'AdminController@showUsers')

@@ -18,9 +18,9 @@
                             <li class="nav-item">
                                 <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login</router-link>
                             </li>
-                            <button type="button" @click="doLogout" v-if="isLogged">
-                            Logout
-                            </button>
+                            <b-button @click="doLogout" v-if="isLogged" variant="outline-info" class="mb-2">
+                                <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+                            </b-button>
                     </ul>
                 </div>
             </div>

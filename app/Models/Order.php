@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    protected $table = 'orders';
+
+    protected $guarded = [];
     public function customer()
     {
         return $this->belongsTo(User::class , 'id' , 'customer_id');
@@ -20,7 +23,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot(['quantity', 'type', 'due_date']);
     }
 
     public function orderFeedback()
@@ -28,9 +31,18 @@ class Order extends Model
         return $this->hasOne(OrderFeedback::class);
     }
 
-    public function updateStatus($state)
+    public function details()
     {
-        $this->shipping_status = $state;
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    public function updateStatus()
+    {
+        if ($this->shipping_status == 'pending') {
+            $this->shipping_status = 'shipped';
+        } else if ($this->shipping_status == 'shipped') {
+            $this->shipping_status = 'delivered';
+        }
         $this->save();
     }
 

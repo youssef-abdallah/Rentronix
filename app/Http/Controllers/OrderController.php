@@ -6,8 +6,7 @@ use App\Models\Order;
 use App\Models\CustomerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NewAd;
+
 
 class OrderController extends Controller
 {
@@ -40,9 +39,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
         Order::create($data);
+
+        /*$customer = User::findOrFail($request->customer_id);
+        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
+        $customer->customerInfo->save();*/
+        
         return response()->json([
             'message' => 'order record created'
         ], 201);
@@ -95,33 +98,15 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $customer = User::findOrFail($order->customer_id);
+        
+        /*$customer = User::findOrFail($order->customer_id);
         $customer->customerInfo->wallet += $order->total_cost;
-        $customer->customerInfo->save();
+        $customer->customerInfo->save();*/
+
         Order::destroy($order->id);
         return response()->json([
             'message' => 'order record deleted'
         ], 200);
     }
 
-    /**
-     * Updates the current order stage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function updateOrderStatus(Order $order, Request $request)
-    {
-        // ToDo put request in api.php
-        $status =  $request->shipping_status;
-        $order->updateStatus($status);
-        $customer_email = User::find($order->customer_id)->email;
-        if ($status == 'delivered')
-        {
-            Mail::to($customer_email)->send(new NewAd());
-        }
-        return response()->json([
-            'message' => 'order status has been updated.'
-        ], 200);
-    }
 }

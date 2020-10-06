@@ -24,14 +24,12 @@ class CreateUserInfo extends Migration
                 ->onDelete('cascade');
         });
         Schema::create('manufacturer_info', function (Blueprint $table) {
-            //$table->primary('user_id');
-            $table->bigIncrements('user_id');
+            $table->bigIncrements('id');
             $table->integer('rating');
             $table->float('wallet');
             $table->float('percentage');
             $table->timestamps();
-
-            $table->foreign('user_id')
+            $table->foreign('id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

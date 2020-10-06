@@ -27,7 +27,7 @@ class ManufacturerInfoFactory extends Factory
         $ids= User::all()->pluck('id')->toArray();
         $ratings=array(1,2,3,4,5);
         return [
-            'user_id'=>$this->faker->unique()->randomElement($ids),
+            'id'=>$this->faker->unique()->randomElement($ids),
             'rating'=>$this->faker->randomElement($ratings),
             'wallet'=>0.0,
             'percentage'=>5.0,

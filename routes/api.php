@@ -134,6 +134,10 @@ Route::get('/admin/products', 'AdminController@showProducts')
     ->name('products.admin')
     ->middleware('auth:api')
     ->middleware('role:Admin');
+Route::delete('/admin/products/{product}', 'AdminController@destroyProduct')
+    ->name('products.delete')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
 Route::get('/admin/orders', 'AdminController@showOrders')
     ->name('orders.admin')
     ->middleware('auth:api')

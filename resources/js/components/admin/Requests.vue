@@ -18,24 +18,19 @@
                         <td>{{ request.product_name }}</td>
                         <td>{{ request.subcategory_title }}</td>
                         <td>{{ request.category_title }}</td>
-                        <!-- <td>{{ request.description }}</td>
-                        <td>{{ request.type }}</td>
-                        <td>{{ request.price }}</td>
-                        <td>{{ request.price_per_hour }}</td>
-                        <td>{{ request.category_title }}</td>
-                        <td><img src="request.image"></td>
-                        <td><a href="request.datasheet">datasheet</a></td>
-                        <td>{{request.approved == 1 ? "Yes" : "No"}}</td>
-                        <td v-if="request.approved == 0"><button class="btn btn-success" @click="approve(index)">Approve</button></td> -->
+
                         <td>
                             <div>
                             <b-button id="show-btn" @click="$bvModal.show('more-details'); setCurrentRequest(index)">More details</b-button>
-
-                            <b-modal id="more-details" hide-footer v-show="currentRequest != null">
+                            </div>
+                        </td>
+                    </tr>
+                    <div>
+                        <b-modal id="more-details" hide-footer v-show="currentRequest !== null">
                                 <template v-slot:modal-title>
                                 <code>Request {{ currentRequest.id }}</code>
                                 </template>
-                                <div class="d-block" v-show="currentRequest != null">
+                                <div class="d-block" v-show="currentRequest !== null">
                                 <div v-if="currentRequest !== null">
                                     <strong>Request</strong>: {{ currentRequest.id }} <br>
                                     <strong>User</strong>: {{ currentRequest.user_id }} <br>
@@ -53,9 +48,7 @@
                                 </div>
                                 </div>
                             </b-modal>
-                            </div>
-                        </td>
-                    </tr>
+                    </div>
                 </tbody>
             </table>
         </div>
@@ -78,13 +71,13 @@
             },
             approve(request) {
                 axios.put(`/api/admin/requests/${request.id}/approve`).then(response => {
+                    this.$router.go(0);
                 })
-                this.$router.go(0);
             },
             destroy(request) {
                 axios.delete(`/api/admin/requests/${request.id}`).then(response => {
+                    this.$router.go(0);
                 })
-                this.$router.push('/admin/dashboard');
             }
         }
     }

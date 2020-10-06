@@ -87,6 +87,14 @@ class AdminController extends Controller
         return response($products, 200);
     }
 
+    public function destroyProduct(Product $product)
+    {
+        $product->delete();
+        return response()->json([
+            'message' => 'product has been successfully deleted.'
+        ], 200);
+    }
+
     public function showOrders()
     {
         $orders = Order::all()->toJson(JSON_PRETTY_PRINT);

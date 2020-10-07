@@ -35,8 +35,11 @@ class CartController extends Controller
         }
         // Adding to cart
         $type = $request->type;
+        $renting_hours = 0;
+        if ($request->renting_hours) $renting_hours = $request->renting_hours;
         Cart::add($product->id, $product->name, 1, $type == 'buy' ? 
-            $product->selling_price : $product->rental_price)
+            $product->selling_price : $product->rental_price, ['hours' => $renting_hours,
+             'type' => $type])
             ->associate('App\Models\Product');
 
         // Storing the cart

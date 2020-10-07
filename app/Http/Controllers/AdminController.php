@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewAd;
+use App\Models\Complaint;
 
 class AdminController extends Controller
 {
@@ -141,5 +142,19 @@ class AdminController extends Controller
     {
         $users = User::all()->toJson(JSON_PRETTY_PRINT);
         return response($users, 200);
+    }
+
+    public function showComplaints()
+    {
+        $complaints = Complaint::all()->toJson(JSON_PRETTY_PRINT);
+        return response($complaints, 200);
+    }
+
+    public function destroyComplaint(Complaint $complaint)
+    {
+        $complaint->delete();
+        return response()->json([
+            'message' => 'complaint has been successfully deleted.'
+        ], 200);
     }
 }

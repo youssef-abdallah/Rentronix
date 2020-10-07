@@ -162,6 +162,14 @@ Route::get('/admin/users', 'AdminController@showUsers')
     ->name('users.admin')
     ->middleware('auth:api')
     ->middleware('role:Admin');
+Route::get('/admin/complaints', 'AdminController@showComplaints')
+    ->name('complaints.admin')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+Route::delete('/admin/complaints/{complaint}', 'AdminController@destroyComplaint')
+    ->name('complaints.delete')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
 
 
 

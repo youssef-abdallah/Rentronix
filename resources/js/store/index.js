@@ -8,7 +8,8 @@ axios.defaults.baseURL = 'http://localhost:8000'
 
 export default new Vuex.Store({
   state: {
-    isLogged: false
+    isLogged: false,
+    isAdmin: false
   },
 
   mutations: {
@@ -19,10 +20,15 @@ export default new Vuex.Store({
     },
 
     clearUserData (state) {
-      state.isLogged = false;
       axios.defaults.headers.common.Authorization = '';
+      state.isLogged = false;
+      state.isAdmin = false;
       localStorage.removeItem('token')
       location.reload()
+    },
+
+    setAdmin(state, isAdmin) {
+      state.isAdmin = isAdmin;
     }
   },
 
@@ -40,6 +46,10 @@ export default new Vuex.Store({
 
     loginCallback ({ commit }, token) {
       commit('setUserData', token)
+      axios.get('/api/users/isadmin').then(response => {
+        const isAdmin = response.data.isAdmin;
+        commit('setAdmin', isAdmin);
+      })
     },
 
     logout ({ commit }) {
@@ -48,6 +58,7 @@ export default new Vuex.Store({
   },
 
   getters : {
-    isLogged: state => !!state.isLogged
+    isLogged: state => !!state.isLogged,
+    isAdmin: state => !!state.isAdmin
   }
 })

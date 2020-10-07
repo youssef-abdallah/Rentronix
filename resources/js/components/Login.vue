@@ -1,9 +1,25 @@
 <template>
-  <div>
-    <h1>Login</h1>
+  <div class="container" style="text-align:center;">
     <form @submit.prevent action="GET">
-      <button type="submit" @click="loginToSocial('facebook')">Login with Facebook</button>
-      <button type="submit" @click="loginToSocial('google')">Login with Google</button>
+      <div class="row">
+        <div class="col-12 mt-4">
+          <button type="submit" @click="loginToSocial('facebook')" class="button is-medium is-facebook social-btn">
+            <span class="icon">
+              <i class="fab fa-facebook"></i>
+            </span>
+            <span>Login with Facebook</span>
+        </button>
+        </div>
+        <div class="col-12 mt-4">
+          <button type="submit" @click="loginToSocial('google')" class="social-btn button is-medium is-youtube">
+            <span class="icon">
+              <i class="fab fa-google"></i>
+            </span>
+            <span>Login with Google</span>
+        </button>
+        </div>
+      </div>
+      
     </form>
   </div>
 </template>
@@ -32,3 +48,9 @@ export default {
   },
 }
 </script>
+
+<style lang="css">
+  .social-btn {
+    width: 30vw;
+  }
+</style>

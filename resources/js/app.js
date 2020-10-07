@@ -8,6 +8,9 @@ require('./bootstrap');
 import VueRouter from 'vue-router';
 import store from './store/index'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bulma/css/bulma.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bulma-social/bin/bulma-social.min.css';
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)

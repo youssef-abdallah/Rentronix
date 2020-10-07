@@ -17,6 +17,9 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item">
+                                <router-link :to="{ name: 'search' }" class="nav-link">Search</router-link>
+                            </li>
+                            <li class="nav-item">
                                 <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login</router-link>
                             </li>
                             <b-button @click="doLogout" v-if="isLogged" variant="outline-info" class="mb-2">

@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /* categories routes*/
 
-    Route::apiResource('/category', CategoryController::class);
+    Route::apiResource('/category', CategoryController::class, ['except' => 'index']);
 
     /* subcategories routes*/
 
@@ -121,6 +121,9 @@ Route::get('advertisements/{advertisement}', 'AdvertisementController@show')->na
 
 /* Home Route */
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* Category Route */
+Route::get('/categories', 'CategoryController@index');
 
 /* Admin Routes */
 Route::get('/admin/requests', 'AdminController@showRequests')

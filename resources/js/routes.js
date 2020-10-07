@@ -3,6 +3,7 @@ import About from './components/About';
 import Login from './components/Login';
 import LoginLoading from './components/LoginLoading';
 import Admin from './components/admin/Admin';
+import Search from './components/Search';
 
 const routes = [
     {
@@ -44,6 +45,14 @@ const routes = [
         meta: {
             auth: true,
             admin: true
+        }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search,
+        meta: {
+
         }
     },
 ]

@@ -30,9 +30,9 @@ class AdvertisementController extends Controller
         ]);
         $advertisement = new Advertisement();
         $advertisement->product_id = $request->product_id;
-        $fileName = 'ad_'.strval($advertisement->id).'.png';
+        $fileName = 'ad_'.$advertisement->id.'.png';
         $file = $request->file('image')->move(public_path('images'), $fileName);
-        $fileUrl = url('public/images/'.$fileName);
+        $fileUrl = url('images/'.$fileName);
         $advertisement->image = $fileUrl;
         $advertisement->save();
         $subscriptions = Subscription::all();

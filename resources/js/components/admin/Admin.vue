@@ -13,6 +13,7 @@
                             <li style="float:left;"><button class="btn" @click="setComponent('products')">Products</button></li>
                             <li style="float:left;"><button class="btn" @click="setComponent('orders')">Orders</button></li>
                             <li style="float:left;"><button class="btn" @click="setComponent('complaints')">Complaints</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('advertisements')">Advertisements</button></li>
                         </ul>
                     </div>
                 </div>
@@ -30,6 +31,7 @@
     import Products from './Products'
     import Orders from './Orders'
     import Complaints from './Complaints'
+    import Advertisements from './Advertisements'
 
     export default {
         data() {
@@ -38,7 +40,8 @@
             }
         },
         components: {
-            Main, Requests, Users, Products, Orders, Complaints
+            Main, Requests, Users, Products, Orders, Complaints,
+            Advertisements
         },
         beforeMount() {
             this.setComponent(this.$route.params.page)
@@ -61,6 +64,9 @@
                         break;
                     case "complaints":
                         this.activeComponent = Complaints
+                        break;
+                    case "advertisements":
+                        this.activeComponent = Advertisements
                         break;
                     default:
                         this.activeComponent = Main

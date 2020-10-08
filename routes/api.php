@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AdvertisementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Models\Advertisement;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /* Advertisements Routes */
 
-    Route::post('advertisements', 'AdvertisementController@store')->name('advertisements.store');
-    Route::put('advertisements/{advertisement}', 'AdvertisementController@update')->name('advertisements.update');
-    Route::delete('advertisements/{advertisement}', 'AdvertisementController@destroy')->name('advertisements.destroy');
+    Route::post('advertisements', 'AdvertisementController@store')->name('advertisements.store')->middleware('role:Admin');;
+    Route::put('advertisements/{advertisement}', 'AdvertisementController@update')->name('advertisements.update')->middleware('role:Admin');;
+    Route::delete('advertisements/{advertisement}', 'AdvertisementController@destroy')->name('advertisements.destroy')->middleware('role:Admin');;
 
     /* Order Feedback Routes */
 
@@ -124,6 +125,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* Category Route */
 Route::get('/categories', 'CategoryController@index');
+
+/* Advertisements Route */
+Route::get('/advertisements', 'AdvertisementController@index');
 
 /* Admin Routes */
 Route::get('/admin/requests', 'AdminController@showRequests')

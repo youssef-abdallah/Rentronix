@@ -4,6 +4,7 @@ import Login from './components/Login';
 import LoginLoading from './components/LoginLoading';
 import Admin from './components/admin/Admin';
 import Search from './components/Search';
+import AdvertisementsUploader from './components/admin/AdvertisementUploader'
 
 const routes = [
     {
@@ -28,6 +29,15 @@ const routes = [
         path: '/authorize/:provider/callback',
         name: 'login-loading',
         component: LoginLoading
+    },
+    {
+        path: '/admin/advertisements/upload',
+        name: 'advertisement-upload',
+        component: AdvertisementsUploader,
+        meta: {
+            auth: true,
+            admin: true
+        }
     },
     {
         path: '/admin/:page',

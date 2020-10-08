@@ -131,4 +131,11 @@ class User extends Authenticatable
 
         return $check;
     }
+
+
+     public function Products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(Category $category,Subcategory $subcategory)
     {
-        $categories = Category::all()->toJson(JSON_PRETTY_PRINT);
+        $categories = Category::all()->sortBy('title')->toJson(JSON_PRETTY_PRINT)  ;
         return response($categories, 200);
     }
 
@@ -38,11 +38,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        Category::create($data);
+        $validatedData = $request->validate([
+            'title'=>'required|unique:categories',
+
+        ]);
+
+        Category::create( $validatedData );
         return response()->json([
             'message' => 'category record created'
         ], 201);
+
     }
 
     /**
@@ -108,4 +113,16 @@ class CategoryController extends Controller
         $category->delete();
         return response()->json(null,204);
     }
+
+    public function CategorySearch()
+    {
+        $query = (string)request('q');
+
+        return Category::query()
+            ->where('title', 'like', "%{$query}%")
+            ->orderBy('title')
+            ->get();
+
+    }
+
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\FavouriteList;
+use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class FavouriteListController extends Controller
@@ -12,9 +15,18 @@ class FavouriteListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category,Subcategory $subcategory, $product_id)
     {
-        //
+        $product = Product::find($product_id);
+        if (count($product->favouriteList)<1)
+        {
+            return response()->json('no comments for this product ',404);
+        }
+        else
+        {
+            return response( $product->favouriteList, 200);
+        }
+
     }
 
     /**

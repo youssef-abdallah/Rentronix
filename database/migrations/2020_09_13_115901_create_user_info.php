@@ -15,8 +15,9 @@ class CreateUserInfo extends Migration
     {
         Schema::create('customer_info', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('address');
-            $table->float('wallet');
+            $table->unsignedBigInteger('user_id');
+            $table->string('address')->nullable();
+            $table->double('credit')->default(0.0);
             $table->timestamps();
             $table->foreign('id')
                 ->references('id')
@@ -25,11 +26,12 @@ class CreateUserInfo extends Migration
         });
         Schema::create('manufacturer_info', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('rating');
-            $table->float('wallet');
-            $table->float('percentage');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('rating')->nullable();
+            $table->double('profit')->default(0.0);
+            $table->float('percentage')->default(0.05);
             $table->timestamps();
-            $table->foreign('id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

@@ -106,6 +106,9 @@ class AdminController extends Controller
 
     public function destroyOrder(Order $order)
     {
+        $customer = User::find($order->customer_id);
+        $customer->customerInfo->credit += $order->total_cost;
+        $customer->customerInfo->save();
         $order->delete();
         return response()->json([
             'message' => 'order has been successfully deleted.'

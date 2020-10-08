@@ -6,7 +6,7 @@ use App\Models\Order;
 use App\Models\CustomerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -40,11 +40,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Order::create($data);
-
-        /*$customer = User::findOrFail($request->customer_id);
-        $customer->customerInfo->wallet -= min($request->total_cost , $customer->customerInfo->wallet);
-        $customer->customerInfo->save();*/
+        $order = Order::create($data);
+        $customer = User::find(Auth::id());
+        $order->customer_id = $customer;
+        $order->save();
+        
+        $info = $customer->customerInfo ?: new CustomerInfo();
+        $info->credit -= min($request->total_cost , $info->credit);
+        $info->user_id = $customer->id;
+        $info->save();
         
         return response()->json([
             'message' => 'order record created'
@@ -99,9 +103,11 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         
-        /*$customer = User::findOrFail($order->customer_id);
-        $customer->customerInfo->wallet += $order->total_cost;
-        $customer->customerInfo->save();*/
+        $customer = User::find(Auth::id());
+        $info = $customer->customerInfo ?: new CustomerInfo();
+        $info->credit += $order->total_cost;
+        $info->user_id = $customer->id;
+        $info->save();
 
         Order::destroy($order->id);
         return response()->json([

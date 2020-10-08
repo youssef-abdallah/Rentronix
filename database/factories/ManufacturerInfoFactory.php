@@ -25,12 +25,12 @@ class ManufacturerInfoFactory extends Factory
     public function definition()
     {
         $ids= User::all()->pluck('id')->toArray();
-        $ratings=array(1,2,3,4,5);
+        $ratings = array(1,2,3,4,5);
         return [
-            'id'=>$this->faker->unique()->randomElement($ids),
-            'rating'=>$this->faker->randomElement($ratings),
-            'wallet'=>0.0,
-            'percentage'=>5.0,
+            'id' => $this->faker->unique()->randomElement($ids),
+            'rating' => $this->faker->randomElement($ratings),
+            'profit' => 0.0,
+            'percentage' => 0.05,
         ];
     }
 }

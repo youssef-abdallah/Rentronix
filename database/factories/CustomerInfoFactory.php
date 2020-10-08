@@ -28,7 +28,7 @@ class CustomerInfoFactory extends Factory
         return [
             'id' => $this->faker->unique()->randomElement($ids),
             'address' => $this->faker->address,
-            'wallet' => 0.0
+            'credit' => 0.0
         ];
     }
 }

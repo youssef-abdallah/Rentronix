@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ManufacturerInfo;
 use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
@@ -34,16 +35,21 @@ class CheckoutController extends Controller
             $order->products()->attach($product->model, ['quantity' => $product->qty,
                 'due_date' => $due_date, 'type' => $type,
                 'seller_id' => $product->model->owner_id]);
+            $cost = 0;
             if ($type == 'rent')
             {
-                $order->total_cost += $product->price * $product->qty * $hours ;
+                $cost = $product->price * $product->qty * $hours;
+                $order->total_cost += $cost;
             } else 
             {
-                $order->total_cost += $product->model->selling_price * $product->qty;
+                $cost = $product->model->selling_price * $product->qty;
+                $order->total_cost += $cost;
             }
-            /*$manufacturer = User::findOrFail($product->model->owner_id);
-            $manufacturer->manufacturerInfo->wallet = $manufacturer->manufacturerInfo->wallet + $order->total_cost;
-            $manufacturer->manufacturerInfo->save();*/
+            $manufacturer = User::findOrFail($product->model->owner_id);
+            $info = $manufacturer->manufacturerInfo ?: new ManufacturerInfo();
+            $info->profit = $info->profit + $cost;
+            $info->user_id = $manufacturer->id;
+            $info->save();
         }
         $order->save();
         Cart::destroy();

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Ability;
 use App\Models\Comment;
 use App\Models\CustomerInfo;
+use App\Models\Promocode;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-           UserSeeder::class,
+            UserSeeder::class,
             RoleSeeder::class,
             ManufacturerInfoSeeder::class,
             CustomerInfoSeeder::class,
@@ -27,7 +28,8 @@ class DatabaseSeeder extends Seeder
             SubcategorySeeder::class,
             ProductSeeder::class,
             CommentSeeder::class,
-
+            FavouriteListSeeder::class,
+            PromocodeSeeder::class,
 
         ]);
     }

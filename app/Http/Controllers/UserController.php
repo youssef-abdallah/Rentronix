@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\Category;
+use App\Models\ManufacturerInfo;
+use App\Models\Product;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -34,4 +37,65 @@ class UserController extends Controller
         }
         return response()->json(null,204);
     }
+
+
+    public function GetalllManufacturesdetails()
+    {
+        try {
+            $manfactures = ManufacturerInfo::all();
+
+            foreach ($manfactures as $manufacture) {
+                $Manufactures_details []= User::find($manufacture->user_id);
+            }
+
+            $Manufactures_details = collect($Manufactures_details)->sortBy('name')->toArray();
+
+            return  $Manufactures_details;
+        }
+        catch (\Exception $e) {
+            return response()->json($e->getMessage(),$e->getCode());
+        }
+        return response()->json(null,204);
+    }
+
+    public function GetManufacturesSubcategories($manufacture_id)
+    {
+        try {
+            $Manufactures_products= Product::where('owner_id',$manufacture_id)->get();
+
+
+            foreach ($Manufactures_products as $product) {
+                $Manufactures_subcategories []= $product->subcategory;
+            }
+
+            return  $Manufactures_subcategories;
+
+
+        }
+        catch (\Exception $e) {
+            return response()->json($e->getMessage(),$e->getCode());
+        }
+        return response()->json(null,204);
+    }
+    public function GetManufacturesProducts($manufacture_id,$subcategory_id)
+    {
+        try {
+            $Manufactures_products= Product::where('owner_id',$manufacture_id)->where('subcategory_id',$subcategory_id)->get();
+
+
+            return  $Manufactures_products;
+
+        }
+        catch (\Exception $e) {
+            return response()->json($e->getMessage(),$e->getCode());
+        }
+        return response()->json(null,204);
+    }
+
+
+
+
+
+
+
 }

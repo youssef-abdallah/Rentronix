@@ -21,20 +21,13 @@ class SubcategoryController extends Controller
         {
             return response()->json('no subcategories for this category ',404);
         }
-        return response($category->subcategory, 200);
+        $array=$category->subcategory;
+        $array = collect($array)->sortBy('title')->toArray();
+        return response($array, 200);
 
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +38,16 @@ class SubcategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Subcategory::create($data);
+
+        $validatedData = $request->validate([
+            'title'=>'required|unique:subcategories',
+            'description'=>'required',
+            'category_id'=>'required',
+
+        ]);
+
+
+        Subcategory::create($validatedData);
         return response()->json([
             'message' => 'subcategory is saved record created'
         ], 201);
@@ -68,16 +70,7 @@ class SubcategoryController extends Controller
         return new SubcategoryResource($subcategory);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\subcategories  $subcategories
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subcategory $subcategories)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -114,4 +107,24 @@ class SubcategoryController extends Controller
         $subcategory->delete();
         return response()->json(null,204);
     }
+
+    public function SubCategorySearch()
+    {
+        $query = (string)request('q');
+
+        return Subcategory::query()
+            ->where('title', 'like', "%{$query}%")
+            ->orderBy('title')
+            ->get();
+
+    }
+
+
+    public function showAll()
+    {
+        $subcategories = Subcategory::all()->sortBy('title')->toJson(JSON_PRETTY_PRINT)  ;
+               return $subcategories;
+    }
+
+
 }

@@ -14,7 +14,8 @@ class Product extends Model
 
     function subcategory()  // identify the one to many relationship between subcategory & product
     {
-        return $this->belongsTo(subcategories::class,'subcategory_id');
+
+        return $this->belongsTo(Subcategory::class,'subcategory_id');
     }
 
     function owner()  // identify the one to many relationship between subcategory & product

@@ -11,9 +11,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function Role(){
+    public function Role()
+    {
         return $this->belongsToMany(Role::class);
     }
+
+        public function ManufactureInfo()
+        {
+            return $this->hasMany(ManufacturerInfo::class);
+
+     }
 
 
     /**
@@ -78,4 +85,11 @@ class User extends Authenticatable
 
         return $check;
     }
+
+
+     public function Products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

@@ -1,9 +1,11 @@
 <?php
+
 namespace Database\Seeders;
-use App\Models\FavouriteList;
+
+use App\Models\Promocode;
 use Illuminate\Database\Seeder;
 
-class FavouriteListSeeder extends Seeder
+class PromocodeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +14,6 @@ class FavouriteListSeeder extends Seeder
      */
     public function run()
     {
-        FavouriteList::factory()->count(5)->create();
+        Promocode::factory()->count(5)->create();
     }
 }

@@ -24,7 +24,6 @@ class CommentController extends Controller
     public function index(Category $category,Subcategory $subcategory, $product_id)
     {
 
-
         $product = Product::find($product_id);
         if (count($product->comments)<1)
         {

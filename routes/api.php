@@ -1,10 +1,10 @@
 <?php
 
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
-
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -69,12 +69,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* User routes */
 
-Route::apiResource('users', UserController::class);
+//Route::apiResource('users', UserController::class);
 
 /* Subscriptions routes */
 
 Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
-/* favourite list routes
+/* favourite list routes  /// getting a favourite list of a certain user
 
 Route::group(['prefix'=>'users'], function (){
     Route::apiResource('{users}/favouriteList', FavouriteList::class);
@@ -92,19 +92,58 @@ Route::group(['prefix'=>'category'], function () {
 });
 
 
+
+// for adding a new subcategory directly
+Route::post('/subcategory', 'SubcategoryController@store');
+Route::get('/allsubcategories', 'SubcategoryController@showAll');
+
 /* Products routes*/
 
 Route::group(['prefix'=>'category/{category}/subcategory'], function () {
     Route::apiResource('{subcategory}/products', ProductController::class);
 });
-
-
+// for adding a new product directly
+Route::post('/products', 'ProductController@store');
+Route::get('/allproducts', 'ProductController@showAll');
 
 /* comments routes */
 
 Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'], function (){
     Route::apiResource('{products}/comments', CommentController::class);
 });
+
+/*promocodes  */
+Route::apiResource('/promocode',PromocodeController::class);
+
+///the products that are in a favourite list
+    Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'], function (){
+    Route::apiResource('{products}/favouritelist',FavouriteListController::class);
+
+
+
+});
+
+/*search apis */
+// category
+Route::get('search/category', 'CategoryController@CategorySearch');
+//subcategory
+Route::get('search/subCategory', 'SubcategoryController@SubCategorySearch');
+//product
+Route::get('search/product', 'ProductController@ProductSearch');
+//Products for rent
+Route::get('search/productForRent', 'ProductController@ProductSearchRent');
+//products for sale
+Route::get('search/productForBuy', 'ProductController@ProductSearchBuy');
+
+/*home apis */
+//manufactures
+Route::get('manufactures', 'UserController@GetalllManufacturesdetails');
+//the subcategories of certain manufactures
+Route::get('manufactures/{manufactures}/subcategory', 'UserController@GetManufacturesSubcategories');
+//the products of certain manufactures
+Route::get('manufactures/{manufactures}/subcategory/{subcategory}', 'UserController@GetManufacturesProducts');
+
+//for all products linked to categories and subcategories check their apis's resource above
 
 
 

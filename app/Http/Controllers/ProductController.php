@@ -30,7 +30,9 @@ class ProductController extends Controller
         {
             return response()->json('no products for this subcategory ',404);
         }
-        return response($subcategory->products, 200);
+        $array=$subcategory->products;
+        $array = collect($array)->sortBy('name')->toArray();
+        return response($array, 200);
     }
 
     /**
@@ -49,7 +51,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$category_id,$subcategory_id)
     {
 
         $validatedData = $request->validate([
@@ -63,6 +65,7 @@ class ProductController extends Controller
             'subcategory_id' =>'required',
             'owner_id'=>'required',
         ]);
+
 
         Product::create($validatedData);
         return response()->json([
@@ -107,16 +110,7 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $Product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -153,4 +147,47 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(null,204);
     }
+
+    public function ProductSearch()
+    {
+        $query = (string)request('q');
+
+        return Product::query()
+            ->where('name', 'like', "%{$query}%")
+            ->orderBy('name')
+            ->get();
+
+    }
+
+    public function ProductSearchBuy()
+    {
+        $query = (string)request('q');
+
+        return Product::query()
+            ->where('name', 'like', "%{$query}%")
+            ->where('available_for', 'like', 'buy')
+            ->orderBy('name')
+            ->get();
+
+    }
+    public function ProductSearchRent()
+    {
+
+        $query = (string)request('q');
+        return Product::query()
+            ->where('name', 'like', "%{$query}%")
+            ->where('available_for', 'like', 'rent')
+            ->orderBy('name')
+            ->get();
+
+    }
+
+    public function showAll()
+    {
+        $products = Product::all()->sortBy('name')->toJson(JSON_PRETTY_PRINT)  ;
+
+          return $products;
+    }
+
+
 }

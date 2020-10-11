@@ -16,6 +16,9 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+import { BSidebar } from 'bootstrap-vue'
+Vue.component('b-sidebar', BSidebar)
+
 // Importing components
 
 import Master from './components/layouts/Master';

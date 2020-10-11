@@ -7,7 +7,8 @@
       img-alt="Card Image"
       text-variant="white"
       sub-title="About us"
-      class="b-card"
+      class="b-card center"
+      style="text-align:center"
     >
       <b-card-text class="b-card-text">
         Rentronix is an electronic rental application. <br>
@@ -21,14 +22,16 @@
 
 <style>
 
-.b-card {
-  text-align: center;
-  width: 80vw;
-  height: 110vh;
-}
-
 .b-card-text {
   color: gray;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 10%;
 }
 
 </style>

@@ -9,7 +9,8 @@ axios.defaults.baseURL = 'http://localhost:8000'
 export default new Vuex.Store({
   state: {
     isLogged: false,
-    isAdmin: false
+    isAdmin: false,
+    isMenuOpen: false
   },
 
   mutations: {
@@ -29,6 +30,10 @@ export default new Vuex.Store({
 
     setAdmin(state, isAdmin) {
       state.isAdmin = isAdmin;
+    },
+
+    toggleMenu(state) {
+      state.isMenuOpen = !state.isMenuOpen;
     }
   },
 
@@ -54,11 +59,16 @@ export default new Vuex.Store({
 
     logout ({ commit }) {
       commit('clearUserData')
+    },
+
+    toggleMenu ({ commit }) {
+      commit('toggleMenu');
     }
   },
 
   getters : {
     isLogged: state => !!state.isLogged,
-    isAdmin: state => !!state.isAdmin
+    isAdmin: state => !!state.isAdmin,
+    isMenuOpen: state => !!state.isMenuOpen
   }
 })

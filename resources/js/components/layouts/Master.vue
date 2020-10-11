@@ -1,11 +1,15 @@
 <template>
     <div>
+        <side-bar></side-bar>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <toggler></toggler>
+                        </li>
                         <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link> 
                         <li class="nav-item">
                             <router-link :to="{ name: 'about' }" class="nav-link">About</router-link> 
@@ -22,8 +26,8 @@
                             <li class="nav-item">
                                 <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login</router-link>
                             </li>
-                            <b-button @click="doLogout" v-if="isLogged" variant="outline-info" class="mb-2">
-                                <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+                            <b-button @click="doLogout" v-if="isLogged" class="mb-2">
+                                 Logout
                             </b-button>
                     </ul>
                 </div>
@@ -47,8 +51,11 @@
 <script>
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex'
+import Sidebar from './Sidebar'
+import Toggler from './Toggler'
 
 export default {
+
     mounted() {
 		if (this.getCookie('token')) {
             this.loginCallback(this.getCookie('token'));
@@ -58,6 +65,11 @@ export default {
 		// 	this.loginCallback(token)
 		// 	console.log(token);
 		// }
+    },
+
+    components: {
+        "side-bar": Sidebar,
+        "toggler": Toggler
     },
 
     computed: {
@@ -100,3 +112,42 @@ export default {
 
 
 </script>
+
+<style>
+html {
+   height: 100%;
+ }
+
+ body {
+   border: 0; margin: 0; padding: 0;
+   font-family: 'Lato';
+   height: 100%;
+   background: rgb(19, 167, 110);
+   background: rgb(155, 169, 192);
+ }
+
+ .logo {
+   align-self: center;
+   color: #fff;
+   font-weight: bold;
+   font-family: 'Lato'
+ }
+
+ .main-nav {
+   display: flex;
+   justify-content: space-between;
+   padding: 0.5rem 0.8rem;
+ }
+
+ ul.sidebar-panel-nav {
+   list-style-type: none;
+ }
+
+ ul.sidebar-panel-nav > li > a {
+   color: #fff;
+   text-decoration: none;
+   font-size: 1.5rem;
+   display: block;
+   padding-bottom: 0.5em;
+ }
+</style>

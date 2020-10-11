@@ -5,6 +5,7 @@ import LoginLoading from './components/LoginLoading';
 import Admin from './components/admin/Admin';
 import Search from './components/Search';
 import AdvertisementsUploader from './components/admin/AdvertisementUploader'
+import Request from './components/Request'
 
 const routes = [
     {
@@ -55,6 +56,14 @@ const routes = [
         meta: {
             auth: true,
             admin: true
+        }
+    },
+    {
+        path: '/request',
+        name: 'request',
+        component: Request,
+        meta: {
+            auth: true,
         }
     },
     {

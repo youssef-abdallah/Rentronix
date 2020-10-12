@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>products</title>
+    <title>Products</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -18,8 +18,7 @@
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation" style="background-color: darkgrey">
         <div class="navbar-brand">
             <span class="navbar-item"  >
-                {{--                <img src="../images/rentronx.png" width="50" height="50">--}}
-                Rentronix
+             <img src="{{url('/images/rentronx.png') }}"style="width: 150px ; height: 100px;">
             </span>
 
             <div class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -32,12 +31,12 @@
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
+            <div style="font-size: 20px" class="navbar-start">
                 <a class="navbar-item" href="http://127.0.0.1:8000/">
                    <strong>Home</strong>
                 </a>
                 <a class="navbar-item">
-                    <strong> Documentation </strong>
+                    <strong> Search </strong>
                 </a>
 
                 <cart-dropdown></cart-dropdown>
@@ -46,10 +45,10 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary"  href="http://127.0.0.1:8000/register"style="background-color: orangered" >
+                    <a class="button is-primary"  href="http://127.0.0.1:8000/register"style="background-color: orangered;padding:15px" >
                         <strong>Register</strong>
                     </a>
-                    <a class="button is-light" href="http://127.0.0.1:8000/login">
+                    <a class="button is-light" href="http://127.0.0.1:8000/login" style="padding:15px">
                        <strong> Log in </strong>
                     </a>
                 </div>
@@ -58,7 +57,7 @@
     </nav>
 
     <div class="section content">
-        <h1>Our Products</h1>
+       <h1 style="color: orangered;font-family: Andalus ;font-size: 40px">Our Products</h1>
         <products-list></products-list>
     </div>
 

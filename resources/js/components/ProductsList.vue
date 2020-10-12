@@ -1,23 +1,38 @@
 
 <template>
-    <table>
+    <table class=" table is-striped is-narrow is-hoverable is-fullwidth" >
         <thead>
-        <th>Name</th>
-        <th>Price</th>
-<!--        <th>image</th>-->
-        <th></th>
-
+            <th class="tbhead" style="color:brown">Name</th>
+            <th class="tbhead" style="color:brown">Price</th>
+            <th></th>
+            <th class="tbhead" style="color:brown">Image</th>
+            <th class="tbhead" style="color:brown">Overview</th>
+            <th></th>
         </thead>
 
         <tbody>
-        <tr v-for="item in items" :key="item.id">
-            <td v-text="item.title"></td>
+        <tr v-for="item in items" :key="item.id" >
+            <td v-text="item.name" class="tbelement">
+            </td>
 
-            <td>${{ item.price.toFixed(2) }}</td>
-<!--           <td>${{item.image}}</td>-->
+            <td class="tbelement">{{ item.selling_price.toFixed(2) }}
+                <span style="font-size:20px ; color: red;">
+                    $
+                </span>
+            </td>
 
             <td>
-                <button class="button is-success" style="background-color: orangered"
+            </td>
+
+            <td class="tbelement">
+                <img src="https://lorempixel.com/640/480/?82477" style="width: 70%; height: 20%;">
+            </td>
+
+            <td v-text="item.product_overview" class="tbelement">
+            </td>
+
+            <td class="tbelement">
+                <button id="addtocard" title="add to cart" class="button is-success" style="background-color: orangered ; margin-top: 30px"
                         @click="addToCart(item)"><strong>Add to Cart</strong></button>
             </td>
         </tr>
@@ -28,9 +43,13 @@
 <script>
 
 export default {
-    // mounted() {
-    //    this.fetchProducts()
-    // },
+    beforeMount() {
+
+            axios.get('/api/allproducts').then(response => {
+                console.log(response)
+                this.items = response.data
+            })
+        },
     // created() {
     //     // this.fetchProducts()
     //     const { data } = this.$axios
@@ -44,59 +63,7 @@ export default {
     // },
     data() {
         return {
-            items: [
-                {
-                    id: 1,
-                    title: 'product 1',
-                    price: 9.99,
-
-                },
-                {
-                    id: 2,
-                    title: 'product 2',
-                    price: 6.66
-                },
-                {
-                    id: 3,
-                    title: 'product 3',
-                    price: 15.99
-                },
-                {
-                    id: 4,
-                    title: 'product 4',
-                    price: 14.00
-                },
-                {
-                    id: 5,
-                    title: 'product 5',
-                    price: 1.20
-                },
-                {
-                    id: 6,
-                    title: 'product 6',
-                    price: 10.00
-                },
-                {
-                    id: 7,
-                    title: 'product 7',
-                    price: 7.80
-                },
-                {
-                    id: 8,
-                    title: 'product 8',
-                    price: 11.30
-                },
-                {
-                    id: 9,
-                    title: 'product 9',
-                    price: 5.55
-                },
-                {
-                    id: 10,
-                    title: 'product 10',
-                    price: 6.00
-                },
-            ]
+            items: []
         };
     },
 
@@ -104,14 +71,21 @@ export default {
         addToCart(item) {
             this.$store.commit('addToCart', item);
         },
-        // fetchProducts() {
-        //     axios.get('/products').then(response => {
-        //         console.log(response.data)
-        //         // this.items = response.data
-        //     })
-        // }
 
     },
 
 }
 </script>
+
+<style>
+.tbelement{
+    font-size: 17px;
+    font-family: "Nunito", sans-serif;
+
+}
+.tbhead{
+    font-size:22px;
+    font-weight: bolder;
+
+}
+</style>

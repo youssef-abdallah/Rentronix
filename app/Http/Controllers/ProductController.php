@@ -153,4 +153,11 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(null,204);
     }
+    public function showAll()
+    {
+        $products = Product::all()->sortBy('name')->toJson(JSON_PRETTY_PRINT)  ;
+
+        return $products;
+    }
+
 }

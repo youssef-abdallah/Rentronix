@@ -15460,12 +15460,12 @@ var store = {
 
             if (found) {
                 found.quantity++;
-                found.totalPrice = found.quantity * found.price;
+                found.totalPrice = found.quantity * found.selling_price;
             } else {
                 state.cart.push(item);
 
                 Vue.set(item, 'quantity', 1);
-                Vue.set(item, 'totalPrice', item.price);
+                Vue.set(item, 'totalPrice', item.selling_price);
             }
 
             state.cartCount++;
@@ -15497,6 +15497,10 @@ var store = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(52)
+}
 var normalizeComponent = __webpack_require__(9)
 /* script */
 var __vue_script__ = __webpack_require__(38)
@@ -15505,7 +15509,7 @@ var __vue_template__ = __webpack_require__(39)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -15572,12 +15576,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    // mounted() {
-    //    this.fetchProducts()
-    // },
+    beforeMount: function beforeMount() {
+        var _this = this;
+
+        axios.get('/api/allproducts').then(function (response) {
+            console.log(response);
+            _this.items = response.data;
+        });
+    },
+
     // created() {
     //     // this.fetchProducts()
     //     const { data } = this.$axios
@@ -15591,48 +15616,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // },
     data: function data() {
         return {
-            items: [{
-                id: 1,
-                title: 'product 1',
-                price: 9.99
-
-            }, {
-                id: 2,
-                title: 'product 2',
-                price: 6.66
-            }, {
-                id: 3,
-                title: 'product 3',
-                price: 15.99
-            }, {
-                id: 4,
-                title: 'product 4',
-                price: 14.00
-            }, {
-                id: 5,
-                title: 'product 5',
-                price: 1.20
-            }, {
-                id: 6,
-                title: 'product 6',
-                price: 10.00
-            }, {
-                id: 7,
-                title: 'product 7',
-                price: 7.80
-            }, {
-                id: 8,
-                title: 'product 8',
-                price: 11.30
-            }, {
-                id: 9,
-                title: 'product 9',
-                price: 5.55
-            }, {
-                id: 10,
-                title: 'product 10',
-                price: 6.00
-            }]
+            items: []
         };
     },
 
@@ -15653,37 +15637,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("table", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "tbody",
-      _vm._l(_vm.items, function(item) {
-        return _c("tr", { key: item.id }, [
-          _c("td", { domProps: { textContent: _vm._s(item.title) } }),
-          _vm._v(" "),
-          _c("td", [_vm._v("$" + _vm._s(item.price.toFixed(2)))]),
-          _vm._v(" "),
-          _c("td", [
-            _c(
-              "button",
-              {
-                staticClass: "button is-success",
-                staticStyle: { "background-color": "orangered" },
-                on: {
-                  click: function($event) {
-                    return _vm.addToCart(item)
+  return _c(
+    "table",
+    { staticClass: " table is-striped is-narrow is-hoverable is-fullwidth" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.items, function(item) {
+          return _c("tr", { key: item.id }, [
+            _c("td", {
+              staticClass: "tbelement",
+              domProps: { textContent: _vm._s(item.name) }
+            }),
+            _vm._v(" "),
+            _c("td", { staticClass: "tbelement" }, [
+              _vm._v(_vm._s(item.selling_price.toFixed(2)) + "\n            "),
+              _c(
+                "span",
+                { staticStyle: { "font-size": "20px", color: "red" } },
+                [_vm._v("\n                $\n            ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c("td", {
+              staticClass: "tbelement",
+              domProps: { textContent: _vm._s(item.product_overview) }
+            }),
+            _vm._v(" "),
+            _c("td", { staticClass: "tbelement" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-success",
+                  staticStyle: {
+                    "background-color": "orangered",
+                    "margin-top": "30px"
+                  },
+                  attrs: { id: "addtocard", title: "add to cart" },
+                  on: {
+                    click: function($event) {
+                      return _vm.addToCart(item)
+                    }
                   }
-                }
-              },
-              [_c("strong", [_vm._v("Add to Cart")])]
-            )
+                },
+                [_c("strong", [_vm._v("Add to Cart")])]
+              )
+            ])
           ])
-        ])
-      }),
-      0
-    )
-  ])
+        }),
+        0
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -15691,11 +15702,36 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", [_vm._v("Name")]),
+      _c("th", { staticClass: "tbhead", staticStyle: { color: "brown" } }, [
+        _vm._v("Name")
+      ]),
       _vm._v(" "),
-      _c("th", [_vm._v("Price")]),
+      _c("th", { staticClass: "tbhead", staticStyle: { color: "brown" } }, [
+        _vm._v("Price")
+      ]),
+      _vm._v(" "),
+      _c("th"),
+      _vm._v(" "),
+      _c("th", { staticClass: "tbhead", staticStyle: { color: "brown" } }, [
+        _vm._v("Image")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "tbhead", staticStyle: { color: "brown" } }, [
+        _vm._v("Overview")
+      ]),
       _vm._v(" "),
       _c("th")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "tbelement" }, [
+      _c("img", {
+        staticStyle: { width: "70%", height: "20%" },
+        attrs: { src: "https://lorempixel.com/640/480/?82477" }
+      })
     ])
   }
 ]
@@ -15794,7 +15830,7 @@ exports = module.exports = __webpack_require__(43)(false);
 
 
 // module
-exports.push([module.i, "\n.removeBtn {\n    margin-right: 1rem;\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n.removeBtn {\n    margin-right: 1rem;\n    color: red;\n}\n.navbar-link{\n    margin-right: 10rem;\n}\n.price{\n    font-size: 15px;\n    color: darkred;\n    font-family: Andalus;\n}\n", ""]);
 
 // exports
 
@@ -16187,6 +16223,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16253,7 +16294,7 @@ var render = function() {
           [
             _vm._l(_vm.$store.state.cart, function(item) {
               return _c(
-                "a",
+                "dev",
                 {
                   key: item.id,
                   staticClass: "navbar-item",
@@ -16261,7 +16302,7 @@ var render = function() {
                 },
                 [
                   _c(
-                    "span",
+                    "a",
                     {
                       staticClass: "removeBtn",
                       attrs: { title: "Remove from cart" },
@@ -16274,36 +16315,59 @@ var render = function() {
                     },
                     [_c("strong", [_vm._v("X")])]
                   ),
-                  _vm._v(
-                    "\n\n            " +
-                      _vm._s(item.title) +
-                      " x" +
-                      _vm._s(item.quantity) +
-                      " - $" +
-                      _vm._s(item.totalPrice) +
-                      "\n        "
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "price",
+                      staticStyle: { "font-size": "17px" }
+                    },
+                    [
+                      _vm._v(" " + _vm._s(item.name) + "\n                   "),
+                      _c("span", { staticStyle: { color: "red" } }, [
+                        _vm._v(
+                          "x" + _vm._s(item.quantity) + "\n                   "
+                        )
+                      ]),
+                      _vm._v(
+                        "  - $" + _vm._s(item.totalPrice) + "\n               "
+                      )
+                    ]
                   )
                 ]
               )
             }),
             _vm._v(" "),
-            _c("a", { staticClass: "navbar-item", attrs: { href: "" } }, [
-              _vm._v(
-                "\n            Total: $" + _vm._s(_vm.totalPrice) + "\n        "
-              )
-            ]),
+            _c(
+              "span",
+              {
+                staticClass: "navbar-item",
+                staticStyle: { color: "deepskyblue" }
+              },
+              [
+                _c(
+                  "span",
+                  { staticStyle: { color: "darkred", "font-size": "larger" } },
+                  [_vm._v("Total: ")]
+                ),
+                _vm._v(" "),
+                _c("strong", [
+                  _c(
+                    "span",
+                    { staticStyle: { color: "red", "font-size": "larger" } },
+                    [_vm._v(_vm._s(_vm.totalPrice) + "$")]
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
-            _c("hr", { staticClass: "navbar-divider" }),
-            _vm._v(" "),
-            _c("a", { staticClass: "navbar-item", attrs: { href: "" } }, [
-              _vm._v("\n            Checkout\n        ")
-            ])
+            _c("hr", { staticClass: "navbar-divider" })
           ],
           2
         )
       : _c("div", { staticClass: "navbar-dropdown is-boxed is-right" }, [
-          _c("a", { staticClass: "navbar-item", attrs: { href: "" } }, [
-            _vm._v("\n            Cart is empty\n        ")
+          _c("div", { staticClass: "navbar-item", attrs: { href: "" } }, [
+            _vm._v("\n                Cart is empty\n            ")
           ])
         ])
   ])
@@ -16323,6 +16387,49 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(53);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(44)("414cdf54", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d3d91e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProductsList.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d3d91e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProductsList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(43)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tbelement{\n    font-size: 17px;\n    font-family: \"Nunito\", sans-serif;\n}\n.tbhead{\n    font-size:22px;\n    font-weight: bolder;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

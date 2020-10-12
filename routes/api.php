@@ -88,6 +88,7 @@ Route::apiResource('/category', CategoryController::class);
 
 /* subcategories routes*/
 
+Route::get('/allproducts', 'ProductController@showAll');
 Route::group(['prefix'=>'category'], function () {
     Route::apiResource('/{category}/subcategory', SubcategoryController::class);
 });

@@ -35,16 +35,17 @@ class UserRequestController extends Controller
             'image' => 'image|max:1024',
             'datasheet' => 'mimes:pdf|max:10000'
         ]);
-        $userRequest = UserRequest::create($data);
-        $imageFileName = 'product_'.strval($userRequest->id).'.png';
+        $userRequest = new UserRequest($data);
+        $imageFileName = 'product_'.(UserRequest::count() + 1).'.png';
         $file = $request->file('image')->move(public_path('images'), $imageFileName);
-        $imageFileUrl = url('public/images/'.$imageFileName);
+        $imageFileUrl = url('images/'.$imageFileName);
         $userRequest->image = $imageFileUrl;
-        $datasheetFileName = 'datasheet_'.strval($userRequest->id).'.pdf';
+        $datasheetFileName = 'datasheet_'.(UserRequest::count() + 1).'.pdf';
         $file = $request->file('datasheet')->move(public_path('datasheets'), $datasheetFileName);
-        $datasheetFileUrl = url('public/images/'.$datasheetFileName);
+        $datasheetFileUrl = url('datasheets/'.$datasheetFileName);
         $userRequest->datasheet = $datasheetFileUrl;
         $userRequest->user_id = Auth::id();
+        $userRequest->type = $request->type;
         $userRequest->save();
         return response()->json([
             'message' => 'request record created'

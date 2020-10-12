@@ -28,7 +28,7 @@
                         <div v-if="currentAdvertisement !== null">
                             <strong>Advertisement</strong>: {{ currentAdvertisement.id }} <br>
                             <strong>Product ID</strong>: {{ currentAdvertisement.product_id }} <br>
-                            <img style="width:30vw; height=40vh" src="currentAdvertisement.image"> <br>
+                            <img style="width:30vw; height=40vh" :src="currentAdvertisement.image"> <br>
                             <button class="btn btn-danger" @click="destroy(currentAdvertisement)">Delete</button>
                         </div>
                         </div>
@@ -54,7 +54,6 @@ export default {
     methods: {
         setCurrentAdvertisement(index) {
             this.currentAdvertisement = this.advertisements[index];
-            console.log(this.currentAdvertisement.image);
         },
 
         destroy(advertisement) {

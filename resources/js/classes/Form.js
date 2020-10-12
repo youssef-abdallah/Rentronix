@@ -36,7 +36,7 @@ class Form {
      */
     reset() {
         for (let field in this.originalData) {
-            this[field] = '';
+            this[field] = null;
         }
 
         this.errors.clear();
@@ -90,8 +90,12 @@ class Form {
      * @param {string} url
      */
     submit(requestType, url) {
+        const formData = new FormData();
+        for (const key in this.data()) {
+            formData.append(key, this.data()[key]);
+        }
         return new Promise((resolve, reject) => {
-            axios[requestType](url, this.data())
+            axios[requestType](url, formData)
                 .then(response => {
                     this.onSuccess(response.data);
 

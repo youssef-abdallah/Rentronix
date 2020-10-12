@@ -40,8 +40,8 @@
                                     <strong>Type</strong>: {{ currentRequest.type }} <br>
                                     <strong>Price</strong>: {{ currentRequest.price }} <br>
                                     <strong>Price Per Hour</strong>: {{ currentRequest.price_per_hour }} <br>
-                                    <strong>Datasheet</strong>: <a href="currentRequest.datasheet">datasheet</a> <br>
-                                    <strong>Image</strong>: <img src="currentRequest.image"> <br>
+                                    <strong>Datasheet</strong>: <a :href="currentRequest.datasheet">datasheet</a> <br>
+                                    <img style="width:30vw; height=40vh" :src="currentRequest.image"> <br>
                                     <strong v-if="currentRequest.approved == 0"><button class="btn btn-success" @click="approve(currentRequest)">Approve</button></strong>
                                     <button class="btn btn-danger" @click="destroy(currentRequest)">Delete</button>
                                     

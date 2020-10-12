@@ -30,7 +30,7 @@ class AdvertisementController extends Controller
         ]);
         $advertisement = new Advertisement();
         $advertisement->product_id = $request->product_id;
-        $fileName = 'ad_'.$advertisement->id.'.png';
+        $fileName = 'ad_'.(Advertisement::count() + 1).'.png';
         $file = $request->file('image')->move(public_path('images'), $fileName);
         $fileUrl = url('images/'.$fileName);
         $advertisement->image = $fileUrl;

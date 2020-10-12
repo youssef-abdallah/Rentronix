@@ -21,10 +21,13 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item">
-                                <router-link :to="{ name: 'search' }" class="nav-link">Search</router-link>
+                                <router-link :to="{ name: 'search' }" class="nav-link">Search <i class="fas fa-search"></i></router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login</router-link>
+                                <router-link :to="{ name: 'login' }" class="nav-link" v-if="!isLogged">Login <i class="fas fa-user"></i></router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{ name: 'cart' }" class="nav-link" v-if="isLogged">Cart <i class="fas fa-shopping-cart"></i></router-link>
                             </li>
                             <b-button @click="doLogout" v-if="isLogged" class="mb-2">
                                  Logout

@@ -133,9 +133,14 @@ class User extends Authenticatable
     }
 
 
-     public function Products()
+    public function Products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id' , 'customer_id');
     }
 
 }

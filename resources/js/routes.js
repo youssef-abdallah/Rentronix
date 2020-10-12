@@ -7,6 +7,7 @@ import Search from './components/Search';
 import AdvertisementsUploader from './components/admin/AdvertisementUploader'
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import Orders from './components/User/Orders';
 
 const routes = [
     {
@@ -83,6 +84,14 @@ const routes = [
             auth: true,
         }
     },
+    {
+        path: '/orders',
+        name: 'orders',
+        component: Orders,
+        meta: {
+            auth: true,
+        }
+    }
 ]
 
 export default routes;

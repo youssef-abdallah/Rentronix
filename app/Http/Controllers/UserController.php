@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\ManufacturerInfo;
 use App\Models\Product;
+use App\Models\Order;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -41,14 +42,6 @@ class UserController extends Controller
             return response()->json($e->getMessage(),$e->getCode());
         }
         return response()->json(null,204);
-    }
-
-    public function showWallet(User $user)
-    {
-        $customerWallet = $user->customerInfo->wallet ?? "";
-        $manufacturerWallet = $user->manufacturerInfo->wallet ?? "";
-        $wallet = json_encode(array("customerWallet"=>$customerWallet , "manufacturerWallet"=>$manufacturerWallet));
-        return response($wallet, 200);
     }
 
     public function isAdmin()
@@ -114,10 +107,14 @@ class UserController extends Controller
         return response()->json(null,204);
     }
 
-
-
-
-
+    public function showUserProfile()
+    {
+        $user = Auth::user();
+        $customerInfo = $user->customerInfo ?? "";
+        $manufacturerInfo = $user->manufacturerInfo ?? "";
+        $info = json_encode(array("user"=>$user , "customerInfo"=>$customerInfo , "manufacturerInfo"=>$manufacturerInfo));
+        return response($info, 200);
+    }
 
 
 }

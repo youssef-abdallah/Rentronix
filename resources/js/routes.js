@@ -5,6 +5,8 @@ import LoginLoading from './components/LoginLoading';
 import Admin from './components/admin/Admin';
 import Search from './components/Search';
 import AdvertisementsUploader from './components/admin/AdvertisementUploader'
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 const routes = [
     {
@@ -63,6 +65,22 @@ const routes = [
         component: Search,
         meta: {
 
+        }
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: Cart,
+        meta: {
+            auth: true,
+        }
+    },
+    {
+        path: '/checkout',
+        name: 'checkout',
+        component: Checkout,
+        meta: {
+            auth: true,
         }
     },
 ]

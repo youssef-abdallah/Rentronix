@@ -50,7 +50,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     /* Orders Routes */
 
     Route::apiResource('orders', 'OrderController');
-    Route::put('orders/updatestatus/{order}', 'OrderController@updateOrderStatus')->name('orders.updateOrderStatus');
 
     /* Advertisements Routes */
 
@@ -66,7 +65,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     /* User routes */
     Route::get('users/isadmin', 'UserController@isAdmin');
     Route::apiResource('users', 'UserController');
-    Route::get('users/wallet/{user}', 'UserController@showWallet')->name('users.showWallet');
+    Route::get('profile', 'UserController@showUserProfile')->name('profile.showUserProfile');
 
     /* Subscriptions routes */
 

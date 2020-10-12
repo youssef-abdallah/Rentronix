@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\CustomerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all()->toJson(JSON_PRETTY_PRINT);
+        $orders = Order::with('products')->where('customer_id',Auth::id())->get()->toJson(JSON_PRETTY_PRINT);
         return response($orders, 200);
     }
 
@@ -64,7 +65,6 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
-        return response($order, 200);
     }
 
     /**

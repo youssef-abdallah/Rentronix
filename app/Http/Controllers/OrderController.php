@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\CustomerInfo;
+use App\Models\ManufacturerInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,7 +103,24 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        
+        foreach ($order->products() as $product)
+        {
+            $type = $product->options['type'];
+            $hours = $product->options['hours'];
+            $seller = User::find($product->owner_id);
+            $sellerInfo = $seller->manufacturerInfo ?: new ManufacturerInfo();
+            $cost = 0;
+            if ($type == 'rent')
+            {
+                $cost = $product->price * $product->qty * $hours;
+                $order->total_cost += $cost;
+            } else 
+            {
+                $cost = $product->model->selling_price * $product->qty;
+                $order->total_cost += $cost;
+            }
+            $sellerInfo->profit -= ($cost * (1 - $sellerInfo->percentage));
+        }
         $customer = User::find(Auth::id());
         $info = $customer->customerInfo ?: new CustomerInfo();
         $info->credit += $order->total_cost;

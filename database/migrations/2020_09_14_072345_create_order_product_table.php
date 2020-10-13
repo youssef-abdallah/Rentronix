@@ -21,6 +21,7 @@ class CreateOrderProductTable extends Migration
             $table->integer('quantity')->default(1);
             $table->enum('type', array('buy', 'rent'));
             $table->date('due_date')->nullable();
+            $table->integer('hours')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');  
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

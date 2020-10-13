@@ -110,10 +110,9 @@ class UserController extends Controller
     public function showUserProfile()
     {
         $user = Auth::user();
-        $customerInfo = $user->customerInfo ?? "";
-        $manufacturerInfo = $user->manufacturerInfo ?? "";
-        $info = json_encode(array("user"=>$user , "customerInfo"=>$customerInfo , "manufacturerInfo"=>$manufacturerInfo));
-        return response($info, 200);
+        $user->customerInfo ?? "";
+        $user->manufacturerInfo ?? "";
+        return response($user, 200);
     }
 
 

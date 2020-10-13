@@ -47,7 +47,7 @@ class CheckoutController extends Controller
             }
             $manufacturer = User::findOrFail($product->model->owner_id);
             $info = $manufacturer->manufacturerInfo ?: new ManufacturerInfo();
-            $info->profit = $info->profit + $cost;
+            $info->profit = $info->profit + (1 - $info->percentage) * $cost;
             $info->user_id = $manufacturer->id;
             $info->save();
         }

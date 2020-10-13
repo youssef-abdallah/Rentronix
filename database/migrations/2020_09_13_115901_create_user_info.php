@@ -19,7 +19,7 @@ class CreateUserInfo extends Migration
             $table->string('address')->nullable();
             $table->double('credit')->default(0.0);
             $table->timestamps();
-            $table->foreign('id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

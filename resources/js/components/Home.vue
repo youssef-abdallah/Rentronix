@@ -50,17 +50,28 @@
         </p>
       </b-carousel-slide>
     </b-carousel>
-
+    <h1 style="text-align: center" class="mt-4">Our Products</h1>
+    <product-list class="mt-4">
+    </product-list>
   </div>
+
+
 </template>
 
 <script>
+
+  import ProductList from './products/ProductList'
+
   export default {
     data() {
       return {
         slide: 0,
         sliding: null
       }
+    },
+
+    components: {
+      'product-list': ProductList
     },
     methods: {
       onSlideStart(slide) {

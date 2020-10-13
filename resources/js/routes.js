@@ -11,6 +11,7 @@ import Requests from './components/User/Requests';
 import Request from './components/User/Request'
 import Complaint from './components/User/Complaint';
 import Complaints from './components/User/Complaints';
+import ProductList from './components/products/ProductList';
 
 const routes = [
     {
@@ -121,6 +122,11 @@ const routes = [
         meta: {
             auth: true,
         }
+    },
+    {
+        path: '/products',
+        name: 'products',
+        component: ProductList
     }
 ]
 

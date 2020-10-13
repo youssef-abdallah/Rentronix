@@ -44,9 +44,11 @@ class CartController extends Controller
 
         // Storing the cart
         Cart::store(Auth::id());
+        $rowId = Cart::content()->last()->rowId;
 
         return response()->json([
-            'message' => 'The product has been added to the cart'
+            'message' => 'The product has been added to the cart',
+            'rowId' => $rowId
         ], 201);
     }
 

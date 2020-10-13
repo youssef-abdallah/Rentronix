@@ -100,7 +100,7 @@ export default {
     label {
         font-size: 12px;
         letter-spacing: 2px;
-        color: #A0A0A0;
+        color: #444444;
     }
 
     .btns{

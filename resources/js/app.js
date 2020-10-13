@@ -22,7 +22,6 @@ Vue.component('b-sidebar', BSidebar)
 // Importing components
 
 import Master from './components/layouts/Master';
-import ExampleComponent from './components/ExampleComponent';
 
 Vue.use(VueRouter);
 import routes from './routes';
@@ -58,7 +57,7 @@ const app = new Vue({
     el: '#app',
     router: router,
     store: store,
-    components: { Master, ExampleComponent },
+    components: { Master },
     created () {
     const token = localStorage.getItem('token')
     if (token) {

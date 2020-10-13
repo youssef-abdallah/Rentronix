@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(complaint,index) in products" @key="index" :key="complaint.id">
+                <tr v-for="(complaint,index) in complaints" @key="index" :key="complaint.id">
                     <td>{{ complaint.id }}</td>
                     <td>{{ complaint.user_id }}</td>
 
@@ -30,7 +30,7 @@
                         <div v-if="currentComplaint !== null">
                             <strong>Complaint</strong>: {{ currentComplaint.id }} <br>
                             <strong>User ID</strong>: {{ currentComplaint.user_id }} <br>
-                            <strong>Content</strong>: {{ currentProduct.content }} <br>
+                            <strong>Content</strong>: {{ currentComplaint.content }} <br>
                             <button class="btn btn-danger" @click="destroy(currentComplaint)">Delete</button>
                             
                         </div>
@@ -54,12 +54,12 @@ export default {
         axios.get('/api/admin/complaints').then(response => this.complaints = response.data)
     },
     methods: {
-        setCurrentProduct(index) {
+        setCurrentComplaint(index) {
             this.currentComplaint = this.complaints[index];
         },
 
         destroy(complaint) {
-            axios.delete(`/api/admin/products/${complaint.id}`).then(response => {
+            axios.delete(`/api/admin/complaints/${complaint.id}`).then(response => {
                 this.$router.go(0);
             })
         }

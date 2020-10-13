@@ -126,7 +126,7 @@ html {
    font-family: 'Lato';
    height: 100%;
    background: rgb(19, 167, 110);
-   background: rgb(155, 169, 192);
+   background: rgb(226, 232, 241);
  }
 
  .logo {

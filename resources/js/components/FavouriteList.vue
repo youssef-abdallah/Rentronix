@@ -3,19 +3,20 @@
         <div class="title">
             <h1>Your Favourite List <i class="far fa-star"></i></h1>
         </div>
-        <div class="wrapper" v-for="product in favouritelist" :key="product.id">
+        <b-card v-for="product in favouritelist" :key="product.id">
             <strong>Product</strong>: {{ product.product.id }} <br>
             <strong>Name</strong>: {{ product.product.name}} <br>
             <strong>Owner ID</strong>: {{ product.product.owner_id }} <br>
-            <strong>Overview</strong>: {{ product.product.overview }} <br>
-            <strong>Price</strong>: {{ product.product.price }} <br>
+            <strong>Overview</strong>: {{ product.product.product_overview }} <br>
+            <span v-if="product.product.available_for == 'rent'"><strong>Rental Price</strong>: {{product.product.rental_price }}</span>
+            <span v-if="product.product.available_for == 'buy'"><strong>Selling Price</strong>: {{product.product.selling_price }}</span><br>
             <strong>Datasheet</strong>: <a href="product.product.datasheet_url">datasheet</a> <br>
             <strong>Image</strong>: <img src="product.product.image_url"> <br>
             <div class="text-right mb-3">
                 <b-button @click="cart" variant="success">Add To Cart</b-button>
                 <b-button @click="destroy(product)" variant="danger">Remove</b-button>   
             </div>            
-        </div>
+        </b-card>
         <b-button @click="continueShopping" variant="info">Continue Shopping</b-button>
     </div>
     <div v-else>
@@ -60,12 +61,4 @@ export default {
 </script>
 
 <style lang="css">
-    .wrapper {
-        border-radius: 10px;
-        border: 2px solid #A0A0A0;
-        padding: 20px;
-        margin: 20px 0;
-        width: 800px;
-        height: 250px;
-    }
 </style>

@@ -143,7 +143,7 @@ class AdminController extends Controller
 
     public function showUsers()
     {
-        $users = User::all()->toJson(JSON_PRETTY_PRINT);
+        $users = User::with('manufacturerInfo')->with('customerInfo')->get()->toJson(JSON_PRETTY_PRINT);
         return response($users, 200);
     }
 

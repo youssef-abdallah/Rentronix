@@ -28,10 +28,11 @@ class UserController extends Controller
         return response()->json(User::query()->find($id),200);
     }
 
-    public function update(Request $request,User $id)
+    public function update(Request $request,User $user)
     {
-        $id->update($request->all());
-        return response()->json($id,200);
+        $user->manufacturerInfo->update(json_decode($request->manufacturer_info, true));
+        $user->manufacturerInfo->save();
+        return response()->json($request,200);
     }
 
     public function destroy(User $user)

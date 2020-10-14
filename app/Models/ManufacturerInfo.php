@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ManufacturerInfo extends Model
 {
     protected $table = 'manufacturer_info' ;
+    protected $guarded = [];
     use HasFactory;
 
     public function User(){

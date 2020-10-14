@@ -64,7 +64,11 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /* User routes */
     Route::get('users/isadmin', 'UserController@isAdmin');
-    Route::apiResource('users', 'UserController');
+    Route::get('users/{user}', 'UserController@show');
+    Route::get('users', 'UserController@index')->middleware('role:Admin');
+    Route::post('users', 'UserController@create')->middleware('role:Admin');
+    Route::put('users/{user}', 'UserController@update')->middleware('role:Admin');
+    Route::delete('users/{user}', 'UserController@destroy')->middleware('role:Admin');
     Route::get('profile', 'UserController@showUserProfile')->name('profile.showUserProfile');
 
     /* Subscriptions routes */

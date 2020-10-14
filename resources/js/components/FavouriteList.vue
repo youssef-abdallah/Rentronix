@@ -17,7 +17,7 @@
                 <b-button @click="destroy(product)" variant="danger">Remove</b-button>   
             </div>            
         </b-card>
-        <b-button @click="continueShopping" variant="info">Continue Shopping</b-button>
+        <b-button class="mt-4" @click="continueShopping" variant="info">Continue Shopping</b-button>
     </div>
     <div v-else>
         <h1>Your Favourite List is Empty</h1>

@@ -31,6 +31,23 @@
                             <strong>Phone number</strong>: {{ currentUser.phone_no }} <br>
                             <strong>Facebook ID</strong>: {{ currentUser.facebook_id }} <br>
                             <strong>Google ID</strong>: {{ currentUser.google_id }} <br>
+                            <div v-show="currentUser.customer_info">
+                                <strong>Address</strong> {{ currentUser.customer_info.address }} <br>
+                                <strong>Credit</strong>: ${{ currentUser.customer_info.credit }}<br>
+                            </div>
+                            <div v-show="currentUser.manufacturer_info">
+                                <strong>Total Profit</strong>: ${{ currentUser.manufacturer_info.profit }} <br>
+                                <strong>Rating</strong>: {{ currentUser.manufacturer_info.rating }} <br>
+                                <b-form-spinbutton
+                                id="sb-step"
+                                v-model="currentUser.manufacturer_info.percentage"
+                                min="0.0"
+                                max="1.0"
+                                step="0.05"
+                                ></b-form-spinbutton>
+                                <strong>Rentronix percentage gain</strong>: {{ currentUser.manufacturer_info.percentage }}%
+                                <b-button @click="updateGain">Update Percentage Gain</b-button>
+                            </div>
                         </div>
                         </div>
                     </b-modal>
@@ -54,6 +71,14 @@ export default {
     methods: {
         setCurrentUser(index) {
             this.currentUser = this.users[index];
+        },
+
+        updateGain() {
+            axios.put(`/api/users/${this.currentUser.id}`, null, { params: this.currentUser})
+            .then(response => {
+                alert('percentage updated successfully.')
+            })
+            .catch(err => console.warn(err));
         }
     }
 }

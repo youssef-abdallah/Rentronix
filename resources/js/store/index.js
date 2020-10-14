@@ -51,10 +51,6 @@ export default new Vuex.Store({
 
     loginCallback ({ commit }, token) {
       commit('setUserData', token)
-      axios.get('/api/users/isadmin').then(response => {
-        const isAdmin = response.data.isAdmin;
-        commit('setAdmin', isAdmin);
-      })
     },
 
     logout ({ commit }) {
@@ -63,6 +59,13 @@ export default new Vuex.Store({
 
     toggleMenu ({ commit }) {
       commit('toggleMenu');
+    },
+
+    admin({ commit }) {
+      axios.get('/api/users/isadmin').then(response => {
+        const isAdmin = response.data.isAdmin;
+        commit('setAdmin', isAdmin);
+      })
     }
   },
 

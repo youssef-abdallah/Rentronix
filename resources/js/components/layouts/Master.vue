@@ -14,7 +14,7 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'about' }" class="nav-link">About</router-link> 
                         </li>
-                        <router-link v-if="isAdmin" class="nav-link" :to="{ name: 'admin' }">Admin</router-link>
+                        <router-link v-show="isAdmin" class="nav-link" :to="{ name: 'admin' }">Admin</router-link>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -60,14 +60,14 @@ import Toggler from './Toggler'
 export default {
 
     mounted() {
+        if (this.isLogged) {
+            this.$store.dispatch('admin')
+        }
 		if (this.getCookie('token')) {
             this.loginCallback(this.getCookie('token'));
+            this.$store.dispatch('admin')
             document.cookie = "token=; max-age=0";
         }
-        // if (token != null) {
-		// 	this.loginCallback(token)
-		// 	console.log(token);
-		// }
     },
 
     components: {

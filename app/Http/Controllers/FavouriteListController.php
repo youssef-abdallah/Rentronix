@@ -44,11 +44,10 @@ class FavouriteListController extends Controller
     {
         //
         $this->validate($request, array(
-            'user_id'=>'required',
             'product_id' =>'required',
            ));
            
-           $status=FavouriteList::where('user_id',Auth::user()->id)
+           $status=FavouriteList::where('user_id',Auth::id())
            ->where('product_id',$request->product_id)
            ->first();
            
@@ -60,7 +59,7 @@ class FavouriteListController extends Controller
               {
                 
                 $favouritelist = new FavouriteList;
-                $favouritelist->user_id = $request->user_id;
+                $favouritelist->user_id = Auth::id();
                 $favouritelist->product_id = $request->product_id;
                 $favouritelist->save();
                 return response()->json([

@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\PromocodeController;
 use App\Models\Advertisement;
+use App\Models\Promocode;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,20 +116,17 @@ Route::get('/allsubcategories', 'SubcategoryController@showAll');
         Route::apiResource('{products}/comments', CommentController::class);
     });
 });
-// for adding a new product directly
-Route::post('/products', 'ProductController@store');
-Route::get('/allproducts', 'ProductController@showAll');
+    // for adding a new product directly
+    Route::post('/products', 'ProductController@store');
+    Route::get('/allproducts', 'ProductController@showAll');
 
-/* Facebook Route */
-Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
+    /* Facebook Route */
+    Route::post('auth/facebook', 'Auth\FacebookController@loginFromToken');
 
-/* Google Route */
-Route::post('auth/google', 'Auth\GoogleController@loginFromToken');
+    /* Google Route */
+    Route::post('auth/google', 'Auth\GoogleController@loginFromToken');
 
-/*promocodes  */
-Route::apiResource('/promocode',PromocodeController::class);
-
-///the products that are in a favourite list
+    ///the products that are in a favourite list
     Route::group(['prefix'=>'category/{category}/subcategory/{subcategory}/products'], function (){
     Route::apiResource('{products}/favouritelist',FavouriteListController::class);
 
@@ -211,6 +211,25 @@ Route::delete('/admin/complaints/{complaint}', 'AdminController@destroyComplaint
     ->name('complaints.delete')
     ->middleware('auth:api')
     ->middleware('role:Admin');
+
+/* Promocodes  */
+// Route::apiResource('/promocodes', PromocodeController::class)
+Route::get('/promocodes', 'PromocodeController@index')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+
+Route::post('/promocodes', 'PromocodeController@store')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+
+Route::delete('/promocodes/{promocode}', 'PromocodeController@destroy')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+
+Route::put('/promocodes/{promocode}', 'PromocodeController@update')
+    ->middleware('auth:api')
+    ->middleware('role:Admin');
+
 
 
 

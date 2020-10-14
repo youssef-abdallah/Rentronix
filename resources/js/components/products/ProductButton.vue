@@ -4,7 +4,7 @@
         <b-button @click="addToCart" variant="success"><i class="fa fa-cart-plus"></i> Add to Cart</b-button>
     </div>
     <div class="col-6">
-        <b-button @click="removeFromCart(product.id)" variant="danger"><i class="fa fa-trash"></i> Remove </b-button>
+        <b-button @click="addToFavourite(product.id)" variant="danger"><i class="fa fa-heart"></i> Favorite </b-button>
     </div>
    
   </div>
@@ -30,9 +30,11 @@
             })
             .catch(err => console.warn(err));
       },
-      removeFromCart (id) {
-          axios.delete(`/api/cart/${this.product.rowId}`).then(response => {
-                this.$router.go(0);
+      addToFavourite (id) {
+          const formData = new FormData();
+          formData.append('product_id', this.product.id)
+          axios.post(`/api/favouritelist`, formData).then(response => {
+                alert('product added to favourite list.')
         })
       }
     }

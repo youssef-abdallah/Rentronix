@@ -2,7 +2,7 @@
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="product">
         <b-card-group>
-            <b-card :img-src="product.image_url" img-alt="Card image" img-top>
+            <b-card :img-src="product.image_url" img-alt="Image not found" img-top>
                 <h4>{{ product.name }}</h4>
                 <b-card-text>
                 {{ product.overview }}

@@ -10,6 +10,7 @@
                 <li><a href="/orders">My Orders</a></li>
                 <li><a href="/requests">My Requests</a></li>
                 <li><a href="/request">Create a request</a></li>
+                <li><a href="/favouritelist">Favourite list</a></li>
                 <li><a href="/cart">My Cart</a></li>
                 <li><a href="/complaint">Make a complaint</a></li>
                 <li><a href="/complaints">My complaints</a></li>

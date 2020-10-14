@@ -3,17 +3,33 @@
         <div class="title">
             <h1>Your Favourite List <i class="far fa-star"></i></h1>
         </div>
-        <div class="wrapper" v-for="product in favouritelist" :key="product.id">
-            <strong>Product</strong>: {{ product.product.id }} <br>
-            <strong>Name</strong>: {{ product.product.name}} <br>
-            <strong>Owner ID</strong>: {{ product.product.owner_id }} <br>
-            <strong>Overview</strong>: {{ product.product.overview }} <br>
-            <strong>Price</strong>: {{ product.product.price }} <br>
-            <strong>Datasheet</strong>: <a href="product.product.datasheet_url">datasheet</a> <br>
-            <strong>Image</strong>: <img src="product.product.image_url"> <br>
-            <div class="text-right mb-3">
-                <b-button @click="cart" variant="success">Add To Cart</b-button>
-                <b-button @click="destroy(product)" variant="danger">Remove</b-button>   
+        <div v-for="item in favouritelist" :key="item.id">
+            <div>
+            <b-card
+                :title="'Product ' + item.product.id"
+                :img-src="item.product.image_url"
+                img-alt="Image"
+                img-top
+                img-height="20vh"
+                tag="article"
+                style="max-width: 50rem;"
+                class="mb-2"
+            >
+                <b-card-text>
+                <strong>Product</strong>: {{ item.product.id }} <br>
+                <strong>Name</strong>: {{ item.product.name}} <br>
+                <strong>Owner ID</strong>: {{ item.product.owner_id }} <br>
+                <strong>Overview</strong>: {{ item.product.product_overview }} <br>
+                <span v-show="item.product.available_for==='rent'"><strong>Rental Price</strong>: {{ item.product.rental_price }} <br></span>
+                <span v-show="item.product.available_for==='buy'"><strong>Selling Price</strong>: {{ item.product.selling_price }} <br></span>
+                <strong>Datasheet</strong>: <a href="item.product.datasheet_url">datasheet</a> <br>
+                <div class="text-right mb-3">
+                    <b-button @click="addToCart(item.product)" variant="success">Add To Cart</b-button>
+                    <b-button @click="destroy(item)" variant="danger">Remove</b-button>   
+                </div>
+                </b-card-text>
+
+            </b-card>
             </div>            
         </div>
         <b-button @click="continueShopping" variant="info">Continue Shopping</b-button>
@@ -40,14 +56,13 @@ export default {
             })
         },
 
-        cart(){
+        addToCart(product) {
             axios.post(`/api/cart`, null, { params: {
-                'id': this.favouritelist.product.id,
-                'type': this.favouritelist.product.available_for,
+                'id': product.id,
+                'type': product.available_for,
             }})
             .then(response => {
                 alert(response.data.message)
-                this.favouritelist['id'] = response.data.id;
             })
             .catch(err => console.warn(err));
         },

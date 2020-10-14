@@ -14,8 +14,14 @@ import Complaints from './components/User/Complaints';
 import ProductList from './components/products/ProductList';
 import Profile from './components/User/Profile';
 import FavouriteList from './components/FavouriteList';
+import PromocodeForm from './components/admin/PromocodeForm'
 
 const routes = [
+    {
+        path: '/home',
+        name: 'home',
+        component: Home
+    },
     {
         path: '/',
         name: 'home',
@@ -38,6 +44,15 @@ const routes = [
         path: '/admin/advertisements/upload',
         name: 'advertisement-upload',
         component: AdvertisementsUploader,
+        meta: {
+            auth: true,
+            admin: true
+        }
+    },
+    {
+        path: '/admin/promocode/add',
+        name: 'promocode-form',
+        component: PromocodeForm,
         meta: {
             auth: true,
             admin: true

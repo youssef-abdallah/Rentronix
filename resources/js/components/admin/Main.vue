@@ -19,6 +19,9 @@
                 <div class="bd-highlight">
                      <a href='/admin/advertisements' class="product-box">Advertisements ({{advertisements.length}})</a>
                 </div>
+                <div class="bd-highlight">
+                     <a href='/admin/promocodes' class="product-box">Promocodes ({{promocodes.length}})</a>
+                </div>
             </div>
         </div>
     </template>
@@ -33,7 +36,8 @@
                 users : [],
                 requests : [],
                 complaints: [],
-                advertisements: []
+                advertisements: [],
+                promocodes: []
             }
         },
         mounted() {
@@ -43,6 +47,7 @@
             axios.get('/api/admin/orders').then(response => this.orders = response.data)
             axios.get('/api/admin/complaints').then(response => this.complaints = response.data)
             axios.get('/api/advertisements').then(response => this.advertisements = response.data)
+            axios.get('/api/promocodes').then(response => this.promocodes = response.data)
         }
     }
     </script>

@@ -1,7 +1,17 @@
 <template>
         <div>
-            <div class="container-fluid hero-section d-flex align-content-center justify-content-center flex-wrap ml-auto">
-                <h2 class="title">Admin Dashboard</h2>
+            <div>
+            <b-card
+                overlay
+                img-src="https://picsum.photos/900/250/?image=3"
+                img-alt="Card Image"
+                text-variant="white"
+                title="Admin Dashboard"
+            >
+                <b-card-text>
+                Welcome back Admin!
+                </b-card-text>
+            </b-card>
             </div>
             <div class="container">
                 <div class="row">
@@ -14,6 +24,7 @@
                             <li style="float:left;"><button class="btn" @click="setComponent('orders')">Orders</button></li>
                             <li style="float:left;"><button class="btn" @click="setComponent('complaints')">Complaints</button></li>
                             <li style="float:left;"><button class="btn" @click="setComponent('advertisements')">Advertisements</button></li>
+                            <li style="float:left;"><button class="btn" @click="setComponent('promocodes')">Promocodes</button></li>
                         </ul>
                     </div>
                 </div>
@@ -32,6 +43,7 @@
     import Orders from './Orders'
     import Complaints from './Complaints'
     import Advertisements from './Advertisements'
+    import Promocodes from './Promocodes'
 
     export default {
         data() {
@@ -41,7 +53,7 @@
         },
         components: {
             Main, Requests, Users, Products, Orders, Complaints,
-            Advertisements
+            Advertisements, Promocodes
         },
         beforeMount() {
             this.setComponent(this.$route.params.page)
@@ -67,6 +79,9 @@
                         break;
                     case "advertisements":
                         this.activeComponent = Advertisements
+                        break;
+                    case "promocodes":
+                        this.activeComponent = Promocodes
                         break;
                     default:
                         this.activeComponent = Main

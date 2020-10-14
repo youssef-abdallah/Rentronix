@@ -69,29 +69,10 @@ export default {
         border-radius: 25px;
         border: 2px solid #A0A0A0;
         padding: 20px;
-        margin: 20px;
+        margin: 20px 0;
         width: 820px;
-        height: 280px;
-    }
-    .btn1{
-        margin-left: 700px;
-    }
- 
-    .title{
-        margin-left:15px;
+        height: 300px;
     }
 
-    .btn2{
-        margin-left: 20px;
-        margin-bottom: 50px;
-        width: 300px;
-        height :50px;
-    }
-    .btn3{
-        margin-left: 220px;
-        margin-bottom: 50px;
-        width: 300px;
-        height :50px;
-    }
 
 </style>

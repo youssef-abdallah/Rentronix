@@ -13,7 +13,7 @@ class FavouriteList extends Model
 
     function product()  // identify the one to many relationship between favrouite list& product
     {
-        return $this->belongsTo(products::class,'product_id');
+        return $this->belongsTo(Product::class,'product_id');
     }
 
     function user()  // identify the one to many relationship between subcategory & product

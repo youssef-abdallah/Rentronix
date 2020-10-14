@@ -89,7 +89,7 @@ export default {
             zip: null,
             creditcard_no: null,
             exp: null, 
-            ccv: 'loan',
+            ccv: null,
         }),
 
    }),

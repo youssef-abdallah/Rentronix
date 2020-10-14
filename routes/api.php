@@ -86,9 +86,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 
         Route::group(['prefix'=>'category'], function () {
             Route::apiResource('/{category}/subcategory', SubcategoryController::class);
-        });
+        });*/
 
-
+    Route::resource('/favouritelist', 'FavouriteListController', ['except' => ['create', 'edit', 'show', 'update']]);
+    
     /* Products routes*/
 
     Route::group(['prefix'=>'category/{category}/subcategory'], function () {

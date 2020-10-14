@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\FavouriteList;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavouriteListController extends Controller
 {
@@ -15,7 +17,7 @@ class FavouriteListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category,Subcategory $subcategory, $product_id)
+    public function index()
     {
         $favouritelist = FavouriteList::with('product')->where("user_id", Auth::id())->get()->toJson(JSON_PRETTY_PRINT);;
         return response($favouritelist, 200);

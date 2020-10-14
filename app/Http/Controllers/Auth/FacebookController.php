@@ -74,7 +74,7 @@ class FacebookController extends Controller
         if (is_null($existingUser))
         {
             $create['name'] = $user->getName();
-            $create['email'] = "nesreen191@gmail.com";//$user->getEmail();
+            $create['email'] = $user->getEmail();
             $create['facebook_id'] = $user->getId();
             $create['facebook_token'] = $user->token;
             $userModel = new User;

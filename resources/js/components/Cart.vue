@@ -12,12 +12,14 @@
             <strong>Quantity</strong>: {{ product.qty }} <br>
             <strong>Type</strong>: {{ product.type}} <br>
             <strong>Datasheet</strong>: <a href="product.model.datasheet_url">datasheet</a> <br>
-            <strong>Image</strong>: <img src="product.model.image_url"> <br>
-            <button class="btn1 btn-danger" @click="destroy(product)">Remove</button>                
+            <strong>Image</strong>: <img src="product.model.image_url"> <br> 
+            <div class="text-right mb-3">
+                <b-button @click="destroy(product)" variant="danger">Remove</b-button>   
+            </div>              
         </div>
         <strong>Total</strong>: {{total}} <br>
-        <button class="btn2 btn-success" @click="checkout">Checkout</button>
-        <button class="btn3 btn-info" @click="continueShopping">Continue Shopping</button>
+        <b-button @click="checkout" variant="success">Checkout</b-button>
+        <b-button @click="continueShopping" variant="info">Continue Shopping</b-button>
     </div>
     <div v-else>
         <h1>Your Cart is Empty</h1>

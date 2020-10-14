@@ -31,8 +31,8 @@
 
             </b-card>
             </div>            
-        </div>
-        <b-button @click="continueShopping" variant="info">Continue Shopping</b-button>
+        <b-button class="mt-4" @click="continueShopping" variant="info">Continue Shopping</b-button>
+    </div>
     </div>
     <div v-else>
         <h1>Your Favourite List is Empty</h1>
@@ -75,12 +75,4 @@ export default {
 </script>
 
 <style lang="css">
-    .wrapper {
-        border-radius: 10px;
-        border: 2px solid #A0A0A0;
-        padding: 20px;
-        margin: 20px 0;
-        width: 800px;
-        height: 250px;
-    }
 </style>

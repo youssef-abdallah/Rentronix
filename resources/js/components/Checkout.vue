@@ -96,7 +96,7 @@ export default {
  
     methods: {
         confirm(){
-            axios.post('/api/checkout')
+            axios.post('/api/checkout'),
             this.$router.push("home")
         },
         backToCart(){

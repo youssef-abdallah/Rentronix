@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\FavouriteList;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavouriteListController extends Controller
 {
@@ -15,17 +17,10 @@ class FavouriteListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category,Subcategory $subcategory, $product_id)
+    public function index()
     {
-        $product = Product::find($product_id);
-        if (count($product->favouriteList)<1)
-        {
-            return response()->json('no comments for this product ',404);
-        }
-        else
-        {
-            return response( $product->favouriteList, 200);
-        }
+        $favouritelist = FavouriteList::with('product')->where("user_id", Auth::id())->get()->toJson(JSON_PRETTY_PRINT);;
+        return response($favouritelist, 200);
 
     }
 
@@ -48,6 +43,30 @@ class FavouriteListController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, array(
+            'user_id'=>'required',
+            'product_id' =>'required',
+           ));
+           
+           $status=FavouriteList::where('user_id',Auth::user()->id)
+           ->where('product_id',$request->product_id)
+           ->first();
+           
+           if(isset($status->user_id) and isset($request->product_id))
+              {
+                return response()->json(['message' => 'The products is already added to the favourite list'], 201);
+              }
+              else
+              {
+                
+                $favouritelist = new FavouriteList;
+                $favouritelist->user_id = $request->user_id;
+                $favouritelist->product_id = $request->product_id;
+                $favouritelist->save();
+                return response()->json([
+                    'message' => 'added to favourite list'
+                ], 201);
+             }
     }
 
     /**
@@ -90,8 +109,14 @@ class FavouriteListController extends Controller
      * @param  \App\FavouriteList  $FavouriteList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FavouriteList $favouriteList)
+    public function destroy($id)
     {
         //
+        $favouritelist = FavouriteList::findOrFail($id);
+        $favouritelist->delete();
+
+        return response()->json([
+            'message' => 'favouritelist deleted'
+        ], 200);
     }
 }

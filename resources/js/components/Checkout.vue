@@ -1,76 +1,99 @@
 <template>
-    <div>
-        <div class="title">
-            <h1>Checkout Page</h1>
-        </div>
-        
-        <div class="wrapper">
-            <form>
-                <h3>
-                <i class="fas fa-shipping-fast"></i>
-                Shipping Details
-            </h3>
-            <div class="name">
-                <div>
-                    <label for="f-name">First</label><br>
-                    <input type="text" name="f-name">
-                </div>
-                <div>
-                    <label for="l-name">Last</label><br>
-                    <input type="text" name="l-name">
-                </div>
-            </div>
-            <div class="street">
-                <label for="name">Street</label><br>
-                <input type="text" name="address">
-            </div>
-            <div class="address-info">
-                <div>
-                    <label for="city">City</label><br>
-                    <input type="text" name="city">
-                </div>
-                <div>
-                    <label for="state">State</label><br>
-                    <input type="text" name="state">
-                </div>
-                <div>
-                    <label for="zip">Zip</label><br>
-                    <input type="text" name="zip">
-                </div>
-            </div>
-            <h3>
-                <i class="far fa-credit-card"></i> Payment Information
-            </h3>
-            <div class="cc-num">
-                <label for="card-num">Credit Card No.</label><br>
-                <input type="text" name="card-num">
-            </div>
-            <div class="cc-info">
-                <div>
-                    <label for="card-num">Exp</label><br>
-                    <input type="text" name="expire">
-                </div>
-                <div>
-                    <label for="card-num">CCV</label><br>
-                    <input type="text" name="security">
-                </div>
-            </div>
-            <div class="btns">
-                <button class="btn btn-success" @click="confirm">Continue to checkout</button>
-                <button class="btn btn-info" @click="backToCart">Back to Cart</button>
-            </div>
-            </form>
-        </div>
-    </div>
+  <div>
+    <b-form @submit.prevent="confirm" @reset="backToCart">
+		<h1>
+        <i class="fas fa-shipping-fast"></i>Shipping Details
+        </h1>
+      <b-form-group id="input-group-1" label="Name:" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="form.name"
+          required
+          placeholder="Enter your full name"
+        ></b-form-input>
+      </b-form-group>
+
+
+      <b-form-group id="input-group-2" label="Phone No." label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="form.phone"
+          required
+          placeholder="Enter your phone no."
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-3" label="Address" label-for="input-3">
+        <b-form-input
+          id="input-3"
+          v-model="form.address"
+          required
+          placeholder="Enter your detailed address"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-4" label="Zip" label-for="input-4">
+        <b-form-input
+          id="input-4"
+          v-model="form.zip"
+          required
+          placeholder="Enter Zip code"
+        ></b-form-input>
+      </b-form-group>
+
+		<h1>
+            <i class="far fa-credit-card"></i> Payment Information
+        </h1>
+      <b-form-group id="input-group-5" label="Credit Card No." label-for="input-5">
+        <b-form-input
+          id="input-5"
+          v-model="form.creditcard_no"
+          required
+          placeholder="Enter credit card no."
+        ></b-form-input>
+      </b-form-group>
+	  
+	  <b-form-group id="input-group-6" label="EXP" label-for="input-6">
+        <b-form-input
+          id="input-6"
+          v-model="form.exp"
+          required
+        ></b-form-input>
+      </b-form-group>
+	
+	<b-form-group id="input-group-7" label="CCV" label-for="input-7">
+        <b-form-input
+          id="input-7"
+          v-model="form.ccv"
+          required
+        ></b-form-input>
+      </b-form-group>	
+
+
+      <b-button type="submit" variant="success">Checkout</b-button>
+      <b-button type="reset" variant="info">Back To Cart</b-button>
+    </b-form>
+  </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
 
-        }
-    },
+import Form from '../classes/Form'
+ 
+export default {
+    data: () => ({
+        form: new Form({
+            name: null, 
+            phone: null,
+            address: null,
+            zip: null,
+            creditcard_no: null,
+            exp: null, 
+            ccv: null,
+        }),
+
+   }),
+ 
     methods: {
         confirm(){
             axios.post('/api/checkout')
@@ -81,63 +104,5 @@ export default {
         }
     }
 }
+
 </script>
-
-<style lang="css">
-    .wrapper{
-        border-radius: 25px;
-        border: 2px solid #A0A0A0;
-        padding: 20px;
-        margin: 20px;
-        width: 700px;
-        height: 500px;
-    }
-
-    input {
-        width: 100%;
-    }
-
-    label {
-        font-size: 12px;
-        letter-spacing: 2px;
-        color: #444444;
-    }
-
-    .btns{
-        justify-content: space-between;
-        display: flex;
-        width: 100%;
-        margin: 20px 0;
-    }
-
-    .name {
-        justify-content: space-between;
-        display: flex;
-        width: 100%;
-
-        div {
-            width: 45%;
-        }
-    }
-
-    .address-info {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-
-        div {
-            width: 30%;
-        }
-    }
-
-    .cc-info {
-        display: flex;
-        justify-content: space-between;
-
-        div {
-            width: 45%;
-        }
-    }   
-
-    
-</style>

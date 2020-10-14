@@ -13,6 +13,7 @@ import Complaint from './components/User/Complaint';
 import Complaints from './components/User/Complaints';
 import ProductList from './components/products/ProductList';
 import Profile from './components/User/Profile';
+import FavouriteList from './components/FavouriteList';
 
 const routes = [
     {
@@ -136,7 +137,16 @@ const routes = [
         meta: {
             auth: true,
         }
+    },
+    {
+        path: '/favouritelist',
+        name: 'favouritelist',
+        component: FavouriteList,
+        meta: {
+            auth: true,
+        }
     }
+
 ]
 
 export default routes;

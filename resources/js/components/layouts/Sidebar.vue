@@ -14,6 +14,7 @@
                 <li><a href="/cart">My Cart</a></li>
                 <li><a href="/complaint">Make a complaint</a></li>
                 <li><a href="/complaints">My complaints</a></li>
+                <li><a href="/subscribe">Subscribe to newsletters</a></li>
                 </ul>
             </div>
         </transition>

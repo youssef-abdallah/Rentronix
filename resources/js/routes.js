@@ -15,6 +15,7 @@ import ProductList from './components/products/ProductList';
 import Profile from './components/User/Profile';
 import FavouriteList from './components/FavouriteList';
 import PromocodeForm from './components/admin/PromocodeForm'
+import SubscriptionForm from './components/User/SubscriptionForm'
 
 const routes = [
     {
@@ -144,6 +145,11 @@ const routes = [
         path: '/products',
         name: 'products',
         component: ProductList
+    },
+    {
+        path: '/subscribe',
+        name: 'subscription-form',
+        component: SubscriptionForm 
     },
     {
         path: '/profile',

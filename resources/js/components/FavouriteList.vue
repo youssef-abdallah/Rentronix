@@ -20,6 +20,7 @@
                 <strong>Name</strong>: {{ item.product.name}} <br>
                 <strong>Owner ID</strong>: {{ item.product.owner_id }} <br>
                 <strong>Overview</strong>: {{ item.product.product_overview }} <br>
+                <strong>Avilable For</strong>: {{ item.product.available_for}} <br>
                 <span v-show="item.product.available_for==='rent'"><strong>Rental Price</strong>: {{ item.product.rental_price }} <br></span>
                 <span v-show="item.product.available_for==='buy'"><strong>Selling Price</strong>: {{ item.product.selling_price }} <br></span>
                 <strong>Datasheet</strong>: <a href="item.product.datasheet_url">datasheet</a> <br>

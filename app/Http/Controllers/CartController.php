@@ -58,7 +58,8 @@ class CartController extends Controller
         Cart::restore(Auth::id());
         $data = $request->json()->all();
         $validator = Validator::make($request->all(), [
-            'quantity' => 'required|numeric|between:1,5'
+            'quantity' => 'required|numeric|between:1,5',
+            'hours' => 'required',
         ]);
 
         if ($validator->fails())
@@ -66,7 +67,7 @@ class CartController extends Controller
             Session::flash('danger', 'The quantity of the product should not exceed 5.');
             return response()->json(['error' => 'Cart quantity has not been updated']);
         }
-        Cart::update($rowId, $data['quantity']);
+        Cart::update($rowId, ['qty'=>$request->quantity , 'options'=>['hours'=>$request->hours]]);
         // Storing the cart
         Cart::store(Auth::id());
         Session::flash('success', 'The quantity has been changed.');

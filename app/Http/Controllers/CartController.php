@@ -64,13 +64,11 @@ class CartController extends Controller
 
         if ($validator->fails())
         {
-            Session::flash('danger', 'The quantity of the product should not exceed 5.');
             return response()->json(['error' => 'Cart quantity has not been updated']);
         }
         Cart::update($rowId, ['qty'=>$request->quantity , 'options'=>['hours'=>$request->hours]]);
         // Storing the cart
         Cart::store(Auth::id());
-        Session::flash('success', 'The quantity has been changed.');
         return response()->json(['success' => 'Cart quantity has been updated']);
     }
 

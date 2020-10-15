@@ -30,7 +30,7 @@
                 </div>
                 <div v-if="product.model.available_for === 'rent'">
                     <label for="demo-sb"><strong>Rental Hours</strong>:</label>
-                    <b-spinbutton v-model="product.hours" min="1" max="720"></b-spinbutton>
+                    <b-spinbutton v-model="product.options.hours" min="1" max="720"></b-spinbutton>
                 </div> 
                 
                 <div class="text-right mb-3 mt-4">
@@ -78,10 +78,10 @@ export default {
         saveChanges(product){
             axios.put(`/api/cart/${product.rowId}`, null, { params: {
                 'quantity': product.qty,
-                'hours' : product.hours,
+                'hours' : product.options.hours,
             }})
             .then(response => {
-                alert(response.data.message)
+                alert(response.data.success)
             })
             .catch(err => console.warn(err));
         }

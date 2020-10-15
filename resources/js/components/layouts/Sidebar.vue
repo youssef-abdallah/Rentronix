@@ -6,7 +6,16 @@
                  class="sidebar-panel">
                 <ul class="sidebar-panel-nav">
                 <li><a href="/profile">Profile</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li><a href="#" v-b-toggle.collapse-2>Categories</a>
+                <b-collapse id="collapse-2">
+                <b-card v-for="category in categories" :key="category.id">{{ category.title }}
+                    <b-button v-b-toggle.collapse-1-inner size="sm" @click="setSubcategory(category)">View subcategories</b-button>
+                    <b-collapse id="collapse-1-inner" class="mt-2">
+                        <b-card v-for="subcategory in filteredSubcategories" :key="subcategory.id">{{ subcategory.title }}</b-card>
+                    </b-collapse>
+                </b-card>
+                </b-collapse>
+                </li>
                 <li><a href="/orders">My Orders</a></li>
                 <li><a href="/requests">My Requests</a></li>
                 <li><a href="/request">Create a request</a></li>
@@ -25,10 +34,25 @@
     import { mapActions } from 'vuex'
 
     export default {
+        data() {
+            return {
+                categories: [],
+                subcategories: [],
+                filteredSubcategories: []
+            }
+        },
+        mounted() {
+            axios.get(`api/category`).then(response => this.categories = response.data)
+            axios.get(`api/allsubcategories`).then(response => this.subcategories = Object.values(response.data))
+        },
         methods: {
             ...mapActions({
                 toggle: 'toggleMenu',
-            })
+            }),
+
+            setSubcategory(category) {
+                this.filteredSubcategories = this.subcategories.filter((subcategory) => subcategory.category_id === category.id) 
+            }
         },
         computed: {
             ...mapGetters([

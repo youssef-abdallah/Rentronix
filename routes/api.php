@@ -84,9 +84,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     });
     */
 
-    /* categories routes*/
-
-    Route::apiResource('/category', CategoryController::class, ['except' => 'index']);
 
     Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
     /* favourite list routes  /// getting a favourite list of a certain user
@@ -108,7 +105,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 // for adding a new subcategory directly
 Route::post('/subcategory', 'SubcategoryController@store');
-Route::get('/allsubcategories', 'SubcategoryController@showAll');
 
 /* Products routes*/
 
@@ -229,6 +225,12 @@ Route::delete('/promocodes/{promocode}', 'PromocodeController@destroy')
 Route::put('/promocodes/{promocode}', 'PromocodeController@update')
     ->middleware('auth:api')
     ->middleware('role:Admin');
+
+/* categories routes*/
+
+Route::apiResource('/category', CategoryController::class);
+
+Route::get('/allsubcategories', 'SubcategoryController@showAll');
 
 
 
